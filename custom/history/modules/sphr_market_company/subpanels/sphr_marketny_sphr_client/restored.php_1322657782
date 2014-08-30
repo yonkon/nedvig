@@ -1,0 +1,59 @@
+<?php
+// created: 2011-11-30 15:56:22
+$layout_defs = array (
+  'first_name' => 
+  array (
+    'name' => 'first_name',
+    'usage' => 'query_only',
+  ),
+  'last_name' => 
+  array (
+    'name' => 'last_name',
+    'usage' => 'query_only',
+  ),
+  'MIDDLE_NAME_C' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'label' => 'LBL_MIDDLE_NAME',
+    'width' => '10%',
+    'link' => true,
+  ),
+  'status' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'vname' => 'LBL_STATUS',
+    'sortable' => false,
+    'width' => '10%',
+  ),
+  'assigned_user_name' => 
+  array (
+    'link' => 'assigned_user_link',
+    'type' => 'relate',
+    'vname' => 'LBL_ASSIGNED_TO_NAME',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'edit_button' => 
+  array (
+    'widget_class' => 'SubPanelEditButton',
+    'module' => 'Contacts',
+    'width' => '5%',
+    'default' => true,
+  ),
+  'remove_button' => 
+  array (
+    'widget_class' => 'SubPanelRemoveButton',
+    'module' => 'Contacts',
+    'width' => '5%',
+    'default' => true,
+  ),
+  'salutation' => 
+  array (
+    'name' => 'salutation',
+    'usage' => 'query_only',
+  ),
+);
+?>

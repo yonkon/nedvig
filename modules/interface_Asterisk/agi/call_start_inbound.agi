@@ -1,0 +1,47 @@
+#!/usr/bin/php -q
+
+<?php
+
+ob_implicit_flush(false);
+error_reporting(0);
+
+
+$sugar_config = array();
+$sugar_config["site_url"] = "https://np-crm.kub3.ru";
+
+$logFile = fopen("/tmp/log_si.txt", "w");
+
+/*
+if (!defined(STDIN)) define('STDIN', fopen('php://stdin', 'r'));
+if (!defined(STDOUT)) define('STDOUT', fopen('php://stdout', 'w'));
+if (!defined(STDERR)) define('STDERR', fopen('php://stderr', 'w'));
+
+
+$asteriskVarsArray = array();
+while (!feof(STDIN)) {
+	$asteriskVar = trim(fgets(STDIN));
+    if ($asteriskVar === "") break;
+    
+    $asteriskVar = explode(":", $asteriskVar);
+    $asteriskVarsArray[$asteriskVar[0]] = trim($asteriskVar[1]);
+}
+*/
+
+
+fputs($logFile, "phone : ".$argv[1]." \n");
+fputs($logFile, "internal phone : ".$argv[2]." \n");
+
+//$execResultString = file_get_contents($sugar_config["site_url"]."/index.php?entryPoint=AsteriskEntryPoint&mode=start_inbound&phone=".urlencode($argv[1]));
+$execResultString = file_get_contents($sugar_config["site_url"]."/index.php?entryPoint=AsteriskEntryPoint&mode=start_inbound&phone=".urlencode($argv[1])."&internal_phone=".urlencode($argv[2])."&campaigns_phone=".urlencode($argv[3]));
+
+fputs($logFile, "execResultString : ".$execResultString." \n");
+
+$execResultArrayTemp = split(";", $execResultString);
+$execResultArray = array();
+foreach ($execResultArrayTemp as $resultVar) {$resultVarTemp = explode(":", $resultVar); $execResultArray[$resultVarTemp[0]] = trim($resultVarTemp[1]);}
+
+fprintf(STDOUT, "SET VARIABLE internalCallerId \"".$execResultArray["internal_number"]."\"" . "\n");
+fprintf(STDOUT, "SET VARIABLE callId \"".$execResultArray["call_id"]."\" " . "\n");
+
+fclose($logFile);
+?>

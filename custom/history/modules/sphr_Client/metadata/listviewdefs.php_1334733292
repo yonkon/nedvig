@@ -1,0 +1,59 @@
+<?php
+$module_name = 'sphr_Client';
+$listViewDefs [$module_name] = 
+array (
+  'LAST_NAME' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_LAST_NAME',
+    'width' => '10%',
+    'default' => true,
+    'link' => true,
+  ),
+  'FIRST_NAME' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_FIRST_NAME',
+    'width' => '10%',
+    'default' => true,
+    'link' => true,
+  ),
+  'PHONE_MOBILE' => 
+  array (
+    'type' => 'int',
+    'label' => 'LBL_PHONE_MOBILE',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'EMAIL' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_EMAIL',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'CURRENT_CITY_C' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'label' => 'LBL_CURRENT_CITY',
+    'width' => '10%',
+  ),
+  'ASSIGNED_USER_NAME' => 
+  array (
+    'link' => 'assigned_user_link',
+    'type' => 'relate',
+    'label' => 'LBL_ASSIGNED_TO_NAME',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'STATUS' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_STATUS',
+    'width' => '10%',
+  ),
+);
+?>

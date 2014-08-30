@@ -1,0 +1,37 @@
+<?php
+$listViewDefs ['Accounts'] = 
+array (
+  'NAME' => 
+  array (
+    'width' => '20%',
+    'label' => 'LBL_LIST_ACCOUNT_NAME',
+    'link' => true,
+    'default' => true,
+  ),
+  'PHONE1_C' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'label' => 'LBL_PHONE1',
+    'width' => '10%',
+  ),
+  'EMAIL1' => 
+  array (
+    'width' => '15%',
+    'label' => 'LBL_EMAIL_ADDRESS',
+    'sortable' => false,
+    'link' => true,
+    'customCode' => '{$EMAIL1_LINK}{$EMAIL1}</a>',
+    'default' => true,
+  ),
+  'CATEGORY_C' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_CATEGORY',
+    'sortable' => false,
+    'width' => '10%',
+  ),
+);
+?>

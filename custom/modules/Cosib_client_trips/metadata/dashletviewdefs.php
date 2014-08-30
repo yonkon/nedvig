@@ -1,0 +1,103 @@
+<?php
+$dashletData['Cosib_client_tripsDashlet']['searchFields'] = array (
+  'cosib_clienhr_client_name' => 
+  array (
+    'default' => '',
+  ),
+  'status' => 
+  array (
+    'default' => '',
+  ),
+  'date_arrive' => 
+  array (
+    'default' => '',
+  ),
+  'date_departure' => 
+  array (
+    'default' => '',
+  ),
+  'assigned_user_name' => 
+  array (
+    'default' => '',
+  ),
+);
+$dashletData['Cosib_client_tripsDashlet']['columns'] = array (
+  'cosib_clienhr_client_name' => 
+  array (
+    'type' => 'relate',
+    'link' => 'cosib_clienps_sphr_client',
+    'label' => 'LBL_COSIB_CLIENT_TRIPS_SPHR_CLIENT_FROM_SPHR_CLIENT_TITLE',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'status' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_STATUS',
+    'sortable' => false,
+    'width' => '10%',
+    'default' => true,
+  ),
+  'date_arrive' => 
+  array (
+    'type' => 'date',
+    'label' => 'LBL_DATE_ARRIVE',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'date_departure' => 
+  array (
+    'type' => 'date',
+    'label' => 'LBL_DATE_DEPARTURE',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'assigned_user_name' => 
+  array (
+    'width' => '8%',
+    'label' => 'LBL_LIST_ASSIGNED_USER',
+    'name' => 'assigned_user_name',
+    'default' => true,
+  ),
+  'trip_place' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_TRIP_PLACE',
+    'width' => '10%',
+    'default' => false,
+  ),
+  'name' => 
+  array (
+    'width' => '100%',
+    'label' => 'LBL_LIST_NAME',
+    'link' => true,
+    'default' => false,
+    'name' => 'name',
+  ),
+  'arrival' => 
+  array (
+    'type' => 'int',
+    'label' => 'LBL_ARRIVAL',
+    'width' => '10%',
+    'default' => false,
+  ),
+  'residence' => 
+  array (
+    'type' => 'text',
+    'studio' => 'visible',
+    'label' => 'LBL_RESIDENCE',
+    'sortable' => false,
+    'width' => '10%',
+    'default' => false,
+  ),
+  'description' => 
+  array (
+    'type' => 'text',
+    'studio' => 'visible',
+    'label' => 'LBL_DESCRIPTION',
+    'sortable' => false,
+    'width' => '10%',
+    'default' => false,
+  ),
+);

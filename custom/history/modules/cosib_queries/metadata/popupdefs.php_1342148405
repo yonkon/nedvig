@@ -1,0 +1,144 @@
+<?php
+$popupMeta = array (
+    'moduleMain' => 'cosib_queries',
+    'varName' => 'cosib_queries',
+    'orderBy' => 'cosib_queries.name',
+    'whereClauses' => array (
+  'type_of_query_c' => 'cosib_queries_cstm.type_of_query_c',
+  'status_c' => 'cosib_queries_cstm.status_c',
+  'category_of_object_c' => 'cosib_queries_cstm.category_of_object_c',
+  'budget_c' => 'cosib_queries_cstm.budget_c',
+  'assigned_to_c' => 'cosib_queries_cstm.assigned_to_c',
+  'sphr_clientb_queries_name' => 'cosib_queries.sphr_clientb_queries_name',
+  'accounts_cob_queries_name' => 'cosib_queries.accounts_cob_queries_name',
+),
+    'searchInputs' => array (
+  4 => 'type_of_query_c',
+  5 => 'status_c',
+  6 => 'category_of_object_c',
+  7 => 'budget_c',
+  8 => 'assigned_to_c',
+  9 => 'sphr_clientb_queries_name',
+  10 => 'accounts_cob_queries_name',
+),
+    'searchdefs' => array (
+  'type_of_query_c' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_TYPE_OF_QUERY',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'type_of_query_c',
+  ),
+  'sphr_clientb_queries_name' => 
+  array (
+    'type' => 'relate',
+    'link' => 'sphr_client_cosib_queries',
+    'label' => 'LBL_SPHR_CLIENT_COSIB_QUERIES_FROM_SPHR_CLIENT_TITLE',
+    'width' => '10%',
+    'name' => 'sphr_clientb_queries_name',
+  ),
+  'status_c' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_STATUS',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'status_c',
+  ),
+  'category_of_object_c' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_CATEGORY_OF_OBJECT',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'category_of_object_c',
+  ),
+  'budget_c' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_BUDGET',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'budget_c',
+  ),
+  'accounts_cob_queries_name' => 
+  array (
+    'type' => 'relate',
+    'link' => 'accounts_cosib_queries',
+    'label' => 'LBL_ACCOUNTS_COSIB_QUERIES_FROM_ACCOUNTS_TITLE',
+    'width' => '10%',
+    'name' => 'accounts_cob_queries_name',
+  ),
+  'assigned_to_c' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_ASSIGNED_TO',
+    'width' => '10%',
+    'name' => 'assigned_to_c',
+  ),
+),
+    'listviewdefs' => array (
+  'TYPE_OF_QUERY_C' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_TYPE_OF_QUERY',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'type_of_query_c',
+  ),
+  'SPHR_CLIENTB_QUERIES_NAME' => 
+  array (
+    'type' => 'relate',
+    'link' => 'sphr_client_cosib_queries',
+    'label' => 'LBL_SPHR_CLIENT_COSIB_QUERIES_FROM_SPHR_CLIENT_TITLE',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'sphr_clientb_queries_name',
+  ),
+  'STATUS_C' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_STATUS',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'status_c',
+  ),
+  'CATEGORY_OF_OBJECT_C' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_CATEGORY_OF_OBJECT',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'category_of_object_c',
+  ),
+  'BUDGET_C' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_BUDGET',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'budget_c',
+  ),
+  'ASSIGNED_TO_C' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'label' => 'LBL_ASSIGNED_TO',
+    'width' => '10%',
+    'name' => 'assigned_to_c',
+  ),
+),
+);

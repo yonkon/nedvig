@@ -1,0 +1,210 @@
+<?php
+$module_name = 'sphr_Object';
+$viewdefs [$module_name] = 
+array (
+  'DetailView' => 
+  array (
+    'templateMeta' => 
+    array (
+      'form' => 
+      array (
+        'buttons' => 
+        array (
+          0 => 'EDIT',
+          1 => 'DUPLICATE',
+          2 => 'DELETE',
+        ),
+      ),
+      'maxColumns' => '2',
+      'widths' => 
+      array (
+        0 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+        1 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+      ),
+	  'includes' => 
+      array (
+        0 => 
+        array (
+		  'file' => 'custom/include/javascript/jquery/jquery.pack.js',
+        ),
+		1 => 
+        array (
+          'file' => 'custom/include/javascript/pikachoose.js',
+        ),
+      ),
+      'useTabs' => false,
+    ),
+    'panels' => 
+    array (
+      'default' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'country',
+            'studio' => 'visible',
+            'label' => 'LBL_COUNTRY',
+          ),
+          1 => 
+          array (
+            'name' => 'address',
+            'label' => 'LBL_ADDRESS',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'region',
+            'label' => 'LBL_REGION',
+          ),
+          1 => 
+          array (
+            'name' => 'name',
+            'label' => 'LBL_NAME',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'type',
+            'studio' => 'visible',
+            'label' => 'LBL_TYPE',
+          ),
+          1 => 
+          array (
+            'name' => 'square',
+            'label' => 'LBL_SQUARE',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'payment_object',
+            'label' => 'LBL_PAYMENT_OBJECT',
+          ),
+          1 => 
+          array (
+            'name' => 'payment_meter',
+            'label' => 'LBL_PAYMENT_METER',
+          ),
+        ),
+        4 => 
+        array (
+          0 =>  
+		  array (
+            'label' => 'LBL_PREVIEW',
+            'customCode' => '
+			<div id="pika_main">
+				<div id="pika_subdiv">
+					<img/>
+				</div>
+				<div id="pika_caption"></div>
+			</div>',
+			),
+		),
+        5 => 
+        array (
+			0 => 
+		   array (
+            'label' => 'LBL_PHOTOS',
+            'customCode' => '
+				<ul class="pikame">
+					{foreach from=$ar_photos key=old_photo_id item=old_photo_value name=fore}
+						<li><img{if $smarty.foreach.fore.first} class="pika_first"{/if} src="{$old_photo_id}"/><span>{$old_photo_value}</span></li>
+					{/foreach}
+				</ul>
+			',
+			),
+		),
+		6 =>
+		array (
+			0 => 
+		   array (
+            'label' => 'LBL_LAYOUTS',
+            'customCode' => '<ul class="pikame">
+					{foreach from=$ar_layouts key=old_layout_id item=old_layout_value }
+						<li><img src="{$old_layout_id}"/><span>{$old_layout_value}</span></li>
+					{/foreach}
+				</ul>',
+			),
+		),			
+          /* 0 => 
+          array (
+            'name' => 'foto',
+            'label' => 'LBL_FOTO',
+          ),
+          1 => 
+          array (
+            'name' => 'layout',
+            'label' => 'LBL_LAYOUT',
+          ), */
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'status',
+            'studio' => 'visible',
+            'label' => 'LBL_STATUS',
+          ),
+          1 => 
+          array (
+            'name' => 'description_complex',
+            'studio' => 'visible',
+            'label' => 'LBL_DESCRIPTION_COMPLEX',
+          ),
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'purchase_scheme',
+            'studio' => 'visible',
+            'label' => 'LBL_PURCHASE_SCHEME',
+          ),
+          1 => 
+          array (
+            'name' => 'description_location',
+            'studio' => 'visible',
+            'label' => 'LBL_DESCRIPTION_LOCATION',
+          ),
+        ),
+        9 => 
+        array (
+          0 => 
+          array (
+            'name' => 'sphr_develohr_object_name',
+          ),
+          1 => 
+          array (
+            'name' => 'sphr_intermhr_object_name',
+          ),
+        ),
+        10 => 
+        array (
+          0 => 
+          array (
+            'name' => 'sphr_owner_hr_object_name',
+          ),
+		   1 => 
+          array (
+            'name' => 'assigned_user_name',
+            'label' => 'LBL_ASSIGNED_TO_NAME',
+          ),
+        ),
+      ),
+    ),
+  ),
+);
+?>

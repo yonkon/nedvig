@@ -1,0 +1,28 @@
+<?php
+// created: 2012-06-15 11:41:16
+$layout_defs = array (
+  'name' => 
+  array (
+    'vname' => 'LBL_NAME',
+    'widget_class' => 'SubPanelDetailViewLink',
+    'width' => '45%',
+  ),
+  'date_modified' => 
+  array (
+    'vname' => 'LBL_DATE_MODIFIED',
+    'width' => '45%',
+  ),
+  'edit_button' => 
+  array (
+    'widget_class' => 'SubPanelEditButton',
+    'module' => 'cosib_messages',
+    'width' => '4%',
+  ),
+  'remove_button' => 
+  array (
+    'widget_class' => 'SubPanelRemoveButton',
+    'module' => 'cosib_messages',
+    'width' => '5%',
+  ),
+);
+?>

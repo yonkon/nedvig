@@ -1,0 +1,160 @@
+<?php
+$popupMeta = array (
+    'moduleMain' => 'sphr_Object',
+    'varName' => 'sphr_Object',
+    'orderBy' => 'sphr_object.name',
+    'whereClauses' => array (
+  'address' => 'sphr_object.address',
+  'name' => 'sphr_object.name',
+  'type' => 'sphr_object.type',
+  'square' => 'sphr_object.square',
+  'payment_object' => 'sphr_object.payment_object',
+  'accounts_sphr_object_name' => 'sphr_object.accounts_sphr_object_name',
+),
+    'searchInputs' => array (
+  5 => 'address',
+  7 => 'name',
+  8 => 'type',
+  9 => 'square',
+  10 => 'payment_object',
+  11 => 'accounts_sphr_object_name',
+),
+    'searchdefs' => array (
+  'address' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_ADDRESS',
+    'width' => '10%',
+    'name' => 'address',
+  ),
+  'name' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_NAME',
+    'width' => '10%',
+    'name' => 'name',
+  ),
+  'type' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_TYPE',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'type',
+  ),
+  'square' => 
+  array (
+    'type' => 'int',
+    'label' => 'LBL_SQUARE',
+    'width' => '10%',
+    'name' => 'square',
+  ),
+  'accounts_sphr_object_name' => 
+  array (
+    'type' => 'relate',
+    'link' => 'accounts_sphr_object',
+    'label' => 'LBL_ACCOUNTS_SPHR_OBJECT_FROM_ACCOUNTS_TITLE',
+    'width' => '10%',
+    'name' => 'accounts_sphr_object_name',
+  ),
+  'accounts_agents' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_ACCOUNTS_AGENTS',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'accounts_agents',
+  ),
+  'payment_object' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_PAYMENT_OBJECT',
+    'width' => '10%',
+    'name' => 'payment_object',
+  ),
+),
+    'listviewdefs' => array (
+  'NAME' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_NAME',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'name',
+    'link' => true,
+  ),
+  'TYPE' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_TYPE',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'type',
+  ),
+  'CATEGORY_C' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_CATEGORY',
+    'sortable' => false,
+    'width' => '10%',
+  ),
+  'OBJECT_STATUS_C' => 
+  array (
+    'type' => 'multienum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_OBJECT_STATUS',
+    'width' => '10%',
+  ),
+  'PRICE_SALE_INT_C' => 
+  array (
+    'type' => 'int',
+    'default' => true,
+    'label' => 'LBL_PRICE_SALE_INT',
+    'width' => '10%',
+  ),
+  'SELLER_PRICE_SALE_INT_C' => 
+  array (
+    'type' => 'int',
+    'default' => true,
+    'label' => 'LBL_SELLER_PRICE_SALE_INT',
+    'width' => '10%',
+  ),
+  'PRICE_RENT_INT_C' => 
+  array (
+    'type' => 'int',
+    'default' => true,
+    'label' => 'LBL_PRICE_RENT_INT',
+    'width' => '10%',
+  ),
+  'SELLER_PRICE_RENT_INT_C' => 
+  array (
+    'type' => 'int',
+    'default' => true,
+    'label' => 'LBL_SELLER_PRICE_RENT_INT',
+    'width' => '10%',
+  ),
+  'COAST_TEXT_C' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'label' => 'LBL_COAST_TEXT',
+    'width' => '10%',
+  ),
+  'ASSIGNED_USER_NAME' => 
+  array (
+    'link' => 'assigned_user_link',
+    'type' => 'relate',
+    'label' => 'LBL_ASSIGNED_TO_NAME',
+    'width' => '10%',
+    'default' => true,
+  ),
+),
+);

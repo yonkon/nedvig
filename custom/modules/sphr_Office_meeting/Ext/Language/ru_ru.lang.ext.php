@@ -1,0 +1,13 @@
+<?php 
+ //WARNING: The contents of this file are auto-generated
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_SPHR_DEAL_SPHR_OFFICE_MEETING_FROM_SPHR_DEAL_TITLE'] = 'Сделка';
+$mod_strings['LBL_SPHR_DEAL_SPHR_OFFICE_MEETING_1_FROM_SPHR_DEAL_TITLE'] = 'Сделка';
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_SPHR_DEAL_SPHR_OFFICE_MEETING_FROM_SPHR_DEAL_TITLE'] = 'Сделка';
+
+?>

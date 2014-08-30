@@ -1,0 +1,88 @@
+<?php
+$module_name = 'sphr_Reserve';
+$viewdefs [$module_name] = 
+array (
+  'EditView' => 
+  array (
+    'templateMeta' => 
+    array (
+      'maxColumns' => '2',
+      'widths' => 
+      array (
+        0 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+        1 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+      ),
+      'javascript' => '
+	  {literal}
+	  <script type="text/javascript">
+	  		addToValidate(\'EditView\', \'sphr_clientr_reserve_name\', \'relate\', true,\'Клиент\' );
+			addToValidate(\'EditView\', \'sphr_objectr_reserve_name\', \'relate\', true,\'Объект\' );
+		</script>
+	  {/literal}
+	',
+      'useTabs' => false,
+    ),
+    'panels' => 
+    array (
+      'default' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'type',
+            'studio' => 'visible',
+            'label' => 'LBL_TYPE',
+          ),
+          1 => 
+          array (
+            'name' => 'flat_number',
+            'label' => 'LBL_FLAT_NUMBER',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'payment',
+            'label' => 'LBL_PAYMENT',
+          ),
+          1 => 
+          array (
+            'name' => 'date_expiration',
+            'label' => 'LBL_DATE_EXPIRATION',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'sphr_clientr_reserve_name',
+          ),
+          1 => 
+          array (
+            'name' => 'sphr_objectr_reserve_name',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'assigned_user_name',
+            'label' => 'LBL_ASSIGNED_TO_NAME',
+          ),
+          1 => '',
+        ),
+      ),
+    ),
+  ),
+);
+?>

@@ -1,0 +1,14 @@
+Fri, 08 Nov 2013 22:15:06 +0400 [UpgradeWizard] - setting session variables...
+Fri, 08 Nov 2013 22:15:06 +0400 [UpgradeWizard] - -----------------------------------------------------------------------------
+Fri, 08 Nov 2013 22:15:06 +0400 [UpgradeWizard] - Upgrade started. At start.php
+Fri, 08 Nov 2013 22:15:06 +0400 [UpgradeWizard] - at unlinkTempFiles()
+Fri, 08 Nov 2013 22:15:06 +0400 [UpgradeWizard] - unlinking [/var/www/html/sugar/ci/deploy/cache/upload/upgrades/temp/upgrade_progress.php]
+Fri, 08 Nov 2013 22:15:06 +0400 [UpgradeWizard] - finished!
+Fri, 08 Nov 2013 22:15:06 +0400 [UpgradeWizard] - resetting $_SESSION
+Fri, 14 Feb 2014 18:55:58 +0400 [UpgradeWizard] - setting session variables...
+Fri, 14 Feb 2014 18:55:58 +0400 [UpgradeWizard] - -----------------------------------------------------------------------------
+Fri, 14 Feb 2014 18:55:58 +0400 [UpgradeWizard] - Upgrade started. At start.php
+Fri, 14 Feb 2014 18:55:58 +0400 [UpgradeWizard] - at unlinkTempFiles()
+Fri, 14 Feb 2014 18:55:58 +0400 [UpgradeWizard] - unlinking [/var/www/html/sugar/ci/deploy/cache/upload/upgrades/temp/upgrade_progress.php]
+Fri, 14 Feb 2014 18:55:58 +0400 [UpgradeWizard] - finished!
+Fri, 14 Feb 2014 18:55:58 +0400 [UpgradeWizard] - resetting $_SESSION

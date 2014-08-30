@@ -1,0 +1,31 @@
+<?php
+// created: 2014-07-22 16:29:41
+$mod_strings = array (
+  'LBL_EDITVIEW_PANEL1' => 'Застройщик',
+  'LBL_DETAILVIEW_PANEL3' => 'Агентский договор',
+  'LBL_ASSIGNED_TO_NAME' => 'Ответственный',
+  'LBL_PHONE' => 'Телефон',
+  'LBL_NAME' => 'Название застройщика',
+  'LBL_INN_AND_KPP' => 'ИНН/КПП',
+  'LBL_ADDRESS_LEGAL' => 'Юридический адрес',
+  'LBL_ACCOUNT_AND_BANK' => 'Расчетный счет, банк',
+  'LBL_NAME_GENERAL_DIRECTOR' => 'ФИО генерального директора',
+  'LBL_CONTRACT_NUMBER' => 'Номер договора',
+  'LBL_QUICKCREATE_PANEL3' => 'Контактная информация',
+  'LBL_TITLE' => 'Заголовок',
+  'LBL_CONTRACT_DATE_SINGING' => 'Дата подписания договора',
+  'LBL_CONTRACT_DATE_EXPIRATION' => 'Дата окончания действия договора',
+  'LBL_CONTRACT_DURATION' => 'Срок  действия договора',
+  'LBL_CONTRACT_COMISSION' => 'Комиссия %',
+  'LBL_PHONE_FAX' => 'Факс',
+  'LBL_EMAIL_ADDRESS' => 'E-mail:',
+  'LBL_WEBSITE' => 'Сайт:',
+  'ERR_PHONE_LENGTH' => 'Длина должна быть 11 символов',
+  'ERR_EMAIL' => 'Неправильный адрес E-mail',
+  'ERR_WEBSITE' => 'Неправильный адрес сайта',
+  'ERR_SLASH_NEED' => 'Обязательно использование символа «/»',
+  'LBL_ACCOUNT_NAME' => 'Название застройщика:',
+  'LBL_DETAILVIEW_PANEL4' => 'Реквизиты',
+  'LBL_SPHR_DEVELOER_SPHR_OBJECT_SUBPANEL_TITLE' => 'LBL_SPHR_DEVELOER_SPHR_OBJECT_SUBPANEL_TITLE',
+);
+?>

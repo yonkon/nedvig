@@ -1,0 +1,19 @@
+﻿<script type="text/javascript" src="custom/modules/cosib_messages/tmpls/answer.js">
+</script>
+
+<p>
+<input  id='show_answer_form' type="button" name="new message" value="{$MOD.LBL_ANSWER_NEW}" />
+</p>
+<div id="answer_form_div" style='display:none'>
+	<form id='answer_message_form' method='POST' action='index.php?module=cosib_messages&action=Answers&sugar_body_only=1'>
+		 <p><textarea id='answer_description'rows="10" cols="45" name="description"></textarea></p>
+		 <br>
+		 <p> 
+			 <input type='reset' value='{$MOD.LBL_ANSWER_CLEAR_FORM}' />
+			 <input type='button' name='description_save' id='answer_description_save' value='{$MOD.LBL_ANSWER_SAVE}' />
+		 </p>
+		 <input type='hidden' name='record' value='{$fields.id.value}'/>
+		 
+	<form>
+</div>
+<div id="messages_list" class="detail view"></div>

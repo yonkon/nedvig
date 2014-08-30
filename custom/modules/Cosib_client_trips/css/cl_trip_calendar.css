@@ -1,0 +1,24 @@
+.cl_trip_status_plan{
+	background-color:#6F6 !important;
+}
+.cl_trip_status_confirm{
+	background-color:#6FF !important;
+}
+.cl_trip_status_takeplace{
+	background-color:#FF9 !important;
+}
+.cl_trip_client{
+	font-weight: bold;
+}
+.cl_trip_object_list{
+	list-style-type:disc;
+	padding:0;
+	margin-left:2px;
+	
+	color:#000;
+}
+.cl_trip_content{
+	display:block;	
+	/*z-index:2333;*/
+	
+}

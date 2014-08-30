@@ -1,0 +1,172 @@
+<table width="650" cellpadding="0" cellspacing="0" border="0" align="center">
+<tr>
+    <th colspan="2" align="left" width="100%" valign="top" style="font-size:xx-large; color:#0071E1; font-style:italic;">
+        <i>{$fields->name_rus_c}</i>
+    </th>
+</tr>
+
+<tr>
+    <td colspan="2" align="center" width="100%" valign="top" >
+    </td>
+</tr>
+
+<tr>
+    <td colspan="2" width="100%">
+        <table cellpadding="0" cellspacing="0" border="0" align="center">
+        
+            <tr>
+                <td width="100%" height="30" align="left" valign="bottom" colspan="4" style="margin:0px;padding:0px;" bgcolor="#f6f6f6"><img src="{$SURL}/custom/modules/sphr_Object/pdf/tmpl/table_top.png" width="650" height="30" border="0" align="bottom" style="position:inline;margin:0px;padding:0px;"></td>
+            </tr>
+            
+            {if $photos_count>0}
+            <tr>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+                <td width="96%" colspan="2" align="center" valign="top" bgcolor="#f6f6f6">
+                    <table width="600" border="0" cellpadding="0" cellspacing="0">
+                        <tr> 
+                            {foreach from=$photos item=photo name=fphoto}
+                                {assign var='total' value=$photos|@count}
+                                {counter assign=index}
+                                <td width="350" align="left" valign="top">
+                                    <a href="{$SURL}/cache/upload/object/{$photo}" target="_blank"><img src="cache/upload/object/cut_{$photo}" align="absmiddle" width="200" height="200"></a>
+                                </td>
+                                {if $index % 2 == 0}
+                                </tr>
+                                <tr>
+                                    <td colspan="2" height="30">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                {/if}
+                            {/foreach}
+                        </tr>
+                    </table>
+                </td>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+            </tr>
+            {/if}
+            
+            <tr>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+                <td width="48%" align="left" style="vertical-align:middle;" bgcolor="#f6f6f6">
+                    <br/>{$MOD.LBL_PRICE_SALE_INT}:
+                </td>
+                
+                <td width="48%" align="left" style="vertical-align:middle;" bgcolor="#f6f6f6">	
+                    <span style="color:#FF6600;">{$fields->price_sale_int_c}&nbsp; *</span>
+                </td>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+            </tr>
+            
+            <tr>
+                <td width="100%" height="10" align="left" style="vertical-align:middle;" bgcolor="#f6f6f6" colspan="4"><img src="{$SURL}/custom/modules/sphr_Object/pdf/tmpl/table_splitter.png" width="650" height="3" border="0" align="bottom" style="position:inline;margin:0px;padding:0px;"></td>
+            </tr>
+            
+            <tr>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+                <td width="48%" align="left" style="vertical-align:middle;" bgcolor="#f6f6f6">
+                    <br/>{$MOD.LBL_PRICE_SALE_METER}:
+                </td>
+                
+                <td width="48%" align="left" style="vertical-align:middle;" bgcolor="#f6f6f6">	
+                    <span style="color:#FF6600;">~{$fields->price_sale_meter_c}&nbsp; *</span>
+                </td>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+            </tr>
+            
+            <tr>
+                <td width="100%" height="10" align="left" style="vertical-align:middle;" bgcolor="#f6f6f6" colspan="4"><img src="{$SURL}/custom/modules/sphr_Object/pdf/tmpl/table_splitter.png" width="650" height="3" border="0" align="bottom" style="position:inline;margin:0px;padding:0px;"></td>
+            </tr>
+
+            <tr>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+                <td  width="48%" align="left" style="vertical-align:middle;" bgcolor="#f6f6f6">
+                    <br/>{$MOD.LBL_COAST}:
+                </td>
+                
+                <td width="48%" align="left" style="vertical-align:central;" bgcolor="#f6f6f6">	
+                    {assign var='opt' value=$fields->field_defs.coast_select_c.options}				
+                    {assign var='arrkeys' value=","|explode:$fields->coast_select_c}
+                    {foreach from=$arrkeys item=arrkey name=optarr}
+                        {assign var='arrkey_cl' value="^"|str_replace:'':$arrkey}		
+			{if $smarty.foreach.optarr.index>0},{/if}
+			{$APP.$opt.$arrkey_cl}				
+                    {/foreach}   
+                </td>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+            </tr>
+            
+            <tr>
+                <td width="100%" height="10" align="left" style="vertical-align:middle;" bgcolor="#f6f6f6" colspan="4"><img src="{$SURL}/custom/modules/sphr_Object/pdf/tmpl/table_splitter.png" width="650" height="3" border="0" align="bottom" style="position:inline;margin:0px;padding:0px;"></td>
+            </tr>
+            
+            <tr>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+                <td width="48%" align="left" style="vertical-align:middle;" bgcolor="#f6f6f6">
+                    <br />{$MOD.LBL_TOTAL_AREA}:
+                </td>
+                
+                <td width="48%" align="left" style="vertical-align:middle;" bgcolor="#f6f6f6">	
+                    {$fields->total_area_c} м<sup>2</sup>
+                </td>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+             </tr>
+             
+             <tr>
+                <td width="100%" height="10" align="left" style="vertical-align:middle;" bgcolor="#f6f6f6" colspan="4"><img src="{$SURL}/custom/modules/sphr_Object/pdf/tmpl/table_splitter.png" width="650" height="3" border="0" align="bottom" style="position:inline;margin:0px;padding:0px;"></td>
+             </tr>
+            
+             <tr>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+                <td width="48%" align="left" style="vertical-align:middle;" bgcolor="#f6f6f6">
+                    <br />{$MOD.LBL_SEA_DISTANCE}:	
+                </td>
+                
+                <td width="48%" align="left" style="vertical-align:middle;" bgcolor="#f6f6f6"> 
+                    {assign var='opt' value=$fields->field_defs.sea_distance_c.options}				
+                    {assign var='arrkeys' value=","|explode:$fields->sea_distance_c}
+                    {foreach from=$arrkeys item=arrkey name=optarr}
+                        {assign var='arrkey_cl' value="^"|str_replace:'':$arrkey}		
+                        {if $smarty.foreach.optarr.index>0},{/if}
+                        {$APP.$opt.$arrkey_cl}				
+                    {/foreach}             
+                </td>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+            </tr>
+            
+            <tr>
+                <td width="100%" height="10" align="left" style="vertical-align:middle;" bgcolor="#f6f6f6" colspan="4"><img src="{$SURL}/custom/modules/sphr_Object/pdf/tmpl/table_splitter.png" width="650" height="3" border="0" align="bottom" style="position:inline;margin:0px;padding:0px;"></td>
+            </tr>
+            
+            <tr>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+                <td width="96%" colspan="2" style="text-align:justify;" bgcolor="#f6f6f6">
+                    <div style="text-indent: 25px; color:#FF6600;">* Цена на объект может отличаться от цены, указанной на сайте. Вы можете уточнить цену у менеджера, отправив запрос через форму на сайте.</div>
+                </td>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+            </tr>
+            
+            <tr>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+                <td width="96%" colspan="2" style="text-align:justify; padding-left:5px; padding-right:5px;"  bgcolor="#f6f6f6">
+                    <div style="text-indent: 25px;">Площадь апартаментов {$fields->total_area_c} м<sup>2</sup>, до моря {assign var='opt' value=$fields->field_defs.sea_distance_c.options}{assign var='arrkeys' value=","|explode:$fields->sea_distance_c}{foreach from=$arrkeys item=arrkey name=optarr}{assign var='arrkey_cl' value="^"|str_replace:'':$arrkey}{if $smarty.foreach.optarr.index>0},{/if}{$APP.$opt.$arrkey_cl}{/foreach} метров</div>
+                </td>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+            </tr>
+
+            {if !empty($DESCRIPTION)}
+            <tr>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+                <td width="96%" colspan="2"  style="text-align:justify; padding-left:5px; padding-right:5px;"  bgcolor="#f6f6f6">
+                    <div style="text-indent: 25px;">{$DESCRIPTION}</div>
+                </td>
+                <td width="2%" bgcolor="#f6f6f6">&nbsp;</td>
+            </tr>
+            {/if}
+            
+            <tr><td width="100%" height="30" align="left" valign="bottom" colspan="4" style="margin:0px;padding:0px;"><img src="{$SURL}/custom/modules/sphr_Object/pdf/tmpl/table_bottom.png" width="650" height="30" border="0" align="bottom" style="position:inline;margin:0px;padding:0px;"></td></tr>
+         
+        </table>
+    </td> 
+</tr>
+
+</table>

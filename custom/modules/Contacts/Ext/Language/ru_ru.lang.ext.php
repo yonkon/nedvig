@@ -1,0 +1,40 @@
+<?php 
+ //WARNING: The contents of this file are auto-generated
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_SPHR_DEVELOPER_CONTACTS_FROM_SPHR_DEVELOPER_TITLE'] = 'Застройщик';
+$mod_strings['LBL_OPPORTUNITIES_CONTACTS_1_FROM_OPPORTUNITIES_TITLE'] = 'Сделки';
+$mod_strings['LBL_OPPORTUNITIES_CONTACTS_2_FROM_OPPORTUNITIES_TITLE'] = 'Сделки';
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_SPHR_DEVELOPER_CONTACTS_FROM_SPHR_DEVELOPER_TITLE'] = 'Застройщик';
+$mod_strings['LBL_OPPORTUNITIES_CONTACTS_1_FROM_OPPORTUNITIES_TITLE'] = 'Сделки';
+$mod_strings['LBL_OPPORTUNITIES_CONTACTS_2_FROM_OPPORTUNITIES_TITLE'] = 'Сделки';
+$mod_strings['LBL_CONTACTS_CONTACTS_FROM_CONTACTS_L_TITLE'] = 'Контакты застройщиков';
+$mod_strings['LBL_CONTACTS_CONTACTS_FROM_CONTACTS_R_TITLE'] = 'Контакты застройщиков';
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_SPHR_DEVELOPER_CONTACTS_FROM_SPHR_DEVELOPER_TITLE'] = 'Застройщик';
+$mod_strings['LBL_OPPORTUNITIES_CONTACTS_1_FROM_OPPORTUNITIES_TITLE'] = 'Сделки';
+$mod_strings['LBL_OPPORTUNITIES_CONTACTS_2_FROM_OPPORTUNITIES_TITLE'] = 'Сделки';
+$mod_strings['LBL_CONTACTS_CONTACTS_FROM_CONTACTS_L_TITLE'] = 'Контакты застройщиков';
+$mod_strings['LBL_CONTACTS_CONTACTS_FROM_CONTACTS_R_TITLE'] = 'Контакты застройщиков';
+
+
+
+$mod_strings = array_merge($mod_strings,
+	array(
+		 'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => "Группы пользователей",
+	)
+);
+
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_SPHR_DEVELOPER_CONTACTS_FROM_SPHR_DEVELOPER_TITLE'] = 'Застройщик';
+$mod_strings['LBL_OPPORTUNITIES_CONTACTS_1_FROM_OPPORTUNITIES_TITLE'] = 'Сделки';
+
+?>

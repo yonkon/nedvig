@@ -1,0 +1,13 @@
+<?php 
+ //WARNING: The contents of this file are auto-generated
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_SPHR_DEAL_SPHR_SHOW_OBJECT_FROM_SPHR_DEAL_TITLE'] = 'Сделка';
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_SPHR_DEAL_SPHR_SHOW_OBJECT_FROM_SPHR_DEAL_TITLE'] = 'Сделка';
+$mod_strings['LBL_SPHR_OBJECT_SPHR_SHOW_OBJECT_FROM_SPHR_OBJECT_TITLE'] = 'Объекты';
+
+?>

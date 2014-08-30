@@ -1,0 +1,51 @@
+<?php
+$module_name = 'cosib_queries';
+$listViewDefs [$module_name] =
+array (
+  'TYPE_OF_QUERY_C' =>
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_TYPE_OF_QUERY',
+    'sortable' => true,
+    'width' => '10%',
+    'link' => true,
+  ),
+  'STATUS_C' =>
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_STATUS',
+    'sortable' => true,
+    'width' => '10%',
+  ),
+  'CATEGORY_OF_OBJECT_C' =>
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_CATEGORY_OF_OBJECT',
+    'sortable' => true,
+    'width' => '10%',
+  ),
+  'BUDGET_C' =>
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_BUDGET',
+    'sortable' => true,
+    'width' => '10%',
+  ),
+  'ASSIGNED_TO_C' =>
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'label' => 'LBL_ASSIGNED_TO',
+    'sortable' => true,
+    'width' => '10%',
+  ),
+);
+?>

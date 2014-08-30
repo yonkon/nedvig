@@ -1,0 +1,18 @@
+syntax: glob
+
+./config.php
+./config_override.php
+upload/*
+cache/*
+*.log
+custom/ZuckerReports/archive/*
+custom/ZuckerReports/temp/*
+custom/modules/*/Ext/*
+custom/application/Ext/*
+custom/history/
+modules/backup_recovery/*
+\.orig\..*$
+\.orig$
+\.chg\..*$
+\.rej$
+\.conflict\~$

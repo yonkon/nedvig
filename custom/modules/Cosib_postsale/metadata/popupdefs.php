@@ -1,0 +1,86 @@
+<?php
+$popupMeta = array (
+    'moduleMain' => 'Cosib_postsale',
+    'varName' => 'Cosib_postsale',
+    'orderBy' => 'cosib_postsale.name',
+    'whereClauses' => array (
+  'cosib_postshr_client_name' => 'cosib_postsale.cosib_postshr_client_name',
+  'cosib_postshr_object_name' => 'cosib_postsale.cosib_postshr_object_name',
+  'assigned_user_id' => 'cosib_postsale.assigned_user_id',
+),
+    'searchInputs' => array (
+  4 => 'cosib_postshr_client_name',
+  5 => 'cosib_postshr_object_name',
+  6 => 'assigned_user_id',
+),
+    'searchdefs' => array (
+  'cosib_postshr_client_name' => 
+  array (
+    'type' => 'relate',
+    'link' => 'cosib_postsle_sphr_client',
+    'label' => 'LBL_COSIB_POSTSALE_SPHR_CLIENT_FROM_SPHR_CLIENT_TITLE',
+    'width' => '10%',
+    'name' => 'cosib_postshr_client_name',
+  ),
+  'cosib_postshr_object_name' => 
+  array (
+    'type' => 'relate',
+    'link' => 'cosib_postsle_sphr_object',
+    'label' => 'LBL_COSIB_POSTSALE_SPHR_OBJECT_FROM_SPHR_OBJECT_TITLE',
+    'width' => '10%',
+    'name' => 'cosib_postshr_object_name',
+  ),
+  'assigned_user_id' => 
+  array (
+    'name' => 'assigned_user_id',
+    'label' => 'LBL_ASSIGNED_TO',
+    'type' => 'enum',
+    'function' => 
+    array (
+      'name' => 'get_user_array',
+      'params' => 
+      array (
+        0 => false,
+      ),
+    ),
+    'width' => '10%',
+  ),
+),
+    'listviewdefs' => array (
+  'COSIB_POSTSHR_CLIENT_NAME' => 
+  array (
+    'type' => 'relate',
+    'link' => 'cosib_postsle_sphr_client',
+    'label' => 'LBL_COSIB_POSTSALE_SPHR_CLIENT_FROM_SPHR_CLIENT_TITLE',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'cosib_postshr_client_name',
+  ),
+  'COSIB_POSTSHR_OBJECT_NAME' => 
+  array (
+    'type' => 'relate',
+    'link' => 'cosib_postsle_sphr_object',
+    'label' => 'LBL_COSIB_POSTSALE_SPHR_OBJECT_FROM_SPHR_OBJECT_TITLE',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'cosib_postshr_object_name',
+  ),
+  'ASSIGNED_USER_NAME' => 
+  array (
+    'width' => '9%',
+    'label' => 'LBL_ASSIGNED_TO_NAME',
+    'module' => 'Employees',
+    'id' => 'ASSIGNED_USER_ID',
+    'default' => true,
+    'name' => 'assigned_user_name',
+  ),
+  'DATE_ENTERED' => 
+  array (
+    'type' => 'datetime',
+    'label' => 'LBL_DATE_ENTERED',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'date_entered',
+  ),
+),
+);

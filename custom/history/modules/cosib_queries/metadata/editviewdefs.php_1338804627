@@ -1,0 +1,301 @@
+<?php
+$module_name = 'cosib_queries';
+$viewdefs [$module_name] = 
+array (
+  'EditView' => 
+  array (
+    'templateMeta' => 
+    array (
+      'maxColumns' => '2',
+      'widths' => 
+      array (
+        0 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+        1 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+      ),
+      'useTabs' => false,
+    ),
+    'panels' => 
+    array (
+      'lbl_editview_panel4' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'type_of_query_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TYPE_OF_QUERY',
+          ),
+          1 => 
+          array (
+            'name' => 'status_c',
+            'studio' => 'visible',
+            'label' => 'LBL_STATUS',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'status_desc_c',
+            'studio' => 'visible',
+            'label' => 'LBL_STATUS_DESC',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'assigned_to_c',
+            'label' => 'LBL_ASSIGNED_TO',
+          ),
+          1 => 
+          array (
+            'name' => 'type_of_object_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TYPE_OF_OBJECT',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'type_of_object_relate_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TYPE_OF_OBJECT_RELATE',
+          ),
+          1 => '',
+        ),
+      ),
+      'lbl_editview_panel7' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'category_of_object_c',
+            'studio' => 'visible',
+            'label' => 'LBL_CATEGORY_OF_OBJECT',
+          ),
+          1 => 
+          array (
+            'name' => 'budget_c',
+            'studio' => 'visible',
+            'label' => 'LBL_BUDGET',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'province_c',
+            'studio' => 'visible',
+            'label' => 'LBL_PROVINCE',
+          ),
+          1 => 
+          array (
+            'name' => 'coast_c',
+            'studio' => 'visible',
+            'label' => 'LBL_COAST',
+          ),
+        ),
+        2 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'settlement_c',
+            'studio' => 'visible',
+            'label' => 'LBL_SETTLEMENT',
+          ),
+          1 => 
+          array (
+            'name' => 'quantity_of_bedroom_c',
+            'studio' => 'visible',
+            'label' => 'LBL_QUANTITY_OF_BEDROOM',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'remoteness_from_sea_c',
+            'studio' => 'visible',
+            'label' => 'LBL_REMOTENESS_FROM_SEA',
+          ),
+          1 => 
+          array (
+            'name' => 'remoteness_from_commercial_c',
+            'label' => 'LBL_REMOTENESS_FROM_COMMERCIAL',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'airport_road_c',
+            'studio' => 'visible',
+            'label' => 'LBL_AIRPORT_ROAD',
+          ),
+          1 => 
+          array (
+            'name' => 'view_of_sea_c',
+            'label' => 'LBL_VIEW_OF_SEA',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'area_c',
+            'studio' => 'visible',
+            'label' => 'LBL_AREA',
+          ),
+          1 => 
+          array (
+            'name' => 'additional_desc_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ADDITIONAL_DESC',
+          ),
+        ),
+      ),
+      'lbl_editview_panel6' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'service_c',
+            'studio' => 'visible',
+            'label' => 'LBL_SERVICE',
+          ),
+          1 => '',
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'deposit_c',
+            'label' => 'LBL_DEPOSIT',
+          ),
+          1 => 
+          array (
+            'name' => 'deposit_date_c',
+            'label' => 'LBL_DEPOSIT_DATE',
+          ),
+        ),
+        2 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+        3 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+      ),
+      'lbl_editview_panel5' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'number_of_people_c',
+            'studio' => 'visible',
+            'label' => 'LBL_NUMBER_OF_PEOPLE',
+          ),
+          1 => '',
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'total_cost_c',
+            'label' => 'LBL_TOTAL_COST',
+          ),
+          1 => '',
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'prepayment_date_c',
+            'label' => 'LBL_PREPAYMENT_DATE',
+          ),
+          1 => 
+          array (
+            'name' => 'prepayment_size_c',
+            'label' => 'LBL_PREPAYMENT_SIZE',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'charge_summ_date_c',
+            'label' => 'LBL_CHARGE_SUMM_DATE',
+          ),
+          1 => 
+          array (
+            'name' => 'charge_c',
+            'label' => 'LBL_CHARGE',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'payment_date_c',
+            'label' => 'LBL_PAYMENT_DATE',
+          ),
+          1 => 
+          array (
+            'name' => 'payment_size_c',
+            'label' => 'LBL_PAYMENT_SIZE',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'documents_date_c',
+            'label' => 'LBL_DOCUMENTS_DATE',
+          ),
+          1 => 
+          array (
+            'name' => 'resolution_date_c',
+            'label' => 'LBL_RESOLUTION_DATE',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'dni_begin_date_c',
+            'label' => 'LBL_DNI_BEGIN_DATE',
+          ),
+          1 => '',
+        ),
+        7 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+      ),
+    ),
+  ),
+);
+?>

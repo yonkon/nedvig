@@ -1,0 +1,3 @@
+﻿UPDATE `fields_meta_data` SET `type` = 'int' WHERE `fields_meta_data`.`id` = 'sphr_Objectid_object_c';
+ALTER TABLE `sphr_object_cstm` CHANGE `id_object_c` `id_object_c` INT( 255 ) NULL DEFAULT NULL ;
+UPDATE `fields_meta_data` SET `id` = 'sphr_Objectarea_area_c',`name` = 'area_area_c',`vname` = 'LBL_AREA_AREA_C',`comments` = NULL,`help` = NULL,`custom_module` = 'sphr_Object',`type` = 'int',`len` = 255,`required` = 0,`default_value` = NULL,`date_modified` = '2012-09-05 07:54:38',`deleted` = 0,`audited` = 0,`massupdate` = 0,`duplicate_merge` = 0,`reportable` = 1,`importable` = 'true',`ext1` = NULL,`ext2` = NULL,`ext3` = NULL,`ext4` = NULL WHERE `fields_meta_data`.`id` = 'sphr_Objectarea_area_c';

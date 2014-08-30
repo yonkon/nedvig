@@ -1,0 +1,73 @@
+<?php
+// created: 2013-01-31 16:05:25
+$layout_defs = array (
+  'name' => 
+  array (
+    'vname' => 'LBL_NAME',
+    'widget_class' => 'SubPanelDetailViewLink',
+    'width' => '',
+  ),
+  'type' => 
+  array (
+    'vname' => 'LBL_TYPE',
+    'width' => '',
+  ),
+  'category_c' => 
+  array (
+    'vname' => 'LBL_CATEGORY',
+    'width' => '',
+  ),
+  'object_status_c' => 
+  array (
+    'vname' => 'LBL_OBJECT_STATUS',
+    'width' => '',
+  ),
+  'price_sale_int_c' => 
+  array (
+    'vname' => 'LBL_PRICE_SALE_INT',
+    'width' => '',
+  ),
+  'seller_price_sale_int_c' => 
+  array (
+    'vname' => 'LBL_SELLER_PRICE_SALE_INT',
+    'width' => '',
+  ),
+  'price_rent_int_c' => 
+  array (
+    'vname' => 'LBL_PRICE_RENT_INT',
+    'width' => '',
+  ),
+  'seller_price_rent_int_c' => 
+  array (
+    'vname' => 'LBL_SELLER_PRICE_RENT_INT',
+    'width' => '',
+  ),
+  'province_text_c' => 
+  array (
+    'vname' => 'LBL_PROVINCE',
+    'width' => '',
+  ),
+  'coast_text_c' => 
+  array (
+    'vname' => 'LBL_COAST',
+    'width' => '',
+  ),
+  'community_text_c' => 
+  array (
+    'vname' => 'LBL_COMMUNITY',
+    'width' => '',
+  ),
+  'edit_button' => 
+  array (
+    'widget_class' => 'SubPanelEditButton',
+    'module' => 'sphr_Object',
+    'width' => '',
+  ),
+  'remove_button' => 
+  array (
+    'widget_class' => 'SubPanelRemoveButton',
+    'module' => 'sphr_Object',
+    'width' => '',
+  ),
+);
+?>

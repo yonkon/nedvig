@@ -1,0 +1,28 @@
+<?php
+// created: 2012-06-13 13:03:55
+$layout_defs = array (
+  'name' => 
+  array (
+    'vname' => 'LBL_NAME',
+    'widget_class' => 'SubPanelDetailViewLink',
+    'width' => '45%',
+  ),
+  'date_modified' => 
+  array (
+    'vname' => 'LBL_DATE_MODIFIED',
+    'width' => '45%',
+  ),
+  'edit_button' => 
+  array (
+    'widget_class' => 'SubPanelEditButton',
+    'module' => 'sphr_Object',
+    'width' => '4%',
+  ),
+  'remove_button' => 
+  array (
+    'widget_class' => 'SubPanelRemoveButton',
+    'module' => 'sphr_Object',
+    'width' => '5%',
+  ),
+);
+?>

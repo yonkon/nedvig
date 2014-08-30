@@ -1,0 +1,116 @@
+<?php
+$module_name = 'cosib_queries';
+$viewdefs [$module_name] = 
+array (
+  'DetailView' => 
+  array (
+    'templateMeta' => 
+    array (
+      'form' => 
+      array (
+        'buttons' => 
+        array (
+          0 => 'EDIT',
+          1 => 'DUPLICATE',
+          2 => 'DELETE',
+        ),
+      ),
+      'maxColumns' => '2',
+      'widths' => 
+      array (
+        0 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+        1 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+      ),
+      'useTabs' => false,
+    ),
+    'panels' => 
+    array (
+      'default' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'type_of_query_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TYPE_OF_QUERY',
+          ),
+          1 => 
+          array (
+            'name' => 'status_c',
+            'studio' => 'visible',
+            'label' => 'LBL_STATUS',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'category_of_object_c',
+            'studio' => 'visible',
+            'label' => 'LBL_CATEGORY_OF_OBJECT',
+          ),
+          1 => 
+          array (
+            'name' => 'budget_c',
+            'studio' => 'visible',
+            'label' => 'LBL_BUDGET',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'province_c',
+            'studio' => 'visible',
+            'label' => 'LBL_PROVINCE',
+          ),
+          1 => 
+          array (
+            'name' => 'coast_c',
+            'studio' => 'visible',
+            'label' => 'LBL_COAST',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'settlement_c',
+            'studio' => 'visible',
+            'label' => 'LBL_SETTLEMENT',
+          ),
+          1 => 
+          array (
+            'name' => 'quantity_of_bedroom_c',
+            'studio' => 'visible',
+            'label' => 'LBL_QUANTITY_OF_BEDROOM',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'remoteness_from_sea_c',
+            'studio' => 'visible',
+            'label' => 'LBL_REMOTENESS_FROM_SEA',
+          ),
+          1 => 
+          array (
+            'name' => 'remoteness_from_commercial_c',
+            'label' => 'LBL_REMOTENESS_FROM_COMMERCIAL',
+          ),
+        ),
+      ),
+    ),
+  ),
+);
+?>

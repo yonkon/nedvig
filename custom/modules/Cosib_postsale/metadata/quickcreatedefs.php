@@ -1,0 +1,63 @@
+<?php
+$module_name = 'Cosib_postsale';
+$viewdefs [$module_name] = 
+array (
+  'QuickCreate' => 
+  array (
+    'templateMeta' => 
+    array (
+      'maxColumns' => '2',
+      'widths' => 
+      array (
+        0 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+        1 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+      ),
+      'useTabs' => false,
+    ),
+    'panels' => 
+    array (
+      'default' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'cosib_postshr_object_name',
+            'label' => 'LBL_COSIB_POSTSALE_SPHR_OBJECT_FROM_SPHR_OBJECT_TITLE',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 'assigned_user_name',
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'cosib_postshr_client_name',
+            'label' => 'LBL_COSIB_POSTSALE_SPHR_CLIENT_FROM_SPHR_CLIENT_TITLE',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'description',
+            'comment' => 'Full text of the note',
+            'studio' => 'visible',
+            'label' => 'LBL_DESCRIPTION',
+          ),
+        ),
+      ),
+    ),
+  ),
+);
+?>

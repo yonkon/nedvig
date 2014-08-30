@@ -1,0 +1,626 @@
+<?php
+$module_name = 'sphr_Object';
+$viewdefs [$module_name] = 
+array (
+  'EditView' => 
+  array (
+    'templateMeta' => 
+    array (
+      'form' => 
+      array (
+        'enctype' => 'multipart/form-data',
+      ),
+      'maxColumns' => '2',
+      'widths' => 
+      array (
+        0 => 
+        array (
+          'label' => '15',
+          'field' => '35',
+        ),
+        1 => 
+        array (
+          'label' => '15',
+          'field' => '35',
+        ),
+      ),
+      'javascript' => '
+		{literal}
+		<script type="text/javascript" src="custom/include/javascript/sphere_modules_editviews.js"></script>
+		<script type="text/javascript">
+		var MsgStr= new Object();
+		{/literal}
+		//Массив констант для вывода сообщений
+		MsgStr["LBL_PAYMENT_OBJECT"]="{$MOD.LBL_PAYMENT_OBJECT}";
+		MsgStr["LBL_PAYMENT_METER"]="{$MOD.LBL_PAYMENT_METER}";
+		MsgStr["SPHR_DEVELOHR_OBJECT_NAME"]="{$MOD.SPHR_DEVELOHR_OBJECT_NAME}";
+		MsgStr["SPHR_INTERMHR_OBJECT_NAME"]="{$MOD.SPHR_INTERMHR_OBJECT_NAME}";
+		
+		MsgStr["ERR_PAYMENT_NEED"]="{$MOD.ERR_PAYMENT_NEED}";
+		MsgStr["ERR_PARTNER_NEED"]="{$MOD.ERR_PARTNER_NEED}";
+		{literal}
+		
+		function checkPartner() //функция установки обязательности застройщика и посредника
+		{
+			var Err = false;
+			if ((ElementValueLength("sphr_develohr_object_name") == 0) && (ElementValueLength("sphr_intermhr_object_name") == 0)) Err = true; 	
+			for (var i = 0; i < validate["EditView"].length; i++)
+			{
+				if (validate["EditView"][i][nameIndex] == "sphr_develohr_object_name" || validate["EditView"][i][nameIndex] == "sphr_intermhr_object_name" )
+				{
+					if (Err) //если ни застройщик, ни посредник не выбран
+					{
+						validate["EditView"][i][typeIndex] = "error";
+						validate["EditView"][i][msgIndex] = MsgStr["ERR_PARTNER_NEED"];
+					} else {
+						validate["EditView"][i][typeIndex] = "relate";
+						switch(validate["EditView"][i][nameIndex])
+						{
+							case "sphr_develohr_object_name": validate["EditView"][i][msgIndex] =  MsgStr["SPHR_DEVELOHR_OBJECT_NAME"]; break;
+							case "sphr_intermhr_object_name": validate["EditView"][i][msgIndex] =  MsgStr["SPHR_INTERMHR_OBJECT_NAME"]; break;
+						}
+					}
+				}
+			}
+		}
+		
+		addToValidate(\'EditView\', \'payment_meter\', \'relate\', false,MsgStr["LBL_PAYMENT_METER"] );
+		addToValidate(\'EditView\', \'payment_object\', \'relate\', false,MsgStr["LBL_PAYMENT_OBJECT"] );
+		checkPayment();
+		
+		addToValidate(\'EditView\', \'sphr_develohr_object_name\', \'relate\', false,MsgStr["SPHR_DEVELOHR_OBJECT_NAME"] );
+		addToValidate(\'EditView\', \'sphr_intermhr_object_name\', \'relate\', false,MsgStr["SPHR_INTERMHR_OBJECT_NAME"] );
+		var t=setInterval("checkPartner()",500);
+		
+		</script>
+	  {/literal}
+	  
+	  {literal}
+      	<script type="text/javascript">
+      		function addPhoto ()
+			{
+				var ar_photo_count = $("#ar_photo_count").val(); //хранит общее кол-во фото
+			    var ar_photo_max = $("#ar_photo_max").val(); //хранит номер для поля, которое будет создано.
+			    
+			    if (ar_photo_count < 10)
+			    {
+				    $("#photo_list").append(\'<tr id="photoRow_\'+ar_photo_max+\'">\'+\'<td nowrap="NOWRAP"><input type="file" name="new_photo_\'+ar_photo_max+\'" id="new_photo_\'+ar_photo_max+\'" value="" size="30"></td>\'+\'<td><img src="themes/default/images/id-ff-remove.png" onclick="deletePhoto(\'+ar_photo_max+\')">\'+\'</td></tr>\');
+				    
+				    ar_photo_max++;
+				    ar_photo_count++;
+				    $("#ar_photo_max").val(ar_photo_max);
+				    $("#ar_photo_count").val(ar_photo_count);
+			    }
+			}
+			
+			function deletePhoto (id)
+			{
+			    var ar_photo_count = $("#ar_photo_count").val();
+
+			    $("#photoRow_"+id).remove();
+			    ar_photo_count--;
+			    $("#ar_photo_count").val(ar_photo_count);
+			}
+			
+		      		function addLayout ()
+			{
+				var ar_layout_count = $("#ar_layout_count").val(); //хранит общее кол-во фото
+			    var ar_layout_max = $("#ar_layout_max").val(); //хранит номер для поля, которое будет создано.
+			    
+			    if (ar_layout_count < 10)
+			    {
+				    $("#layout_list").append(\'<tr id="layoutRow_\'+ar_layout_max+\'">\'+\'<td nowrap="NOWRAP"><input type="file" name="new_layout_\'+ar_layout_max+\'" id="new_layout_\'+ar_layout_max+\'" value="" size="30"></td>\'+\'<td><img src="themes/default/images/id-ff-remove.png" onclick="deleteLayout(\'+ar_layout_max+\')">\'+\'</td></tr>\');
+				    
+				    ar_layout_max++;
+				    ar_layout_count++;
+				    $("#ar_layout_max").val(ar_layout_max);
+				    $("#ar_layout_count").val(ar_layout_count);
+			    }
+			}
+			
+			function deleteLayout (id)
+			{
+			    var ar_layout_count = $("#ar_layout_count").val();
+
+			    $("#layoutRow_"+id).remove();
+			    ar_layout_count--;
+			    $("#ar_layout_count").val(ar_layout_count);
+			}
+			
+			function objectStatusChange() {
+				var statusValue = $("#object_status_c").val();
+				if(statusValue == null) {
+					$("#price_sale_c").parent("td").parent("tr").hide();
+					$("#price_rent_c").parent("td").parent("tr").hide();
+					$("#price_sale_c").val("");
+					$("#price_rent_c").val("");
+					$("#seller_price_sale_c").val("");
+					$("#seller_price_rent_c").val("");
+				}
+				else {
+					if((statusValue == "sale") && (statusValue != "sale,arenda")) {
+						$("#price_sale_c").parent("td").parent("tr").show();
+						$("#price_rent_c").parent("td").parent("tr").hide();
+						$("#price_rent_c").val("");
+						$("#seller_price_rent_c").val("");
+					}
+					if((statusValue == "arenda") && (statusValue != "sale,arenda")) {
+						$("#price_rent_c").parent("td").parent("tr").show();
+						$("#price_sale_c").parent("td").parent("tr").hide();
+						$("#price_sale_c").val("");
+						$("#seller_price_sale_c").val("");
+					}
+					if(statusValue == "sale,arenda") {
+						$("#price_sale_c").parent("td").parent("tr").show();
+						$("#price_rent_c").parent("td").parent("tr").show();
+					}
+				}
+			}
+			
+			$(document).ready(function() {
+				objectStatusChange();
+			});
+
+			$("#object_status_c").attr("size", "2");
+			
+			$("#object_status_c").mouseup(function() {
+				objectStatusChange();
+			});
+			
+		</script>
+      	{/literal}
+	  ',
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'custom/include/javascript/jquery/jquery.pack.js',
+        ),
+      ),
+      'useTabs' => false,
+    ),
+    'panels' => 
+    array (
+      'default' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'name_rus_c',
+            'studio' => 'visible',
+            'label' => 'LBL_NAME_RUS',
+          ),
+          1 => '',
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'name_eng_c',
+            'studio' => 'visible',
+            'label' => 'LBL_NAME_ENG',
+          ),
+          1 => '',
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'name_sp_c',
+            'studio' => 'visible',
+            'label' => 'LBL_NAME_SP',
+          ),
+          1 => '',
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'type',
+            'studio' => 'visible',
+            'label' => 'LBL_TYPE',
+          ),
+          1 => '',
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'category_c',
+            'studio' => 'visible',
+            'label' => 'LBL_CATEGORY',
+          ),
+          1 => '',
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'object_status_c',
+            'studio' => 'visible',
+            'label' => 'LBL_OBJECT_STATUS',
+          ),
+          1 => '',
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'sphr_owner_hr_object_name',
+          ),
+          1 => '',
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'price_sale_c',
+            'studio' => 'visible',
+            'label' => 'LBL_PRICE_SALE',
+          ),
+          1 => 
+          array (
+            'name' => 'seller_price_sale_c',
+            'studio' => 'visible',
+            'label' => 'LBL_SELLER_PRICE_SALE',
+          ),
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'price_rent_c',
+            'studio' => 'visible',
+            'label' => 'LBL_PRICE_RENT',
+          ),
+          1 => 
+          array (
+            'name' => 'seller_price_rent_c',
+            'studio' => 'visible',
+            'label' => 'LBL_SELLER_PRICE_RENT',
+          ),
+        ),
+        9 => 
+        array (
+          0 => 
+          array (
+            'name' => 'amount_commission_c',
+            'studio' => 'visible',
+            'label' => 'LBL_AMOUNT_COMMISSION',
+          ),
+          1 => '',
+        ),
+        10 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+        11 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+        12 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+        13 => 
+        array (
+          0 => 
+          array (
+            'name' => 'address',
+            'studio' => 'visible',
+            'label' => 'LBL_ADDRESS',
+          ),
+          1 => '',
+        ),
+        14 => 
+        array (
+          0 => 
+          array (
+            'name' => 'number_bedroom_c',
+            'studio' => 'visible',
+            'label' => 'LBL_NUMBER_BEDROOM',
+          ),
+          1 => 
+          array (
+            'name' => 'number_bathroom_c',
+            'studio' => 'visible',
+            'label' => 'LBL_NUMBER_BATHROOM',
+          ),
+        ),
+        15 => 
+        array (
+          0 => 
+          array (
+            'name' => 'total_area_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TOTAL_AREA',
+          ),
+          1 => 
+          array (
+            'name' => 'apartment_area_c',
+            'studio' => 'visible',
+            'label' => 'LBL_APARTMENT_AREA',
+          ),
+        ),
+        16 => 
+        array (
+          0 => 
+          array (
+            'name' => 'sea_distance_c',
+            'studio' => 'visible',
+            'label' => 'LBL_SEA_DISTANCE',
+          ),
+          1 => 
+          array (
+            'name' => 'comm_center_distance_c',
+            'studio' => 'visible',
+            'label' => 'LBL_COMM_CENTER_DISTANCE',
+          ),
+        ),
+        17 => 
+        array (
+          0 => 
+          array (
+            'name' => 'nearest_airport_c',
+            'studio' => 'visible',
+            'label' => 'LBL_NEAREST_AIRPORT',
+          ),
+          1 => '',
+        ),
+        18 => 
+        array (
+          0 => 
+          array (
+            'name' => 'complex_c',
+            'studio' => 'visible',
+            'label' => 'LBL_COMPLEX',
+          ),
+          1 => '',
+        ),
+        19 => 
+        array (
+          0 => 
+          array (
+            'name' => 'view_sea_c',
+            'studio' => 'visible',
+            'label' => 'LBL_VIEW_SEA',
+          ),
+          1 => 
+          array (
+            'name' => 'view_mount_c',
+            'studio' => 'visible',
+            'label' => 'LBL_VIEW_MOUNT',
+          ),
+        ),
+        20 => 
+        array (
+          0 => 
+          array (
+            'name' => 'view_forest_c',
+            'studio' => 'visible',
+            'label' => 'LBL_VIEW_FOREST_C',
+          ),
+          1 => 
+          array (
+            'name' => 'view_park_c',
+            'studio' => 'visible',
+            'label' => 'LBL_VIEW_PARK',
+          ),
+        ),
+        21 => 
+        array (
+          0 => 
+          array (
+            'name' => 'view_salt_lake_c',
+            'studio' => 'visible',
+            'label' => 'LBL_VIEW_SALT_LAKE',
+          ),
+          1 => 
+          array (
+            'name' => 'view_golf_pole_c',
+            'studio' => 'visible',
+            'label' => 'LBL_VIEW_GOLF_POLE',
+          ),
+        ),
+        22 => 
+        array (
+          0 => 
+          array (
+            'name' => 'city_area_c',
+            'studio' => 'visible',
+            'label' => 'LBL_CITY_AREA',
+          ),
+          1 => 
+          array (
+            'name' => 'green_area_c',
+            'studio' => 'visible',
+            'label' => 'LBL_GREEN_AREA',
+          ),
+        ),
+        23 => 
+        array (
+          0 => 
+          array (
+            'name' => 'garage_c',
+            'studio' => 'visible',
+            'label' => 'LBL_GARAGE',
+          ),
+          1 => 
+          array (
+            'name' => 'parking_area_c',
+            'studio' => 'visible',
+            'label' => 'LBL_PARKING_AREA',
+          ),
+        ),
+        24 => 
+        array (
+          0 => 
+          array (
+            'name' => 'private_swimpool_c',
+            'studio' => 'visible',
+            'label' => 'LBL_PRIVATE_SWIMPOOL',
+          ),
+          1 => 
+          array (
+            'name' => 'general_swimpool_c',
+            'studio' => 'visible',
+            'label' => 'LBL_GENERAL_SWIMPOOL',
+          ),
+        ),
+        25 => 
+        array (
+          0 => 
+          array (
+            'name' => 'children_area_c',
+            'studio' => 'visible',
+            'label' => 'LBL_CHILDREN_AREA',
+          ),
+          1 => 
+          array (
+            'name' => 'sport_area_c',
+            'studio' => 'visible',
+            'label' => 'LBL_SPORT_AREA',
+          ),
+        ),
+        26 => 
+        array (
+          0 => 
+          array (
+            'name' => 'terrace_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TERRACE',
+          ),
+          1 => 
+          array (
+            'name' => 'balcony_c',
+            'studio' => 'visible',
+            'label' => 'LBL_BALCONY',
+          ),
+        ),
+        27 => 
+        array (
+          0 => 
+          array (
+            'name' => 'solarium_c',
+            'studio' => 'visible',
+            'label' => 'LBL_SOLARIUM',
+          ),
+          1 => 
+          array (
+            'name' => 'basement_c',
+            'studio' => 'visible',
+            'label' => 'LBL_BASEMENT',
+          ),
+        ),
+        28 => 
+        array (
+          0 => '',
+          1 => 
+          array (
+            'name' => 'storeroom_c',
+            'studio' => 'visible',
+            'label' => 'LBL_STOREROOM',
+          ),
+        ),
+        29 => 
+        array (
+          0 => 
+          array (
+            'name' => 'mebel_c',
+            'studio' => 'visible',
+            'label' => 'LBL_MEBEL',
+          ),
+          1 => 
+          array (
+            'name' => 'kitchen_mebel_c',
+            'studio' => 'visible',
+            'label' => 'LBL_KITCHEN_MEBEL',
+          ),
+        ),
+        30 => 
+        array (
+          0 => 
+          array (
+            'name' => 'life_equipment_c',
+            'studio' => 'visible',
+            'label' => 'LBL_LIFE_EQUIPMENT',
+          ),
+          1 => 
+          array (
+            'name' => 'safe_c',
+            'studio' => 'visible',
+            'label' => 'LBL_SAFE',
+          ),
+        ),
+        31 => 
+        array (
+          0 => 
+          array (
+            'name' => 'jacuzzi_c',
+            'studio' => 'visible',
+            'label' => 'LBL_JACUZZI',
+          ),
+          1 => 
+          array (
+            'name' => 'conditioner_c',
+            'studio' => 'visible',
+            'label' => 'LBL_CONDITIONER',
+          ),
+        ),
+        32 => 
+        array (
+          0 => 
+          array (
+            'name' => 'intelligent_house_c',
+            'studio' => 'visible',
+            'label' => 'LBL_INTELLIGENT_HOUSE',
+          ),
+          1 => 
+          array (
+            'name' => 'alarm_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ALARM',
+          ),
+        ),
+        33 => 
+        array (
+          0 => 
+          array (
+            'name' => 'additional_description_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ADDITIONAL_DESCRIPTION',
+          ),
+          1 => 
+          array (
+            'name' => 'additional_description_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ADDITIONAL_DESCRIPTION',
+          ),
+        ),
+        34 => 
+        array (
+          0 => 
+          array (
+            'name' => 'accounts_sphr_object_name',
+          ),
+          1 => 
+          array (
+            'name' => 'cosib_postshr_object_name',
+          ),
+        ),
+        35 => 
+        array (
+          0 => 
+          array (
+            'name' => 'sphr_client_object_1_name',
+          ),
+        ),
+      ),
+    ),
+  ),
+);
+?>

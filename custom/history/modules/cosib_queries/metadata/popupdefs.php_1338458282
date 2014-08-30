@@ -1,0 +1,65 @@
+<?php
+$popupMeta = array (
+    'moduleMain' => 'cosib_queries',
+    'varName' => 'cosib_queries',
+    'orderBy' => 'cosib_queries.name',
+    'whereClauses' => array (
+  'name' => 'cosib_queries.name',
+),
+    'searchInputs' => array (
+  0 => 'cosib_queries_number',
+  1 => 'name',
+  2 => 'priority',
+  3 => 'status',
+),
+    'listviewdefs' => array (
+  'TYPE_OF_QUERY_C' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_TYPE_OF_QUERY',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'type_of_query_c',
+  ),
+  'STATUS_C' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_STATUS',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'status_c',
+  ),
+  'CATEGORY_OF_OBJECT_C' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_CATEGORY_OF_OBJECT',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'category_of_object_c',
+  ),
+  'BUDGET_C' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_BUDGET',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'budget_c',
+  ),
+  'ASSIGNED_TO_C' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'label' => 'LBL_ASSIGNED_TO',
+    'width' => '10%',
+    'name' => 'assigned_to_c',
+  ),
+),
+);

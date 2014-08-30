@@ -1,0 +1,85 @@
+<?php
+$module_name = 'Cosib_client_trips';
+$listViewDefs [$module_name] =
+array (
+  'COSIB_CLIENHR_CLIENT_NAME' =>
+  array (
+    'type' => 'relate',
+    'link' => 'cosib_clienps_sphr_client',
+    'label' => 'LBL_COSIB_CLIENT_TRIPS_SPHR_CLIENT_FROM_SPHR_CLIENT_TITLE',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'STATUS' =>
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_STATUS',
+    'sortable' => true,
+    'width' => '10%',
+    'default' => true,
+    'link' => true,
+  ),
+  'DATE_ARRIVE' =>
+  array (
+    'type' => 'date',
+    'label' => 'LBL_DATE_ARRIVE',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'DATE_DEPARTURE' =>
+  array (
+    'type' => 'date',
+    'label' => 'LBL_DATE_DEPARTURE',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'ASSIGNED_USER_NAME' =>
+  array (
+    'width' => '9%',
+    'label' => 'LBL_ASSIGNED_TO_NAME',
+    'module' => 'Employees',
+    'id' => 'ASSIGNED_USER_ID',
+    'default' => true,
+  ),
+  'TRIP_PLACE' =>
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_TRIP_PLACE',
+    'width' => '10%',
+    'default' => false,
+  ),
+  'NAME' =>
+  array (
+    'width' => '32%',
+    'label' => 'LBL_NAME',
+    'default' => false,
+    'link' => true,
+  ),
+  'ARRIVAL' =>
+  array (
+    'type' => 'int',
+    'label' => 'LBL_ARRIVAL',
+    'width' => '10%',
+    'default' => false,
+  ),
+  'RESIDENCE' =>
+  array (
+    'type' => 'text',
+    'studio' => 'visible',
+    'label' => 'LBL_RESIDENCE',
+    'sortable' => false,
+    'width' => '10%',
+    'default' => false,
+  ),
+  'DESCRIPTION' =>
+  array (
+    'type' => 'text',
+    'studio' => 'visible',
+    'label' => 'LBL_DESCRIPTION',
+    'sortable' => false,
+    'width' => '10%',
+    'default' => false,
+  ),
+);
+?>

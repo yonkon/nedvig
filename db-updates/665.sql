@@ -1,0 +1,33 @@
+INSERT INTO acl_roles_actions (id, role_id, action_id, access_override, date_modified, deleted) VALUES
+('dabc8a80-7fe3-9eef-fb28-4f59c7ce481c', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '9d753c6f-96c9-6eeb-a0b6-4ea91b767b3f', -98, '2012-03-09 09:04:03', 0),
+('dca73b19-db4c-22a3-e3f8-4f59c70b17ed', '779533e2-40eb-c968-dcc8-4e2b16dcda91', 'a561cce4-41c8-5bc1-2443-4ea91b22050a', 0, '2012-03-09 09:04:03', 0),
+('de8fd52d-1734-37a3-4d77-4f59c77b49e5', '779533e2-40eb-c968-dcc8-4e2b16dcda91', 'a38c3c5d-f14e-a3e3-4181-4ea91b06ad77', 0, '2012-03-09 09:04:03', 0),
+('e070e59b-6247-a158-10bc-4f59c799fd79', '779533e2-40eb-c968-dcc8-4e2b16dcda91', 'a90c4eca-bea0-c624-13a5-4ea91b4d9d0e', 0, '2012-03-09 09:04:03', 0),
+('e2633e2d-395b-f929-97dd-4f59c71f858b', '779533e2-40eb-c968-dcc8-4e2b16dcda91', 'a7393c1d-d38b-0d18-1460-4ea91b2890fb', 0, '2012-03-09 09:04:03', 0),
+('e445bc6c-bf89-54e1-a5d8-4f59c77178e8', '779533e2-40eb-c968-dcc8-4e2b16dcda91', 'a187bb1e-52a6-6f42-c06c-4ea91b8d865c', 0, '2012-03-09 09:04:03', 0),
+('e630356b-7bf8-c0a6-2f67-4f59c7f14abf', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '9fb53e1b-cac1-4df0-752b-4ea91b59b473', 0, '2012-03-09 09:04:03', 0),
+('326f50e9-7ebb-78da-dc35-4f59c7818316', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '93916444-421d-146d-fb4b-4ed21ee48e56', -98, '2012-03-09 09:04:05', 0),
+('34547e04-faaa-772d-c1ad-4f59c7e1a701', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '96d92eb6-5b7a-0d0f-80f6-4ed21ea78a8d', 0, '2012-03-09 09:04:05', 0),
+('36406ebf-7e49-e5fc-3b33-4f59c772cc1b', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '9607653c-abb0-b533-7f18-4ed21e5a7586', 0, '2012-03-09 09:04:05', 0),
+('38a09b88-7a6f-473b-e567-4f59c704ee3f', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '9876be7e-18df-fc27-19b7-4ed21e8359a2', 0, '2012-03-09 09:04:05', 0),
+('3a8a1973-e4e3-6675-57ad-4f59c79a5aa1', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '97a88d32-d8c0-4900-1a79-4ed21eb87829', 0, '2012-03-09 09:04:05', 0),
+('3c7020cf-eeb6-d201-6ee6-4f59c70e3d7a', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '9539074b-9f97-e964-fd55-4ed21eb60f65', 0, '2012-03-09 09:04:05', 0),
+('3e56a16e-00c2-6f7e-2b97-4f59c7e268ce', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '94687ee0-3b2d-d935-f715-4ed21e739857', 0, '2012-03-09 09:04:05', 0),
+('403f93c4-6a7c-7e51-5341-4f59c79a8e69', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '6432114b-f792-34f8-dbcd-4ed21ec0501d', -98, '2012-03-09 09:04:05', 0),
+('422938a7-0af1-ccca-018b-4f59c7870ee4', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '682f6351-7328-bc6a-a4be-4ed21edf16e1', 0, '2012-03-09 09:04:05', 0),
+('440cf9cf-6421-98dd-2ece-4f59c771c421', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '673ebf74-a4b2-92b6-4ad1-4ed21e056d02', 0, '2012-03-09 09:04:05', 0),
+('45f5b2e5-ffce-9c63-aed9-4f59c7c9a49f', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '6a14850e-c419-9415-c768-4ed21e622d07', 0, '2012-03-09 09:04:05', 0),
+('47dda043-2dfa-3537-3844-4f59c7b9c3ae', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '6923c5bb-6151-b771-61a3-4ed21eb809cb', 0, '2012-03-09 09:04:05', 0),
+('49cd02f5-77d5-a6ba-eabb-4f59c76f53f1', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '664df9fa-1751-b40e-878a-4ed21e79820d', 0, '2012-03-09 09:04:05', 0),
+('4bb46823-510b-8d6c-2d17-4f59c79a8d13', '779533e2-40eb-c968-dcc8-4e2b16dcda91', '6555bc03-9371-7296-5444-4ed21ef47b69', 0, '2012-03-09 09:04:05', 0);
+
+UPDATE acl_roles_actions SET access_override = -98 WHERE 
+	role_id = '779533e2-40eb-c968-dcc8-4e2b16dcda91' AND  action_id = '4cfc7b3b-7a23-eb2c-0fb0-4e1f1c81d02b';
+UPDATE acl_roles_actions SET access_override = 0 WHERE 
+	role_id = '779533e2-40eb-c968-dcc8-4e2b16dcda91' AND  action_id = '536f8457-4627-64eb-f7ca-4e1f1c1cf1cf';
+UPDATE acl_roles_actions SET access_override = 0 WHERE 
+	role_id = '779533e2-40eb-c968-dcc8-4e2b16dcda91' AND  action_id = '51edbc7b-fd10-cc67-ba1e-4e1f1cf38234';
+UPDATE acl_roles_actions SET access_override = 0 WHERE 
+	role_id = '779533e2-40eb-c968-dcc8-4e2b16dcda91' AND  action_id = '50719fb3-35a2-8906-d954-4e1f1ca21acf';	
+UPDATE acl_roles_actions SET access_override = 0 WHERE 
+	role_id = '779533e2-40eb-c968-dcc8-4e2b16dcda91' AND  action_id = '4ef0eaf9-6460-90a0-e61c-4e1f1caa499a';

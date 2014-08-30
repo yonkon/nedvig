@@ -1,0 +1,445 @@
+<?php
+$module_name = 'sphr_Object';
+$viewdefs [$module_name] = 
+array (
+  'EditView' => 
+  array (
+    'templateMeta' => 
+    array (
+      'form' => 
+      array (
+        'enctype' => 'multipart/form-data',
+		'buttons' => 
+        array (
+          0 => 
+          array (
+			'customCode' => '<input type="submit" value="Сохранить" name="button" onclick="{literal}if(pressSave() == 0) {return false;} else {this.form.action.value=\'Save\'; return check_form(\'EditView\');}{/literal}" class="button primary" accesskey="S" title="Сохранить [Alt+S]">',
+		  ),
+          1 => 'CANCEL',
+        ),
+      ),
+      'maxColumns' => '2',
+      'widths' => 
+      array (
+        0 => 
+        array (
+          'label' => '15',
+          'field' => '35',
+        ),
+        1 => 
+        array (
+          'label' => '15',
+          'field' => '35',
+        ),
+      ),
+      'javascript' => '{$EDIT_JAVASCRIPT}',
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'custom/include/javascript/jquery/jquery.pack.js',
+        ),
+      ),
+      'useTabs' => false,
+    ),
+    'panels' => 
+    array (
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'name_rus_c',
+            'studio' => 'visible',
+            'label' => 'LBL_NAME_RUS',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'name_eng_c',
+            'studio' => 'visible',
+            'label' => 'LBL_NAME_ENG',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'name_sp_c',
+            'studio' => 'visible',
+            'label' => 'LBL_NAME_SP',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'parent_name',
+            'studio' => 'visible',
+            'label' => 'LBL_FLEX_RELATE',
+          ),
+          1 => 
+          array (
+            'name' => 'assigned_user_name',
+            'label' => 'LBL_ASSIGNED_TO_NAME',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'type',
+            'studio' => 'visible',
+            'label' => 'LBL_TYPE',
+          ),
+          1 => 
+          array (
+            'name' => 'category_c',
+            'studio' => 'visible',
+            'label' => 'LBL_CATEGORY',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'object_status_c',
+            'studio' => 'visible',
+            'label' => 'LBL_OBJECT_STATUS',
+          ),
+          1 => 
+          array (
+            'name' => 'address',
+            'label' => 'LBL_ADDRESS',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'price_sale_int_c',
+            'label' => 'LBL_PRICE_SALE_INT',
+          ),
+          1 => 
+          array (
+            'name' => 'seller_price_sale_int_c',
+            'label' => 'LBL_SELLER_PRICE_SALE_INT',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'price_rent_int_c',
+            'label' => 'LBL_PRICE_RENT_INT',
+          ),
+          1 => 
+          array (
+            'name' => 'seller_price_rent_int_c',
+            'label' => 'LBL_SELLER_PRICE_RENT_INT',
+          ),
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'amount_commission_c',
+            'label' => 'LBL_AMOUNT_COMMISSION',
+          ),
+          1 => '',
+        ),
+        9 => 
+        array (
+          0 => 
+          array (
+            'customCode' => '<select id="province" name="province" style="width: 250px; height: 20px;"></select><input type="hidden" id="province_text" name="province_text" value="">',
+            'label' => 'LBL_PROVINCE',
+          ),
+          1 => '',
+        ),
+        10 => 
+        array (
+          0 => 
+          array (
+            'customCode' => '<select id="coast" name="coast" style="width: 250px; height: 20px;"></select><input type="hidden" id="coast_text" name="coast_text" value="">',
+            'label' => 'LBL_COAST',
+          ),
+          1 => '',
+        ),
+        11 => 
+        array (
+          0 => 
+          array (
+			'customCode' => '<select id="community" name="community" style="width: 250px; height: 20px;"></select><input type="hidden" id="community_text" name="community_text" value="">',
+            'label' => 'LBL_COMMUNITY',
+          ),
+          1 => '',
+        ),
+        12 => 
+        array (
+          0 => 
+          array (
+            'name' => 'number_bedroom_c',
+            'studio' => 'visible',
+            'label' => 'LBL_NUMBER_BEDROOM',
+          ),
+          1 => 
+          array (
+            'name' => 'number_bathroom_c',
+            'studio' => 'visible',
+            'label' => 'LBL_NUMBER_BATHROOM',
+          ),
+        ),
+        13 => 
+        array (
+          0 => 
+          array (
+            'name' => 'total_area_c',
+            'label' => 'LBL_TOTAL_AREA',
+          ),
+          1 => 
+          array (
+            'name' => 'apartment_area_c',
+            'label' => 'LBL_APARTMENT_AREA',
+          ),
+        ),
+        14 => 
+        array (
+          0 => 
+          array (
+            'name' => 'sea_distance_c',
+            'label' => 'LBL_SEA_DISTANCE',
+          ),
+          1 => 
+          array (
+            'name' => 'comm_center_distance_c',
+            'label' => 'LBL_COMM_CENTER_DISTANCE',
+          ),
+        ),
+        15 => 
+        array (
+          0 => 
+          array (
+            'name' => 'complex_c',
+            'label' => 'LBL_COMPLEX',
+          ),
+          1 => 
+          array (
+            'name' => 'nearest_airport_c',
+            'studio' => 'visible',
+            'label' => 'LBL_NEAREST_AIRPORT',
+          ),
+        ),
+        16 => 
+        array (
+          0 => 
+          array (
+            'name' => 'view_sea_c',
+            'label' => 'LBL_VIEW_SEA',
+          ),
+          1 => 
+          array (
+            'name' => 'view_mount_c',
+            'label' => 'LBL_VIEW_MOUNT',
+          ),
+        ),
+        17 => 
+        array (
+          0 => 
+          array (
+            'name' => 'view_forest_c',
+            'label' => 'LBL_VIEW_FOREST_C',
+          ),
+          1 => 
+          array (
+            'name' => 'view_park_c',
+            'label' => 'LBL_VIEW_PARK',
+          ),
+        ),
+        18 => 
+        array (
+          0 => 
+          array (
+            'name' => 'view_salt_lake_c',
+            'label' => 'LBL_VIEW_SALT_LAKE',
+          ),
+          1 => 
+          array (
+            'name' => 'view_golf_pole_c',
+            'label' => 'LBL_VIEW_GOLF_POLE',
+          ),
+        ),
+        19 => 
+        array (
+          0 => 
+          array (
+            'name' => 'city_area_c',
+            'label' => 'LBL_CITY_AREA',
+          ),
+          1 => 
+          array (
+            'name' => 'green_area_c',
+            'label' => 'LBL_GREEN_AREA',
+          ),
+        ),
+        20 => 
+        array (
+          0 => 
+          array (
+            'name' => 'garage_c',
+            'label' => 'LBL_GARAGE',
+          ),
+          1 => 
+          array (
+            'name' => 'parking_area_c',
+            'label' => 'LBL_PARKING_AREA',
+          ),
+        ),
+        21 => 
+        array (
+          0 => 
+          array (
+            'name' => 'private_swimpool_c',
+            'label' => 'LBL_PRIVATE_SWIMPOOL',
+          ),
+          1 => 
+          array (
+            'name' => 'general_swimpool_c',
+            'label' => 'LBL_GENERAL_SWIMPOOL',
+          ),
+        ),
+        22 => 
+        array (
+          0 => 
+          array (
+            'name' => 'children_area_c',
+            'label' => 'LBL_CHILDREN_AREA',
+          ),
+          1 => 
+          array (
+            'name' => 'sport_area_c',
+            'label' => 'LBL_SPORT_AREA',
+          ),
+        ),
+        23 => 
+        array (
+          0 => 
+          array (
+            'name' => 'terrace_c',
+            'label' => 'LBL_TERRACE',
+          ),
+          1 => 
+          array (
+            'name' => 'balcony_c',
+            'label' => 'LBL_BALCONY',
+          ),
+        ),
+        24 => 
+        array (
+          0 => 
+          array (
+            'name' => 'solarium_c',
+            'label' => 'LBL_SOLARIUM',
+          ),
+          1 => 
+          array (
+            'name' => 'jacuzzi_c',
+            'label' => 'LBL_JACUZZI',
+          ),
+        ),
+        25 => 
+        array (
+          0 => 
+          array (
+            'name' => 'basement_c',
+            'label' => 'LBL_BASEMENT',
+          ),
+          1 => 
+          array (
+            'name' => 'storeroom_c',
+            'label' => 'LBL_STOREROOM',
+          ),
+        ),
+        26 => 
+        array (
+          0 => 
+          array (
+            'name' => 'mebel_c',
+            'label' => 'LBL_MEBEL',
+          ),
+          1 => 
+          array (
+            'name' => 'kitchen_mebel_c',
+            'label' => 'LBL_KITCHEN_MEBEL',
+          ),
+        ),
+        27 => 
+        array (
+          0 => 
+          array (
+            'name' => 'life_equipment_c',
+            'label' => 'LBL_LIFE_EQUIPMENT',
+          ),
+          1 => 
+          array (
+            'name' => 'safe_c',
+            'label' => 'LBL_SAFE',
+          ),
+        ),
+        28 => 
+        array (
+          0 => 
+          array (
+            'name' => 'conditioner_c',
+            'label' => 'LBL_CONDITIONER',
+          ),
+          1 => 
+          array (
+            'name' => 'intelligent_house_c',
+            'label' => 'LBL_INTELLIGENT_HOUSE',
+          ),
+        ),
+        29 => 
+        array (
+          0 => 
+          array (
+            'name' => 'alarm_c',
+            'label' => 'LBL_ALARM',
+          ),
+          1 => '',
+        ),
+        30 => 
+        array (
+          0 => 
+          array (
+            'name' => 'heating_c',
+            'label' => 'LBL_HEATING',
+          ),
+          1 => 
+          array (
+            'name' => 'heating_floor_c',
+            'label' => 'LBL_HEATING_FLOOR',
+          ),
+        ),
+        31 => 
+        array (
+          0 => 
+          array (
+            'name' => 'additional_description_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ADDITIONAL_DESCRIPTION',
+          ),
+          1 => 
+		  array(
+			  'customCode' => '<div>Разрешены фотографии только формата: JPEG(JPG).</div><div id="oldPhotosBlock" style="width: 210px;"></div><div id="photosBlock"></div><img src="themes/Sugar5/images/plus.gif" id="addPhotoFieldButton" style="cursor: pointer;">',
+			  'label' => 'Фотографии',
+		  ),
+        ),
+      ),
+    ),
+  ),
+);
+?>

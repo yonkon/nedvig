@@ -1,0 +1,73 @@
+<?php
+$popupMeta = array (
+    'moduleMain' => 'Campaign',
+    'varName' => 'CAMPAIGN',
+    'orderBy' => 'name',
+    'whereClauses' => array (
+  'name' => 'campaigns.name',
+),
+    'searchInputs' => array (
+  0 => 'name',
+),
+    'searchdefs' => array (
+  0 => 'name',
+  1 => 'campaign_type',
+  2 => 'status',
+  3 => 'start_date',
+  4 => 'end_date',
+),
+    'listviewdefs' => array (
+  'NAME' => 
+  array (
+    'width' => '20%',
+    'label' => 'LBL_LIST_CAMPAIGN_NAME',
+    'link' => true,
+    'default' => true,
+    'name' => 'name',
+  ),
+  'COST_C' => 
+  array (
+    'type' => 'int',
+    'default' => true,
+    'label' => 'LBL_COST',
+    'width' => '10%',
+  ),
+  'START_DATE' => 
+  array (
+    'width' => '10%',
+    'label' => 'LBL_LIST_START_DATE',
+    'default' => true,
+    'name' => 'start_date',
+  ),
+  'END_DATE' => 
+  array (
+    'width' => '10%',
+    'label' => 'LBL_LIST_END_DATE',
+    'default' => true,
+    'name' => 'end_date',
+  ),
+  'PHONE_IN_C' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'label' => 'LBL_PHONE_IN',
+    'width' => '10%',
+  ),
+  'CONTENT' => 
+  array (
+    'type' => 'text',
+    'label' => 'LBL_CAMPAIGN_CONTENT',
+    'sortable' => false,
+    'width' => '10%',
+    'default' => true,
+  ),
+  'ASSIGNED_USER_NAME' => 
+  array (
+    'link' => 'assigned_user_link',
+    'type' => 'relate',
+    'label' => 'LBL_ASSIGNED_TO_NAME',
+    'width' => '10%',
+    'default' => true,
+  ),
+),
+);

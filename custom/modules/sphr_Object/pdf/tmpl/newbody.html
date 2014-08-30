@@ -1,0 +1,325 @@
+﻿<table width ='750px' border="1">
+<tbody>
+<tr>
+<td width = '30%' colspan=3 align = 'center' style='background-color:#5F6FB4;padding-top:5px'>
+<h1><ins>{$TITLE}</ins></h1>
+</td>
+</tr>
+<tr>
+<td width = '30%' valign ='top' align = 'center' style='padding-top:5px'>
+
+	{if $photos_count>0}
+	{foreach from=$photos item=photo name=fphoto}	
+		<a href="{$SURL}/cache/upload/object/{$photo}" target='_blank'><img src='{$SURL}/cache/upload/object/cut_{$photo}'/></a><br/>
+	 {/foreach}
+	{/if}
+</td>
+<td width = '30%' valign ='top' style='background-color:#EEEEEE;padding-top:5px''>
+  <table>
+  <tbody>
+  <tr>
+    <td><b>{$MOD.LBL_ID_OBJECT}:</td><td>{$fields->id_object_c}</td>
+  </tr>
+  <tr>
+    <td><b>{$MOD.LBL_NAME}:</td><td>{$TITLE}</td>
+  </tr>
+  {if strpos($fields->object_status_c,'sale')!==false}
+  <tr>
+    <td><b>{$MOD.LBL_PRICE_SALE_INT}:</td><td>{$fields->price_sale_int_c}</td>
+  </tr>
+  {/if}
+  {if strpos($fields->object_status_c,'arenda')!==false}
+  <tr>
+    <td><b>{$MOD.LBL_PRICE_RENT_INT}:</td><td>{$fields->price_rent_int_c}</td>
+  </tr>
+  {/if}
+  <tr height='20px'>
+    <td></td><td></td>
+  </tr>
+  <tr>
+    <td><b>{$MOD.LBL_TYPE}:</b></td><td>
+	{assign var='opt' value=$fields->field_defs.type.options}				
+	{assign var='arrkeys' value=","|explode:$fields->type}
+	{foreach from=$arrkeys item=arrkey name=optarr}	
+		{assign var='arrkey_cl' value="^"|str_replace:'':$arrkey}
+		{if $smarty.foreach.optarr.index>0},{/if}
+		{$APP.$opt.$arrkey_cl}				
+	{/foreach}
+	</td>
+  </tr>
+  <tr>
+    <td><b>{$MOD.LBL_OBJECT_STATUS}:</b></td><td>	
+	{assign var='opt' value=$fields->field_defs.object_status_c.options}				
+	{assign var='arrkeys' value=","|explode:$fields->object_status_c}
+	{foreach from=$arrkeys item=arrkey name=optarr}
+		{assign var='arrkey_cl' value="^"|str_replace:'':$arrkey}		
+		{if $smarty.foreach.optarr.index>0},{/if}
+		{$APP.$opt.$arrkey_cl}				
+	{/foreach}
+	</td>
+  </tr>
+  <tr>
+    <td><b>{$MOD.LBL_CATEGORY}:</b></td><td>	
+	{assign var='opt' value=$fields->field_defs.category_c.options}				
+	{assign var='arrkeys' value=","|explode:$fields->category_c}
+	{foreach from=$arrkeys item=arrkey name=optarr}
+		{assign var='arrkey_cl' value="^"|str_replace:'':$arrkey}		
+		{if $smarty.foreach.optarr.index>0},{/if}
+		{$APP.$opt.$arrkey_cl}				
+	{/foreach}
+	</td>
+  </tr>
+  <tr height='20px'>
+    <td></td><td></td>
+  </tr>
+  <tr>
+    <td><b>{$MOD.LBL_CATEGORY}:</b></td><td>	
+	{assign var='opt' value=$fields->field_defs.nearest_airport_c.options}				
+	{assign var='arrkeys' value=","|explode:$fields->nearest_airport_c}
+	{foreach from=$arrkeys item=arrkey name=optarr}
+		{assign var='arrkey_cl' value="^"|str_replace:'':$arrkey}		
+		{if $smarty.foreach.optarr.index>0},{/if}
+		{$APP.$opt.$arrkey_cl}				
+	{/foreach}
+	</td>
+  </tr>
+   <tr>
+    <td><b>{$MOD.LBL_SEA_DISTANCE}:</b></td><td>	
+	{assign var='opt' value=$fields->field_defs.sea_distance_c.options}				
+	{assign var='arrkeys' value=","|explode:$fields->sea_distance_c}
+	{foreach from=$arrkeys item=arrkey name=optarr}
+		{assign var='arrkey_cl' value="^"|str_replace:'':$arrkey}		
+		{if $smarty.foreach.optarr.index>0},{/if}
+		{$APP.$opt.$arrkey_cl}				
+	{/foreach}
+	</td>
+  </tr>
+   <tr>
+    <td><b>{$MOD.LBL_COMM_CENTER_DISTANCE}:</b></td><td>	
+	{assign var='opt' value=$fields->field_defs.comm_center_distance_c.options}				
+	{assign var='arrkeys' value=","|explode:$fields->comm_center_distance_c}
+	{foreach from=$arrkeys item=arrkey name=optarr}
+		{assign var='arrkey_cl' value="^"|str_replace:'':$arrkey}		
+		{if $smarty.foreach.optarr.index>0},{/if}
+		{$APP.$opt.$arrkey_cl}				
+	{/foreach}
+	</td>
+  </tr>
+  <tr height='20px'>
+    <td></td><td></td>
+  </tr>
+  
+  <tr>
+    <td>{$MOD.LBL_COMPLEX}</td><td><input type="checkbox"  {if $fields->complex_c!=0} checked='checked' {/if} value="1" disabled='disabled' name="complex_c" ></td>
+  </tr>
+  {/if}
+   <tr>
+    <td>{$MOD.LBL_GARAGE}</td><td><input type="checkbox"  {if $fields->garage_c!=0} checked='checked'  {/if} value="1" disabled='disabled' name="garage_c" ></td>
+  </tr>
+  {/if}
+   <tr>
+    <td>{$MOD.LBL_PARKING_AREA}</td><td><input type="checkbox"  {if $fields->parking_area_c!=0} checked='checked'  {/if} value="1" disabled='disabled' name="parking_area_c" ></td>
+  </tr>
+  {/if}
+   <tr>
+    <td>{$MOD.LBL_PRIVATE_SWIMPOOL}</td><td><input type="checkbox"  {if $fields->private_swimpool_c!=0} checked='checked'  {/if} value="1" disabled='disabled' name="private_swimpool_c" ></td>
+  </tr>
+  {/if}
+   <tr>
+    <td>{$MOD.LBL_GENERAL_SWIMPOOL}</td><td><input type="checkbox"  {if $fields->general_swimpool_c!=0}  checked='checked' {/if} value="1" disabled='disabled' name="general_swimpool_c" ></td>
+  </tr>
+  {/if}
+   <tr>
+    <td>{$MOD.LBL_CHILDREN_AREA}</td><td><input type="checkbox"  {if $fields->children_area_c!=0} checked='checked'  {/if} value="1" disabled='disabled' name="children_area_c" ></td>
+  </tr>
+  {/if}
+   <tr>
+    <td>{$MOD.LBL_SPORT_AREA}</td><td><input type="checkbox"  {if $fields->sport_area_c!=0} checked='checked'  {/if} value="1" disabled='disabled' name="sport_area_c" ></td>
+  </tr>
+  {/if}
+   <tr>
+    <td>{$MOD.LBL_AREA}</td><td><input type="checkbox"  {if $fields->area_c!=0} checked='checked'  {/if} value="1" disabled='disabled' name="area_c" ></td>
+  </tr>
+  {/if}
+  <tr height='20px'>
+    <td></td><td></td>
+  </tr>
+  
+   <tr>
+    <td>{$MOD.LBL_TERRACE}</td><td><input type="checkbox"  {if $fields->terrace_c!=0} checked='checked'  {/if} value="1" disabled='disabled' name="terrace_c" ></td>
+  </tr>
+  {/if}
+   <tr>
+    <td>{$MOD.LBL_BALCONY}</td><td><input type="checkbox"  {if $fields->balcony_c!=0} checked='checked'  {/if} value="1" disabled='disabled' name="balcony_c" ></td>    
+  </tr>
+  {/if}
+   <tr>
+    <td>{$MOD.LBL_SOLARIUM}</td><td><input type="checkbox"  {if $fields->solarium_c!=0} checked='checked'  {/if} value="1" disabled='disabled' name="solarium_c" ></td>
+  </tr>
+  {/if}
+   <tr>
+    <td>{$MOD.LBL_BASEMENT}</td><td><input type="checkbox"  {if $fields->basement_c!=0} checked='checked'  {/if} value="1" disabled='disabled' name="basement_c" ></td>
+  </tr>
+  {/if}
+   <tr>
+    <td>{$MOD.LBL_STOREROOM}</td><td><input type="checkbox"  {if $fields->storeroom_c!=0} checked='checked'  {/if} value="1" disabled='disabled' name="storeroom_c" ></td>
+  </tr>
+  {/if}
+  </tbody>  
+  </table>
+</td>
+<td width = '30%' valign ='top' style="padding-left:15px;padding-top:5px'>">
+	<table>
+	  <tbody>
+	  <tr height='70px'>
+		<td></td><td></td>
+	  </tr>	  
+	  <tr>
+		<td><b>{$MOD.LBL_PROVINCE}:</b></td><td>{$fields->province_text_c}</td>
+	  </tr>
+	  <tr>
+		<td><b>{$MOD.LBL_COAST}:</b></td><td>{$fields->coast_text_c}</td>
+	  </tr>
+	  <tr>
+		<td><b>{$MOD.LBL_COMMUNITY}:</b></td><td>{$fields->community_text_c}</td>
+	  </tr>
+	  <tr height='20px'>
+		<td></td><td></td>
+	  </tr>
+	  <tr>
+		<td><b>{$MOD.LBL_TOTAL_AREA}:</b></td><td>{$fields->total_area_c}</td>
+	  </tr>
+	  <tr>
+		<td><b>{$MOD.LBL_APARTMENT_AREA}:</b></td><td>{$fields->apartment_area_c}</td>
+	  </tr>
+	  <tr>
+		<td><b>{$MOD.LBL_AREA_AREA_C}:</b></td><td>{$fields->area_area_c}</td>
+	  </tr>
+	  <tr>
+    <td><b>{$MOD.LBL_NUMBER_BEDROOM}:</b></td><td>	
+	{assign var='opt' value=$fields->field_defs.number_bedroom_c.options}				
+	{assign var='arrkeys' value=","|explode:$fields->number_bedroom_c}
+	{foreach from=$arrkeys item=arrkey name=optarr}
+		{assign var='arrkey_cl' value="^"|str_replace:'':$arrkey}		
+		{if $smarty.foreach.optarr.index>0},{/if}
+		{$APP.$opt.$arrkey_cl}				
+	{/foreach}
+	</td>
+	  </tr>
+	   <tr>
+		<td><b>{$MOD.LBL_NUMBER_BATHROOM}:</b></td><td>	
+		{assign var='opt' value=$fields->field_defs.number_bathroom_c.options}				
+		{assign var='arrkeys' value=","|explode:$fields->number_bathroom_c}
+		{foreach from=$arrkeys item=arrkey name=optarr}
+			{assign var='arrkey_cl' value="^"|str_replace:'':$arrkey}		
+			{if $smarty.foreach.optarr.index>0},{/if}
+			{$APP.$opt.$arrkey_cl}				
+		{/foreach}
+		</td>
+	  </tr>
+	  <tr height='20px'>
+		<td></td><td></td>
+	  </tr>
+	  {if $fields->mebel_c!=0}
+	  <tr>
+		<td>{$MOD.LBL_MEBEL}</td><td></td>
+	  </tr>
+	  {/if}
+	  {if $fields->kitchen_mebel_c!=0}
+	  <tr>
+		<td>{$MOD.LBL_KITCHEN_MEBEL}</td><td></td>
+	  </tr>
+	  {/if}
+	  {if $fields->life_equipment_c!=0}
+	  <tr>
+		<td>{$MOD.LBL_LIFE_EQUIPMENT}:</td><td></td>
+	  </tr>
+	  {/if}
+	  {if $fields->safe_c!=0}
+	  <tr>
+		<td>{$MOD.LBL_SAFE}</td><td></td>
+	  </tr>
+	  {if $fields->jacuzzi_c!=0}
+	  <tr>
+		<td>{$MOD.LBL_JACUZZI}</td><td></td>
+	  </tr>
+	  {/if}
+	  {if $fields->conditioner_c!=0}
+	  <tr>
+		<td>{$MOD.LBL_CONDITIONER}:</td><td>/td>
+	  </tr>
+	  {/if}
+	  {if $fields->intelligent_house_c!=0}
+	  <tr>
+		<td>{$MOD.LBL_INTELLIGENT_HOUSE}:</td><td></td>
+	  </tr>
+	  {/if}
+	  {if $fields->alarm_c!=0}
+	  <tr>
+		<td>{$MOD.LBL_ALARM}:</td><td><input type="checkbox"   checked='checked'  {/if} value="1" disabled='disabled' name="alarm_c" ></td>
+	  </tr>
+	  {/if}
+	  {if $fields->heating_c!=0} 
+	  <tr>
+		<td>{$MOD.LBL_HEATING}:</td><td><input type="checkbox"  checked='checked'  {/if} value="1" disabled='disabled' name="heating_c" ></td>
+	  </tr>
+	  {/if}
+	  {if $fields->heating_floor_c!=0}
+	  <tr>
+		<td>{$MOD.LBL_HEATING_FLOOR}:</td><td><input type="checkbox"   checked='checked'  {/if} value="1" disabled='disabled' name="heating_floor_c" ></td>
+	  </tr>
+	  <tr height='20px'>
+		<td></td><td></td>
+	  </tr>
+	  {/if}
+	  {if $fields->city_area_c!=0}
+	  <tr>
+		<td>{$MOD.LBL_CITY_AREA}</td><td></td>
+	  </tr>
+	  {/if}
+	  {if $fields->green_area_c!=0}
+	   <tr>
+		<td>{$MOD.LBL_GREEN_AREA}</td><td></td>
+	  </tr>	
+	  {/if}	  
+	  {if $fields->view_sea_c!=0}
+	   <tr>
+		<td>{$MOD.LBL_VIEW_SEA}</td><td></td>
+	  </tr>
+	  {/if}
+	  {if $fields->view_mount_c!=0}
+	   <tr>
+		<td>{$MOD.LBL_VIEW_MOUNT}</td><td></td>
+	  </tr>
+	  {/if}
+	  {if $fields->view_forest_c!=0}
+	  <tr>
+		<td>{$MOD.LBL_VIEW_FOREST_C}</td></td>
+	  </tr>
+	  {/if}
+	  {if $fields->view_park_c!=0}
+	   <tr>
+		<td>{$MOD.LBL_VIEW_PARK}</td><td></td>
+	  </tr>
+	  {/if}
+	  {if $fields->view_salt_lake_c!=0}
+	  <tr>
+		<td>{$MOD.LBL_VIEW_SALT_LAKE}</td><td></td>
+	  </tr>
+	  {/if}
+	  {if $fields->view_golf_pole_c!=0}
+	  <tr>
+		<td>{$MOD.LBL_VIEW_GOLF_POLE}</td><td></td>
+	  </tr>
+	 {/if}
+  </tbody>  
+  </table>
+</td>
+</tr>
+<tr>
+<td width = '30%' colspan=3 align = 'left'style='background-color:#fbfddf;padding:10px'>
+{$DESCRIPTION}
+</td>
+</tr>
+</tbody>
+</table>

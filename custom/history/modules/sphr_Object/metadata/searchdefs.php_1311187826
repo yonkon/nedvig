@@ -1,0 +1,272 @@
+<?php
+$module_name = 'sphr_Object';
+$searchdefs [$module_name] = 
+array (
+  'layout' => 
+  array (
+    'basic_search' => 
+    array (
+      'country' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_COUNTRY',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'country',
+      ),
+      'address' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_ADDRESS',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'address',
+      ),
+      'region' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_REGION',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'region',
+      ),
+      'title' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_TITLE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'title',
+      ),
+      'type' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_TYPE',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'type',
+      ),
+      'square' => 
+      array (
+        'type' => 'int',
+        'label' => 'LBL_SQUARE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'square',
+      ),
+      'payment_object' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_PAYMENT_OBJECT',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'payment_object',
+      ),
+      'payment_meter' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_PAYMENT_METER',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'payment_meter',
+      ),
+      'foto' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_FOTO',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'foto',
+      ),
+      'layout' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_LAYOUT',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'layout',
+      ),
+      'status' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_STATUS',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'status',
+      ),
+      'description_complex' => 
+      array (
+        'type' => 'text',
+        'studio' => 'visible',
+        'label' => 'LBL_DESCRIPTION_COMPLEX',
+        'sortable' => false,
+        'width' => '10%',
+        'default' => true,
+        'name' => 'description_complex',
+      ),
+      'purchase_scheme' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_PURCHASE_SCHEME',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'purchase_scheme',
+      ),
+      'description_location' => 
+      array (
+        'type' => 'text',
+        'studio' => 'visible',
+        'label' => 'LBL_DESCRIPTION_LOCATION',
+        'sortable' => false,
+        'width' => '10%',
+        'default' => true,
+        'name' => 'description_location',
+      ),
+    ),
+    'advanced_search' => 
+    array (
+      'country' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_COUNTRY',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'country',
+      ),
+      'address' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_ADDRESS',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'address',
+      ),
+      'region' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_REGION',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'region',
+      ),
+      'title' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_TITLE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'title',
+      ),
+      'type' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_TYPE',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'type',
+      ),
+      'square' => 
+      array (
+        'type' => 'int',
+        'label' => 'LBL_SQUARE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'square',
+      ),
+      'payment_object' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_PAYMENT_OBJECT',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'payment_object',
+      ),
+      'payment_meter' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_PAYMENT_METER',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'payment_meter',
+      ),
+      'foto' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_FOTO',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'foto',
+      ),
+      'layout' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_LAYOUT',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'layout',
+      ),
+      'status' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_STATUS',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'status',
+      ),
+      'description_complex' => 
+      array (
+        'type' => 'text',
+        'studio' => 'visible',
+        'label' => 'LBL_DESCRIPTION_COMPLEX',
+        'sortable' => false,
+        'width' => '10%',
+        'default' => true,
+        'name' => 'description_complex',
+      ),
+      'purchase_scheme' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_PURCHASE_SCHEME',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'purchase_scheme',
+      ),
+      'description_location' => 
+      array (
+        'type' => 'text',
+        'studio' => 'visible',
+        'label' => 'LBL_DESCRIPTION_LOCATION',
+        'sortable' => false,
+        'width' => '10%',
+        'default' => true,
+        'name' => 'description_location',
+      ),
+    ),
+  ),
+  'templateMeta' => 
+  array (
+    'maxColumns' => '3',
+    'widths' => 
+    array (
+      'label' => '10',
+      'field' => '30',
+    ),
+  ),
+);
+?>

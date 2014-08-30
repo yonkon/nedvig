@@ -1,0 +1,103 @@
+<?php
+$popupMeta = array (
+    'moduleMain' => 'sphr_Object',
+    'varName' => 'sphr_Object',
+    'orderBy' => 'sphr_object.name',
+    'whereClauses' => array (
+  'address' => 'sphr_object.address',
+  'title' => 'sphr_object.title',
+  'type' => 'sphr_object.type',
+  'square' => 'sphr_object.square',
+  'payment_object' => 'sphr_object.payment_object',
+),
+    'searchInputs' => array (
+  5 => 'address',
+  7 => 'title',
+  8 => 'type',
+  9 => 'square',
+  10 => 'payment_object',
+),
+    'searchdefs' => array (
+  'address' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_ADDRESS',
+    'width' => '10%',
+    'name' => 'address',
+  ),
+  'title' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_TITLE',
+    'width' => '10%',
+    'name' => 'title',
+  ),
+  'type' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_TYPE',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'type',
+  ),
+  'square' => 
+  array (
+    'type' => 'int',
+    'label' => 'LBL_SQUARE',
+    'width' => '10%',
+    'name' => 'square',
+  ),
+  'payment_object' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_PAYMENT_OBJECT',
+    'width' => '10%',
+    'name' => 'payment_object',
+  ),
+),
+    'listviewdefs' => array (
+  'ADDRESS' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_ADDRESS',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'address',
+  ),
+  'TITLE' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_TITLE',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'title',
+  ),
+  'TYPE' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_TYPE',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'type',
+  ),
+  'SQUARE' => 
+  array (
+    'type' => 'int',
+    'label' => 'LBL_SQUARE',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'square',
+  ),
+  'PAYMENT_OBJECT' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_PAYMENT_OBJECT',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'payment_object',
+  ),
+),
+);

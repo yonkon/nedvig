@@ -1,0 +1,290 @@
+<?php
+/*********************************************************************************
+ * SugarCRM is a customer relationship management program developed by
+ * SugarCRM, Inc. Copyright (C) 2004-2011 SugarCRM Inc.
+ * 
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License version 3 as published by the
+ * Free Software Foundation with the addition of the following permission added
+ * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+ * IN WHICH THE COPYRIGHT IS OWNED BY SUGARCRM, SUGARCRM DISCLAIMS THE WARRANTY
+ * OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+ * details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License along with
+ * this program; if not, see http://www.gnu.org/licenses or write to the Free
+ * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301 USA.
+ * 
+ * You can contact SugarCRM, Inc. headquarters at 10050 North Wolfe Road,
+ * SW2-130, Cupertino, CA 95014, USA. or at email address contact@sugarcrm.com.
+ * 
+ * The interactive user interfaces in modified source and object code versions
+ * of this program must display Appropriate Legal Notices, as required under
+ * Section 5 of the GNU Affero General Public License version 3.
+ * 
+ * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+ * these Appropriate Legal Notices must retain the display of the "Powered by
+ * SugarCRM" logo. If the display of the logo is not reasonably feasible for
+ * technical reasons, the Appropriate Legal Notices must display the words
+ * "Powered by SugarCRM".
+ ********************************************************************************/
+
+$relationships = array (
+  'campaign_prospects' => 
+  array (
+    'id' => '1fa6e39e-824f-cebc-0133-511255dac056',
+    'relationship_name' => 'campaign_prospects',
+    'lhs_module' => 'Campaigns',
+    'lhs_table' => 'campaigns',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Prospects',
+    'rhs_table' => 'prospects',
+    'rhs_key' => 'campaign_id',
+    'join_table' => NULL,
+    'join_key_lhs' => NULL,
+    'join_key_rhs' => NULL,
+    'relationship_type' => 'one-to-many',
+    'relationship_role_column' => NULL,
+    'relationship_role_column_value' => NULL,
+    'reverse' => '0',
+    'deleted' => '0',
+    'readonly' => true,
+    'rhs_subpanel' => NULL,
+    'lhs_subpanel' => NULL,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'is_custom' => false,
+    'from_studio' => true,
+  ),
+  'prospect_tasks' => 
+  array (
+    'id' => '25b6fb32-9c08-8300-a6fd-511255c24973',
+    'relationship_name' => 'prospect_tasks',
+    'lhs_module' => 'Prospects',
+    'lhs_table' => 'prospects',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Tasks',
+    'rhs_table' => 'tasks',
+    'rhs_key' => 'parent_id',
+    'join_table' => NULL,
+    'join_key_lhs' => NULL,
+    'join_key_rhs' => NULL,
+    'relationship_type' => 'one-to-many',
+    'relationship_role_column' => 'parent_type',
+    'relationship_role_column_value' => 'Prospects',
+    'reverse' => '0',
+    'deleted' => '0',
+    'readonly' => true,
+    'rhs_subpanel' => NULL,
+    'lhs_subpanel' => NULL,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'is_custom' => false,
+    'from_studio' => true,
+  ),
+  'prospect_notes' => 
+  array (
+    'id' => '25eafc21-d9d6-2aa7-bcf8-5112558ff4be',
+    'relationship_name' => 'prospect_notes',
+    'lhs_module' => 'Prospects',
+    'lhs_table' => 'prospects',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Notes',
+    'rhs_table' => 'notes',
+    'rhs_key' => 'parent_id',
+    'join_table' => NULL,
+    'join_key_lhs' => NULL,
+    'join_key_rhs' => NULL,
+    'relationship_type' => 'one-to-many',
+    'relationship_role_column' => 'parent_type',
+    'relationship_role_column_value' => 'Prospects',
+    'reverse' => '0',
+    'deleted' => '0',
+    'readonly' => true,
+    'rhs_subpanel' => NULL,
+    'lhs_subpanel' => NULL,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'is_custom' => false,
+    'from_studio' => true,
+  ),
+  'prospect_meetings' => 
+  array (
+    'id' => '2620a756-efe9-d698-f638-511255517a47',
+    'relationship_name' => 'prospect_meetings',
+    'lhs_module' => 'Prospects',
+    'lhs_table' => 'prospects',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Meetings',
+    'rhs_table' => 'meetings',
+    'rhs_key' => 'parent_id',
+    'join_table' => NULL,
+    'join_key_lhs' => NULL,
+    'join_key_rhs' => NULL,
+    'relationship_type' => 'one-to-many',
+    'relationship_role_column' => 'parent_type',
+    'relationship_role_column_value' => 'Prospects',
+    'reverse' => '0',
+    'deleted' => '0',
+    'readonly' => true,
+    'rhs_subpanel' => NULL,
+    'lhs_subpanel' => NULL,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'is_custom' => false,
+    'from_studio' => true,
+  ),
+  'prospect_calls' => 
+  array (
+    'id' => '26569e5b-4881-ad48-f0b3-511255773f1a',
+    'relationship_name' => 'prospect_calls',
+    'lhs_module' => 'Prospects',
+    'lhs_table' => 'prospects',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Calls',
+    'rhs_table' => 'calls',
+    'rhs_key' => 'parent_id',
+    'join_table' => NULL,
+    'join_key_lhs' => NULL,
+    'join_key_rhs' => NULL,
+    'relationship_type' => 'one-to-many',
+    'relationship_role_column' => 'parent_type',
+    'relationship_role_column_value' => 'Prospects',
+    'reverse' => '0',
+    'deleted' => '0',
+    'readonly' => true,
+    'rhs_subpanel' => NULL,
+    'lhs_subpanel' => NULL,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'is_custom' => false,
+    'from_studio' => true,
+  ),
+  'prospects_sphr_client' => 
+  array (
+    'id' => '1152761f-37a7-b22b-00e7-511255a47d24',
+    'relationship_name' => 'prospects_sphr_client',
+    'lhs_module' => 'Prospects',
+    'lhs_table' => 'prospects',
+    'lhs_key' => 'id',
+    'rhs_module' => 'sphr_Client',
+    'rhs_table' => 'sphr_client',
+    'rhs_key' => 'id',
+    'join_table' => 'prospects_sphr_client_c',
+    'join_key_lhs' => 'prospects_485fospects_ida',
+    'join_key_rhs' => 'prospects_cd3c_client_idb',
+    'relationship_type' => 'one-to-many',
+    'relationship_role_column' => NULL,
+    'relationship_role_column_value' => NULL,
+    'reverse' => '0',
+    'deleted' => '0',
+    'readonly' => true,
+    'rhs_subpanel' => 'ForProspectLists',
+    'lhs_subpanel' => NULL,
+    'from_studio' => true,
+    'is_custom' => true,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
+  'prospects_sphr_client_1' => 
+  array (
+    'id' => '11bfa3c3-fdd6-eb83-279b-5112559ad216',
+    'relationship_name' => 'prospects_sphr_client_1',
+    'lhs_module' => 'Prospects',
+    'lhs_table' => 'prospects',
+    'lhs_key' => 'id',
+    'rhs_module' => 'sphr_Client',
+    'rhs_table' => 'sphr_client',
+    'rhs_key' => 'id',
+    'join_table' => 'prospects_sphr_client_1_c',
+    'join_key_lhs' => 'prospects_5bbdospects_ida',
+    'join_key_rhs' => 'prospects_2b7e_client_idb',
+    'relationship_type' => 'one-to-many',
+    'relationship_role_column' => NULL,
+    'relationship_role_column_value' => NULL,
+    'reverse' => '0',
+    'deleted' => '0',
+    'readonly' => true,
+    'rhs_subpanel' => 'ForProspectLists',
+    'lhs_subpanel' => NULL,
+    'from_studio' => true,
+    'is_custom' => true,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
+  'prospects_sphr_client_3' => 
+  array (
+    'id' => '175fae74-5dca-c3c3-6504-5112555b66f4',
+    'relationship_name' => 'prospects_sphr_client_3',
+    'lhs_module' => 'Prospects',
+    'lhs_table' => 'prospects',
+    'lhs_key' => 'id',
+    'rhs_module' => 'sphr_Client',
+    'rhs_table' => 'sphr_client',
+    'rhs_key' => 'id',
+    'join_table' => 'prospects_sphr_client_3_c',
+    'join_key_lhs' => 'prospects_3000ospects_ida',
+    'join_key_rhs' => 'prospects_e5f8_client_idb',
+    'relationship_type' => 'one-to-many',
+    'relationship_role_column' => NULL,
+    'relationship_role_column_value' => NULL,
+    'reverse' => '0',
+    'deleted' => '0',
+    'readonly' => true,
+    'rhs_subpanel' => 'ForProspectLists',
+    'lhs_subpanel' => NULL,
+    'from_studio' => true,
+    'is_custom' => true,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
+  'prospects_sphr_client_2' => 
+  array (
+    'id' => '1c391c30-8c30-ba2a-3d73-51125520c6d0',
+    'relationship_name' => 'prospects_sphr_client_2',
+    'lhs_module' => 'Prospects',
+    'lhs_table' => 'prospects',
+    'lhs_key' => 'id',
+    'rhs_module' => 'sphr_Client',
+    'rhs_table' => 'sphr_client',
+    'rhs_key' => 'id',
+    'join_table' => 'prospects_sphr_client_2_c',
+    'join_key_lhs' => 'prospects_d78dospects_ida',
+    'join_key_rhs' => 'prospects_9bbf_client_idb',
+    'relationship_type' => 'one-to-many',
+    'relationship_role_column' => NULL,
+    'relationship_role_column_value' => NULL,
+    'reverse' => '0',
+    'deleted' => '0',
+    'readonly' => true,
+    'rhs_subpanel' => 'ForProspectLists',
+    'lhs_subpanel' => NULL,
+    'from_studio' => true,
+    'is_custom' => true,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
+  'prospects_sphr_client_4' => 
+  array (
+    'rhs_label' => 'Клиенты',
+    'lhs_label' => 'Targets',
+    'lhs_subpanel' => 'default',
+    'rhs_subpanel' => 'ForProspectLists',
+    'lhs_module' => 'Prospects',
+    'rhs_module' => 'sphr_Client',
+    'relationship_type' => 'many-to-many',
+    'readonly' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'is_custom' => false,
+    'from_studio' => true,
+    'relationship_name' => 'prospects_sphr_client_4',
+  ),
+);
+?>

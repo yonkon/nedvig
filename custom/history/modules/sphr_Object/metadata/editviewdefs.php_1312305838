@@ -1,0 +1,313 @@
+<?php
+$module_name = 'sphr_Object';
+$viewdefs [$module_name] = 
+array (
+  'EditView' => 
+  array (
+    'templateMeta' => 
+    array (
+      'form' => 
+      array (
+        'enctype' => 'multipart/form-data',
+      ),
+      'maxColumns' => '2',
+      'widths' => 
+      array (
+        0 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+        1 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+      ),
+      'javascript' => '
+		{literal}
+		<script type="text/javascript" src="custom/include/javascript/sphere_modules_editviews.js"></script>
+		<script type="text/javascript">
+		var MsgStr= new Object();
+		{/literal}
+		//Массив констант для вывода сообщений
+		MsgStr["LBL_PAYMENT_OBJECT"]="{$MOD.LBL_PAYMENT_OBJECT}";
+		MsgStr["LBL_PAYMENT_METER"]="{$MOD.LBL_PAYMENT_METER}";
+		MsgStr["SPHR_DEVELOHR_OBJECT_NAME"]="{$MOD.SPHR_DEVELOHR_OBJECT_NAME}";
+		MsgStr["SPHR_INTERMHR_OBJECT_NAME"]="{$MOD.SPHR_INTERMHR_OBJECT_NAME}";
+		
+		MsgStr["ERR_PAYMENT_NEED"]="{$MOD.ERR_PAYMENT_NEED}";
+		MsgStr["ERR_PARTNER_NEED"]="{$MOD.ERR_PARTNER_NEED}";
+		{literal}
+		
+		function checkPartner() //функция установки обязательности застройщика и посредника
+		{
+			var Err = false;
+			if ((ElementValueLength("sphr_develohr_object_name") == 0) && (ElementValueLength("sphr_intermhr_object_name") == 0)) Err = true; 	
+			for (var i = 0; i < validate["EditView"].length; i++)
+			{
+				if (validate["EditView"][i][nameIndex] == "sphr_develohr_object_name" || validate["EditView"][i][nameIndex] == "sphr_intermhr_object_name" )
+				{
+					if (Err) //если ни застройщик, ни посредник не выбран
+					{
+						validate["EditView"][i][typeIndex] = "error";
+						validate["EditView"][i][msgIndex] = MsgStr["ERR_PARTNER_NEED"];
+					} else {
+						validate["EditView"][i][typeIndex] = "relate";
+						switch(validate["EditView"][i][nameIndex])
+						{
+							case "sphr_develohr_object_name": validate["EditView"][i][msgIndex] =  MsgStr["SPHR_DEVELOHR_OBJECT_NAME"]; break;
+							case "sphr_intermhr_object_name": validate["EditView"][i][msgIndex] =  MsgStr["SPHR_INTERMHR_OBJECT_NAME"]; break;
+						}
+					}
+				}
+			}
+		}
+		
+		addToValidate(\'EditView\', \'payment_meter\', \'relate\', false,MsgStr["LBL_PAYMENT_METER"] );
+		addToValidate(\'EditView\', \'payment_object\', \'relate\', false,MsgStr["LBL_PAYMENT_OBJECT"] );
+		checkPayment();
+		
+		addToValidate(\'EditView\', \'sphr_develohr_object_name\', \'relate\', false,MsgStr["SPHR_DEVELOHR_OBJECT_NAME"] );
+		addToValidate(\'EditView\', \'sphr_intermhr_object_name\', \'relate\', false,MsgStr["SPHR_INTERMHR_OBJECT_NAME"] );
+		var t=setInterval("checkPartner()",500);
+		
+		</script>
+	  {/literal}
+	  
+	  {literal}
+      	<script type="text/javascript">
+      		function addPhoto ()
+			{
+				var ar_photo_count = $("#ar_photo_count").val(); //хранит общее кол-во фото
+			    var ar_photo_max = $("#ar_photo_max").val(); //хранит номер для поля, которое будет создано.
+			    
+			    if (ar_photo_count < 10)
+			    {
+				    $("#photo_list").append(\'<tr id="photoRow_\'+ar_photo_max+\'">\'+\'<td nowrap="NOWRAP"><input type="file" name="new_photo_\'+ar_photo_max+\'" id="new_photo_\'+ar_photo_max+\'" value="" size="30"></td>\'+\'<td><img src="themes/default/images/id-ff-remove.png" onclick="deletePhoto(\'+ar_photo_max+\')">\'+\'</td></tr>\');
+				    
+				    ar_photo_max++;
+				    ar_photo_count++;
+				    $("#ar_photo_max").val(ar_photo_max);
+				    $("#ar_photo_count").val(ar_photo_count);
+			    }
+			}
+			
+			function deletePhoto (id)
+			{
+			    var ar_photo_count = $("#ar_photo_count").val();
+
+			    $("#photoRow_"+id).remove();
+			    ar_photo_count--;
+			    $("#ar_photo_count").val(ar_photo_count);
+			}
+			
+		      		function addLayout ()
+			{
+				var ar_layout_count = $("#ar_layout_count").val(); //хранит общее кол-во фото
+			    var ar_layout_max = $("#ar_layout_max").val(); //хранит номер для поля, которое будет создано.
+			    
+			    if (ar_layout_count < 10)
+			    {
+				    $("#layout_list").append(\'<tr id="layoutRow_\'+ar_layout_max+\'">\'+\'<td nowrap="NOWRAP"><input type="file" name="new_layout_\'+ar_layout_max+\'" id="new_layout_\'+ar_layout_max+\'" value="" size="30"></td>\'+\'<td><img src="themes/default/images/id-ff-remove.png" onclick="deleteLayout(\'+ar_layout_max+\')">\'+\'</td></tr>\');
+				    
+				    ar_layout_max++;
+				    ar_layout_count++;
+				    $("#ar_layout_max").val(ar_layout_max);
+				    $("#ar_layout_count").val(ar_layout_count);
+			    }
+			}
+			
+			function deleteLayout (id)
+			{
+			    var ar_layout_count = $("#ar_layout_count").val();
+
+			    $("#layoutRow_"+id).remove();
+			    ar_layout_count--;
+			    $("#ar_layout_count").val(ar_layout_count);
+			}
+			
+		</script>
+      	{/literal}
+	  ',
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'custom/include/javascript/jquery/jquery.pack.js',
+        ),
+      ),
+      'useTabs' => false,
+    ),
+    'panels' => 
+    array (
+      'default' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'country',
+            'studio' => 'visible',
+            'label' => 'LBL_COUNTRY',
+          ),
+          1 => 
+          array (
+            'name' => 'address',
+            'label' => 'LBL_ADDRESS',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'region',
+            'label' => 'LBL_REGION',
+          ),
+          1 => 
+          array (
+            'name' => 'name',
+            'label' => 'LBL_NAME',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'type',
+            'studio' => 'visible',
+            'label' => 'LBL_TYPE',
+          ),
+          1 => 
+          array (
+            'name' => 'square',
+            'label' => 'LBL_SQUARE',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'payment_object',
+            'label' => 'LBL_PAYMENT_OBJECT',
+            'displayParams' => 
+            array (
+              'field' => 
+              array (
+                'onChange' => 'checkPayment();',
+              ),
+            ),
+          ),
+          1 => 
+          array (
+            'name' => 'payment_meter',
+            'label' => 'LBL_PAYMENT_METER',
+            'displayParams' => 
+            array (
+              'field' => 
+              array (
+                'onChange' => 'checkPayment();',
+              ),
+            ),
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'payment_meter',
+            'label' => 'LBL_PAYMENT_METER',
+            'displayParams' => 
+            array (
+              'field' => 
+              array (
+                'onChange' => 'checkPayment();',
+              ),
+            ),
+          ),
+          1 => 
+          array (
+            'name' => 'payment_meter',
+            'label' => 'LBL_PAYMENT_METER',
+            'displayParams' => 
+            array (
+              'field' => 
+              array (
+                'onChange' => 'checkPayment();',
+              ),
+            ),
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'status',
+            'studio' => 'visible',
+            'label' => 'LBL_STATUS',
+          ),
+          1 => 
+          array (
+            'name' => 'description_complex',
+            'studio' => 'visible',
+            'label' => 'LBL_DESCRIPTION_COMPLEX',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'purchase_scheme',
+            'studio' => 'visible',
+            'label' => 'LBL_PURCHASE_SCHEME',
+          ),
+          1 => 
+          array (
+            'name' => 'description_location',
+            'studio' => 'visible',
+            'label' => 'LBL_DESCRIPTION_LOCATION',
+          ),
+        ),
+        7 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'sphr_develohr_object_name',
+          ),
+          1 => 
+          array (
+            'name' => 'sphr_intermhr_object_name',
+          ),
+        ),
+        9 => 
+        array (
+          0 => 
+          array (
+            'name' => 'sphr_owner_hr_object_name',
+          ),
+          1 => 
+          array (
+            'name' => 'sphr_develohr_object_name',
+          ),
+        ),
+        10 => 
+        array (
+          0 => 
+          array (
+            'name' => 'sphr_intermhr_object_name',
+          ),
+          1 => 
+          array (
+            'name' => 'sphr_owner_hr_object_name',
+          ),
+        ),
+      ),
+    ),
+  ),
+);
+?>

@@ -1,0 +1,135 @@
+<?php
+$module_name = 'sphr_Interest';
+$searchdefs [$module_name] = 
+array (
+  'layout' => 
+  array (
+    'basic_search' => 
+    array (
+      'title' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_TITLE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'title',
+      ),
+      'country' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_COUNTRY',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'country',
+      ),
+      'room_count' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_ROOM_COUNT',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'room_count',
+      ),
+      'sphr_client_interest_name' => 
+      array (
+        'type' => 'relate',
+        'link' => 'sphr_client_sphr_interest',
+        'label' => 'LBL_SPHR_CLIENT_SPHR_INTEREST_FROM_SPHR_CLIENT_TITLE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'sphr_client_interest_name',
+      ),
+    ),
+    'advanced_search' => 
+    array (
+      'name' => 
+      array (
+        'name' => 'name',
+        'default' => true,
+        'width' => '10%',
+      ),
+      'country' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_COUNTRY',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'country',
+      ),
+      'description_wish' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_DESCRIPTION_WISH',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'description_wish',
+      ),
+      'payment_object' => 
+      array (
+        'type' => 'int',
+        'label' => 'LBL_PAYMENT_OBJECT',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'payment_object',
+      ),
+      'payment_meter' => 
+      array (
+        'type' => 'int',
+        'label' => 'LBL_PAYMENT_METER',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'payment_meter',
+      ),
+      'discount' => 
+      array (
+        'type' => 'int',
+        'label' => 'LBL_DISCOUNT',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'discount',
+      ),
+      'room_count' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_ROOM_COUNT',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'room_count',
+      ),
+      'square' => 
+      array (
+        'type' => 'int',
+        'label' => 'LBL_SQUARE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'square',
+      ),
+      'description_payment_terms' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_DESCRIPTION_PAYMENT_TERMS',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'description_payment_terms',
+      ),
+    ),
+  ),
+  'templateMeta' => 
+  array (
+    'maxColumns' => '3',
+    'widths' => 
+    array (
+      'label' => '10',
+      'field' => '30',
+    ),
+  ),
+);
+?>

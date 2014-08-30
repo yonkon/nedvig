@@ -1,0 +1,44 @@
+#!/usr/bin/php -q
+
+<?php
+
+ob_implicit_flush(false);
+error_reporting(0);
+
+
+$sugar_config = array();
+$sugar_config["site_url"] = "http://ds0.kub3.ru/mne/newspb";
+
+$logFile = fopen("log.txt", "w");
+
+/*
+if (!defined(STDIN)) define('STDIN', fopen('php://stdin', 'r'));
+if (!defined(STDOUT)) define('STDOUT', fopen('php://stdout', 'w'));
+if (!defined(STDERR)) define('STDERR', fopen('php://stderr', 'w'));
+
+
+$asteriskVarsArray = array();
+while (!feof(STDIN)) {
+	$asteriskVar = trim(fgets(STDIN));
+    if ($asteriskVar === "") break;
+    
+    $asteriskVar = explode(":", $asteriskVar);
+    $asteriskVarsArray[$asteriskVar[0]] = trim($asteriskVar[1]);
+}
+*/
+
+fputs($logFile, "call_time : ".$argv[1]." \n");
+fputs($logFile, "call_id : ".$argv[2]." \n");
+
+
+$execResultString = file_get_contents($sugar_config["site_url"]."/index.php?entryPoint=AsteriskEntryPoint&mode=end&call_time=".urlencode($argv[1])."&call_id=".urlencode($argv[2]));
+
+fputs($logFile, "execResultString : ".$execResultString." \n");
+
+$resultVarTemp = explode(":", $execResultString);
+$execResultArray[$resultVarTemp[0]] = trim($resultVarTemp[1]);
+
+fprintf(STDOUT, "SET VARIABLE callId ".$execResultArray["call_id"]);
+
+fclose($logFile);
+?>

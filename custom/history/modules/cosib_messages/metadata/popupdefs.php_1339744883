@@ -1,0 +1,43 @@
+<?php
+$popupMeta = array (
+    'moduleMain' => 'cosib_messages',
+    'varName' => 'cosib_messages',
+    'orderBy' => 'cosib_messages.name',
+    'whereClauses' => array (
+  'name' => 'cosib_messages.name',
+),
+    'searchInputs' => array (
+  0 => 'cosib_messages_number',
+  1 => 'name',
+  2 => 'priority',
+  3 => 'status',
+),
+    'listviewdefs' => array (
+  'NAME' => 
+  array (
+    'width' => '32%',
+    'label' => 'LBL_NAME',
+    'default' => true,
+    'link' => true,
+    'name' => 'name',
+  ),
+  'SPHR_CLIENT_MESSAGES_NAME' => 
+  array (
+    'type' => 'relate',
+    'link' => 'sphr_clientcosib_messages',
+    'label' => 'LBL_SPHR_CLIENT_COSIB_MESSAGES_FROM_SPHR_CLIENT_TITLE',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'sphr_client_messages_name',
+  ),
+  'SPHR_OBJECT_MESSAGES_NAME' => 
+  array (
+    'type' => 'relate',
+    'link' => 'sphr_objectcosib_messages',
+    'label' => 'LBL_SPHR_OBJECT_COSIB_MESSAGES_FROM_SPHR_OBJECT_TITLE',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'sphr_object_messages_name',
+  ),
+),
+);

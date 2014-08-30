@@ -1,0 +1,528 @@
+<?php
+$module_name = 'sphr_Object';
+$searchdefs [$module_name] = 
+array (
+  'layout' => 
+  array (
+    'basic_search' => 
+    array (
+      'name' => 
+      array (
+        'type' => 'name',
+        'label' => 'LBL_NAME',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'name',
+      ),
+      'assigned_user_name' => 
+      array (
+        'link' => 'assigned_user_link',
+        'type' => 'relate',
+        'label' => 'LBL_ASSIGNED_TO_NAME',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'assigned_user_name',
+      ),
+      'type' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_TYPE',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'type',
+      ),
+      'object_status_c' => 
+      array (
+        'type' => 'multienum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_OBJECT_STATUS',
+        'width' => '10%',
+        'name' => 'object_status_c',
+      ),
+      'category_c' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_CATEGORY',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'category_c',
+      ),
+      'coast_select_c' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_COAST_SELECT',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'coast_select_c',
+      ),
+      'price_sale_c' => 
+      array (
+        'type' => 'varchar',
+        'default' => true,
+        'label' => 'LBL_PRICE_SALE',
+        'width' => '10%',
+        'name' => 'price_sale_c',
+      ),
+      'seller_price_sale_c' => 
+      array (
+        'type' => 'varchar',
+        'default' => true,
+        'label' => 'LBL_SELLER_PRICE_SALE',
+        'width' => '10%',
+        'name' => 'seller_price_sale_c',
+      ),
+      'price_rent_c' => 
+      array (
+        'type' => 'varchar',
+        'default' => true,
+        'label' => 'LBL_PRICE_RENT',
+        'width' => '10%',
+        'name' => 'price_rent_c',
+      ),
+      'seller_price_rent_c' => 
+      array (
+        'type' => 'varchar',
+        'default' => true,
+        'label' => 'LBL_SELLER_PRICE_RENT',
+        'width' => '10%',
+        'name' => 'seller_price_rent_c',
+      ),
+    ),
+    'advanced_search' => 
+    array (
+      'name' => 
+      array (
+        'type' => 'name',
+        'label' => 'LBL_NAME',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'name',
+      ),
+      'assigned_user_name' => 
+      array (
+        'link' => 'assigned_user_link',
+        'type' => 'relate',
+        'label' => 'LBL_ASSIGNED_TO_NAME',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'assigned_user_name',
+      ),
+      'type' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_TYPE',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'type',
+      ),
+      'category_c' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_CATEGORY',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'category_c',
+      ),
+      'object_status_c' => 
+      array (
+        'type' => 'multienum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_OBJECT_STATUS',
+        'width' => '10%',
+        'name' => 'object_status_c',
+      ),
+      'parent_name' => 
+      array (
+        'type' => 'parent',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_FLEX_RELATE',
+        'width' => '10%',
+        'name' => 'parent_name',
+      ),
+      'province_select_c' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_PROVINCE_SELECT',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'province_select_c',
+      ),
+      'coast_select_c' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_COAST_SELECT',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'coast_select_c',
+      ),
+      'community_text_c' => 
+      array (
+        'type' => 'varchar',
+        'default' => true,
+        'label' => 'LBL_COMMUNITY_TEXT',
+        'width' => '10%',
+        'name' => 'community_text_c',
+      ),
+      'price_sale_c' => 
+      array (
+        'type' => 'varchar',
+        'default' => true,
+        'label' => 'LBL_PRICE_SALE',
+        'width' => '10%',
+        'name' => 'price_sale_c',
+      ),
+      'seller_price_sale_c' => 
+      array (
+        'type' => 'varchar',
+        'default' => true,
+        'label' => 'LBL_SELLER_PRICE_SALE',
+        'width' => '10%',
+        'name' => 'seller_price_sale_c',
+      ),
+      'price_rent_c' => 
+      array (
+        'type' => 'varchar',
+        'default' => true,
+        'label' => 'LBL_PRICE_RENT',
+        'width' => '10%',
+        'name' => 'price_rent_c',
+      ),
+      'seller_price_rent_c' => 
+      array (
+        'type' => 'varchar',
+        'default' => true,
+        'label' => 'LBL_SELLER_PRICE_RENT',
+        'width' => '10%',
+        'name' => 'seller_price_rent_c',
+      ),
+      'number_bedroom_c' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_NUMBER_BEDROOM',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'number_bedroom_c',
+      ),
+      'number_bathroom_c' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_NUMBER_BATHROOM',
+        'sortable' => false,
+        'width' => '10%',
+        'name' => 'number_bathroom_c',
+      ),
+      'total_area_c' => 
+      array (
+        'type' => 'int',
+        'default' => true,
+        'label' => 'LBL_TOTAL_AREA',
+        'width' => '10%',
+        'name' => 'total_area_c',
+      ),
+      'apartment_area_c' => 
+      array (
+        'type' => 'int',
+        'default' => true,
+        'label' => 'LBL_APARTMENT_AREA',
+        'width' => '10%',
+        'name' => 'apartment_area_c',
+      ),
+      'sea_distance_c' => 
+      array (
+        'type' => 'int',
+        'default' => true,
+        'label' => 'LBL_SEA_DISTANCE',
+        'width' => '10%',
+        'name' => 'sea_distance_c',
+      ),
+      'comm_center_distance_c' => 
+      array (
+        'type' => 'int',
+        'default' => true,
+        'label' => 'LBL_COMM_CENTER_DISTANCE',
+        'width' => '10%',
+        'name' => 'comm_center_distance_c',
+      ),
+      'nearest_airport_c' => 
+      array (
+        'type' => 'multienum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_NEAREST_AIRPORT',
+        'width' => '10%',
+        'name' => 'nearest_airport_c',
+      ),
+      'complex_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_COMPLEX',
+        'width' => '10%',
+        'name' => 'complex_c',
+      ),
+      'view_sea_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_VIEW_SEA',
+        'width' => '10%',
+        'name' => 'view_sea_c',
+      ),
+      'view_mount_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_VIEW_MOUNT',
+        'width' => '10%',
+        'name' => 'view_mount_c',
+      ),
+      'view_forest_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_VIEW_FOREST_C',
+        'width' => '10%',
+        'name' => 'view_forest_c',
+      ),
+      'view_park_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_VIEW_PARK',
+        'width' => '10%',
+        'name' => 'view_park_c',
+      ),
+      'view_salt_lake_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_VIEW_SALT_LAKE',
+        'width' => '10%',
+        'name' => 'view_salt_lake_c',
+      ),
+      'view_golf_pole_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_VIEW_GOLF_POLE',
+        'width' => '10%',
+        'name' => 'view_golf_pole_c',
+      ),
+      'city_area_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_CITY_AREA',
+        'width' => '10%',
+        'name' => 'city_area_c',
+      ),
+      'green_area_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_GREEN_AREA',
+        'width' => '10%',
+        'name' => 'green_area_c',
+      ),
+      'garage_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_GARAGE',
+        'width' => '10%',
+        'name' => 'garage_c',
+      ),
+      'parking_area_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_PARKING_AREA',
+        'width' => '10%',
+        'name' => 'parking_area_c',
+      ),
+      'private_swimpool_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_PRIVATE_SWIMPOOL',
+        'width' => '10%',
+        'name' => 'private_swimpool_c',
+      ),
+      'general_swimpool_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_GENERAL_SWIMPOOL',
+        'width' => '10%',
+        'name' => 'general_swimpool_c',
+      ),
+      'children_area_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_CHILDREN_AREA',
+        'width' => '10%',
+        'name' => 'children_area_c',
+      ),
+      'sport_area_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_SPORT_AREA',
+        'width' => '10%',
+        'name' => 'sport_area_c',
+      ),
+      'terrace_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_TERRACE',
+        'width' => '10%',
+        'name' => 'terrace_c',
+      ),
+      'balcony_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_BALCONY',
+        'width' => '10%',
+        'name' => 'balcony_c',
+      ),
+      'solarium_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_SOLARIUM',
+        'width' => '10%',
+        'name' => 'solarium_c',
+      ),
+      'jacuzzi_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_JACUZZI',
+        'width' => '10%',
+        'name' => 'jacuzzi_c',
+      ),
+      'basement_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_BASEMENT',
+        'width' => '10%',
+        'name' => 'basement_c',
+      ),
+      'storeroom_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_STOREROOM',
+        'width' => '10%',
+        'name' => 'storeroom_c',
+      ),
+      'mebel_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_MEBEL',
+        'width' => '10%',
+        'name' => 'mebel_c',
+      ),
+      'kitchen_mebel_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_KITCHEN_MEBEL',
+        'width' => '10%',
+        'name' => 'kitchen_mebel_c',
+      ),
+      'life_equipment_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_LIFE_EQUIPMENT',
+        'width' => '10%',
+        'name' => 'life_equipment_c',
+      ),
+      'safe_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_SAFE',
+        'width' => '10%',
+        'name' => 'safe_c',
+      ),
+      'alarm_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_ALARM',
+        'width' => '10%',
+        'name' => 'alarm_c',
+      ),
+      'intelligent_house_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_INTELLIGENT_HOUSE',
+        'width' => '10%',
+        'name' => 'intelligent_house_c',
+      ),
+      'heating_floor_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_HEATING_FLOOR',
+        'width' => '10%',
+        'name' => 'heating_floor_c',
+      ),
+      'heating_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_HEATING',
+        'width' => '10%',
+        'name' => 'heating_c',
+      ),
+      'conditioner_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_CONDITIONER',
+        'width' => '10%',
+        'name' => 'conditioner_c',
+      ),
+    ),
+  ),
+  'templateMeta' => 
+  array (
+    'maxColumns' => '2',
+    'widths' => 
+    array (
+      'label' => '10',
+      'field' => '30',
+    ),
+  ),
+);
+?>
