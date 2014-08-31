@@ -73,17 +73,24 @@ class sphr_Client extends sphr_Client_sugar {
         global $current_user;
         $temp_array = $this->get_list_view_array();        
         $temp_array['NAME']= $this->first_name;
-        if($this->last_name!= ''){
+        if($this->last_name!= '' && $this->status != 2){ //Добавляем фамилию, если клиент не в статусе "Соискатель"
            if($temp_array['NAME']!= '') $temp_array['NAME'].= ' ';
            $temp_array['NAME'].= $this->last_name;
         }
+
         $temp_array['EMAIL1'] = $this->emailAddress->getPrimaryAddress($this);
         $temp_array['EMAIL1_LINK'] = $current_user->getEmailLink('email1', $this, '', '', 'ListView');
         
         //#3789
         $temp_array['ACTIVITIES'] = $this->getTasks($temp_array['ID']) === true ? translate('LBL_ACTIVITIES_YES','sphr_Client') : translate('LBL_ACTIVITIES_NO','sphr_Client');
         //---
-        
+        if ($this->assigned_user_id != $current_user->id) {
+            $personal_data = array('EMAIL', 'EMAIL1', 'EMAIL1_LINK', 'PHONE', 'PHONE_HOME', 'PHONE_MOBILE', 'PHONE_WORK','PHONE_OTHER', 'PHONE_FAX', 'EMAIL2');
+            foreach ($personal_data as $excluded_field) {
+                $temp_array[$excluded_field] = '';
+            }
+
+        }
         return $temp_array;
     }
 

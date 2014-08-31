@@ -47,7 +47,10 @@ class sphr_ClientViewList extends ViewList
 
 
         $where_clauses = $this->searchForm->generateSearchWhere(true, $this->seed->module_dir);
-        if (count($where_clauses) > 0 )$this->where = '('. implode(' ) AND ( ', $where_clauses) . ')';
+        if (count($where_clauses) > 0 ) {
+            $where_clauses_sql = '('. implode(' ) AND ( ', $where_clauses) . ')';
+            $this->where = empty($this->where) ? $where_clauses_sql : $this->where . ' AND ' . $where_clauses_sql;
+        }
 
         //#3789
         $this->where = str_replace("first_name like '", "first_name like '%", $this->where);
@@ -84,7 +87,7 @@ class sphr_ClientViewList extends ViewList
         global $current_user;
         if (!$current_user->is_admin) {
             if (!empty($this->where)) $this->where .= ' AND ';
-            $this->where .= ' assigned_user_id = "' . $current_user->id . '" ';
+            $this->where .= ' (assigned_user_id = "' . $current_user->id . '" OR sphr_client.status = 2 ) ';
         }
         if (isCurrentUserOnlyOperator())
         {

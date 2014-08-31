@@ -472,8 +472,18 @@ class EditView
         ) 
     {
         global $mod_strings, $sugar_config, $app_strings, $app_list_strings, $theme, $current_user;
+        if (!$current_user->is_admin && $this->fieldDefs['assigned_user_id'] != $current_user->id) {
+            $this->fieldDefs['phone_home']['value'] = '';
+            $this->fieldDefs['phone_mobile']['value'] = '';
+            $this->fieldDefs['phone_work']['value'] = '';
+            $this->fieldDefs['phone_other']['value'] = '';
+            $this->fieldDefs['phone_fax']['value'] = '';
+            $this->fieldDefs['email1']['value'] = '';
+            $this->fieldDefs['email2']['value'] = '';
+            $this->fieldDefs['email']['value'] = '';
+            $this->fieldDefs['last_name']['value'] = '';
 
-
+        }
         if(isset($this->defs['templateMeta']['javascript'])) {
            if(is_array($this->defs['templateMeta']['javascript'])) {
            	 $this->th->ss->assign('externalJSFile', 'modules/' . $this->module . '/metadata/editvewdefs.js');
