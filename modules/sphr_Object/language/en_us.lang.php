@@ -37,6 +37,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
   'LBL_ASSIGNED_TO_NAME' => 'User',
   'LBL_ID' => 'ID',
+  'LBL_DATE_SENT' => 'Date Sent',
   'LBL_DATE_ENTERED' => 'Date Created',
   'LBL_DATE_MODIFIED' => 'Date Modified',
   'LBL_MODIFIED' => 'Modified By',

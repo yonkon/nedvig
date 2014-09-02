@@ -30,7 +30,7 @@ pictures - string - фото объекта. Передаются в виде с
 
 name_rus_c - varchar(255) - название на русском.
 
-name_eng_c - varchar(255) - название на английском.
+name_eng_c - varchar(255) - Артикул.
 
 name_sp_c - varchar(255) - название на испанском.
 

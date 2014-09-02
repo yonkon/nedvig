@@ -37,6 +37,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID' => 'Ответственный (Id)',
   'LBL_ASSIGNED_TO_NAME' => 'Ответственный',
   'LBL_ID' => 'ID',
+  'LBL_DATE_SENT' => 'Дата отправки',
   'LBL_DATE_ENTERED' => 'Дата создания',
   'LBL_DATE_MODIFIED' => 'Дата изменения',
   'LBL_MODIFIED' => 'Изменено',

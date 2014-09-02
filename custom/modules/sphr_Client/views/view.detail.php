@@ -409,7 +409,7 @@ MJS;
 			mygrid = new dhtmlXGridObject("mygrid_container");
 			mygrid.setImagePath("custom/include/email_sender/dhtmlxGrid/codebase/imgs/");
 			//mygrid.setColumnIds("ch,type,title,first_name,last_name,middle_name,status,status_description,assigned_user,date_entered,date_modified");
-			mygrid.setHeader("#,Название объекта, Адрес объекта, Регион, Тип, Площадь, Цена продажи, Дата создания, Ответственный");
+			mygrid.setHeader("#,Название объекта, Адрес объекта, Регион, Тип, Площадь, Цена продажи, Дата отправки, Ответственный");
 			mygrid.setColTypes  ("ch,ro,ro,ro,ro,ro,ro,ro,ro");
 			mygrid.setInitWidths("15,94,94,94,94,94,94,94,94,");
 			mygrid.setColSorting("na,str,str,str,str,str,str,DateSort,str");
