@@ -472,7 +472,7 @@ class EditView
         ) 
     {
         global $mod_strings, $sugar_config, $app_strings, $app_list_strings, $theme, $current_user;
-        if (!$current_user->is_admin && $this->fieldDefs['assigned_user_id'] != $current_user->id) {
+        if (!$current_user->is_admin && $this->fieldDefs['assigned_user_id']['value'] != $current_user->id) {
             $this->fieldDefs['phone_home']['value'] = '';
             $this->fieldDefs['phone_mobile']['value'] = '';
             $this->fieldDefs['phone_work']['value'] = '';

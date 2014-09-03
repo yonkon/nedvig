@@ -84,7 +84,7 @@ class sphr_Client extends sphr_Client_sugar {
         //#3789
         $temp_array['ACTIVITIES'] = $this->getTasks($temp_array['ID']) === true ? translate('LBL_ACTIVITIES_YES','sphr_Client') : translate('LBL_ACTIVITIES_NO','sphr_Client');
         //---
-        if ($this->assigned_user_id != $current_user->id) {
+        if (!$current_user->is_admin && $this->assigned_user_id != $current_user->id) {
             $personal_data = array('EMAIL', 'EMAIL1', 'EMAIL1_LINK', 'PHONE', 'PHONE_HOME', 'PHONE_MOBILE', 'PHONE_WORK','PHONE_OTHER', 'PHONE_FAX', 'EMAIL2');
             foreach ($personal_data as $excluded_field) {
                 $temp_array[$excluded_field] = '';
