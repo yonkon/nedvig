@@ -19,6 +19,14 @@ LEFT JOIN  email_addr_bean_rel AS eb ON eb.bean_id=sphr_client.id
 				AND eb.bean_module ='sphr_Client' AND eb.deleted=0 AND primary_address=1
 			JOIN  email_addresses AS e ON e.id=eb.email_address_id AND e.deleted=0
 WHERE (sphr_client.deleted = 0)";
+global $current_user;
+if(!$current_user->id) {
+    $current_user = new User();
+    $current_user->retrieve($_SESSION['authenticated_user_id']);
+}
+if (!$current_user->is_admin) {
+    $query .=  ' AND (sphr_client.assigned_user_id = "' . $current_user->id . '" OR sphr_client.status=2) ';
+}
 //LEFT OUTER JOIN - чтобы получить и оъекты без ответсвенных
 
 $result=$db->query($query, true);
@@ -47,6 +55,13 @@ while(($row = $db->fetchByAssoc($result)) != null )
 		{
 			case "type_c":  $writer->text($app_list_strings['client_type_list'][$cell_value]);
 							break;
+            case "last_name":
+                if (!$current_user->is_admin && $row['status'] == 2) {
+                    $writer->text('нет');
+                } else {
+                    $writer->text($cell_value);
+                }
+                break;
 			case "status":  $writer->text($app_list_strings['client_status_list'][$cell_value]);
 							break;
 			default: 		$writer->text($cell_value);

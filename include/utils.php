@@ -708,7 +708,9 @@ function safe_map_named($request_var, & $focus, $member_var, $always_copy)
  */
 function return_app_list_strings_language($language) 
 {
-	global $app_list_strings;
+    $GLOBALS['log']->info("return_app_list_strings_language($language) begin");
+
+    global $app_list_strings;
 	global $sugar_config;
 
 	$cache_key = 'app_list_strings.'.$language;
@@ -777,6 +779,7 @@ function return_app_list_strings_language($language)
 	$app_list_strings = $temp_app_list_strings;
 
 	sugar_cache_put($cache_key, $return_value);
+    $GLOBALS['log']->info("return_app_list_strings_language($language) end");
 
 	return $return_value;
 }
@@ -818,6 +821,7 @@ function _mergeCustomAppListStrings($file , $app_list_strings){
 function return_application_language($language) 
 {
 	global $app_strings, $sugar_config;
+    $GLOBALS['log']->info("return_application_language($language) begin");
 
 	$cache_key = 'app_strings.'.$language;
 
@@ -896,8 +900,9 @@ function return_application_language($language)
 	$app_strings = $temp_app_strings;
 
 	sugar_cache_put($cache_key, $return_value);
-	
-	return $return_value;
+    $GLOBALS['log']->info("return_application_language($language) end");
+
+    return $return_value;
 }
 
 /** 

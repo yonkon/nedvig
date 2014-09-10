@@ -69,6 +69,7 @@ class sphr_Client extends sphr_Client_sugar {
     }
 
     function get_list_view_data() {
+        $GLOBALS['log']->info('sphrClient->get_list_viw_data begin');
         global $system_config;
         global $current_user;
         $temp_array = $this->get_list_view_array();        
@@ -89,8 +90,9 @@ class sphr_Client extends sphr_Client_sugar {
             foreach ($personal_data as $excluded_field) {
                 $temp_array[$excluded_field] = '';
             }
-
         }
+                $GLOBALS['log']->info('sphrClient->get_list_viw_data end');
+
         return $temp_array;
     }
 

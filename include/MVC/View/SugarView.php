@@ -104,7 +104,12 @@ class SugarView
      */
     public function process()
     {
+        $GLOBALS['log']->info("LogicHook::initialize begin");
         LogicHook::initialize();
+        $GLOBALS['log']->info("LogicHook::initialize() end");
+
+        $GLOBALS['log']->info(" this->_checkModule, _trackView(), displayHeader|javascript begin");
+
         $this->_checkModule();     
         
         //trackView has to be here in order to track for breadcrumbs
@@ -115,7 +120,9 @@ class SugarView
         } else {
             $this->renderJavascript();	
         }
-        
+
+        $GLOBALS['log']->info(" this->_checkModule, _trackView(), displayHeader|javascript end");
+
         $this->_buildModuleList();
         $this->preDisplay();
         $this->displayErrors();

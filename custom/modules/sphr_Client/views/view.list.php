@@ -49,7 +49,13 @@ class sphr_ClientViewList extends ViewList
         $where_clauses = $this->searchForm->generateSearchWhere(true, $this->seed->module_dir);
         if (count($where_clauses) > 0 ) {
             $where_clauses_sql = '('. implode(' ) AND ( ', $where_clauses) . ')';
-            $this->where = empty($this->where) ? $where_clauses_sql : $this->where . ' AND ' . $where_clauses_sql;
+            if (empty($this->where)) {
+                $this->where =  $where_clauses_sql;
+            } else {
+                if (strpos($this->where, $where_clauses_sql) === false) {
+                    $this->where  = $this->where . ' AND ' . $where_clauses_sql;
+                }
+            }
         }
 
         //#3789
@@ -113,7 +119,10 @@ class sphr_ClientViewList extends ViewList
     }
     function process() {
         //$this->manager->process();
+        $GLOBALS['log']->info("sphr_ClientViewList->process begin");
         parent::process();
+        $GLOBALS['log']->info("sphr_ClientViewList->process end");
+
     }
 
     /**

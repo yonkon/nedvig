@@ -240,6 +240,16 @@ foreach ($clients_id as $id){
 		while ($row = $db->fetchByAssoc($result2)) {
 		    $photo=$row["id"];
 			$main=$row["main"];
+            $image_size = getimagesize($photo_dir.$photo);
+            if($image_size && $image_size[0] > 1024 || $image_size[1] > 1024 ) {
+                if($image_size[0] > $image_size[1] ) {
+                    $percents = 1024 / $image_size[0] * 100;
+                } else {
+                    $percents = 1024 / $image_size[1] * 100;
+                }
+                imageresizejpg($photo_dir.$photo, $photo_dir.$photo, $percents, 100);
+            }
+//            imagesx($photo_dir.$photo)
 		    $mailer->AddAttachment($photo_dir.$photo);
 			if($main == 0)
 			    $f_note = $photo_dir.$photo;
@@ -281,4 +291,36 @@ if ($mailer->IsError())
 else
     echo "Письма, содержащие " . count($objects_id) . " объектов были отправлены " . count($clients_id) . " клиентам.";
 
+function imageresizejpg($outfile, $infile, $percents, $quality)
+{
+    $result = true;
+
+    if (!$im = imagecreatefromjpeg($infile)) {
+        $result = false;
+    }
+
+    if (!$w = imagesx($im) * $percents / 100) {
+        $result = false;
+    }
+
+    if (!$h = imagesy($im) * $percents / 100) {
+        $result = false;
+    }
+
+    if (!$im1 = imagecreatetruecolor($w, $h)) {
+        $result = false;
+    }
+
+    if (!imagecopyresampled($im1, $im, 0, 0, 0, 0, $w, $h, imagesx($im), imagesy($im))) {
+        $result = false;
+    }
+
+    if (!imagejpeg($im1, $outfile, $quality)) {
+        $result = false;
+    }
+    imagedestroy($im);
+    imagedestroy($im1);
+
+    return $result;
+}
 ?>
