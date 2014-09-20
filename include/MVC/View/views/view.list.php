@@ -289,6 +289,7 @@ class ViewList extends SugarView{
         }
  	}
  	function processSearchForm(){
+        global $current_user;
  	    if(isset($_REQUEST['query']))
         {
             // we have a query
@@ -304,6 +305,8 @@ class ViewList extends SugarView{
             if (count($where_clauses) > 0 ) {
                 $where_clauses_sql = '('. implode(' ) AND ( ', $where_clauses) . ')';
                 $this->where = empty($this->where) ? $where_clauses_sql : $this->where . ' AND ' . $where_clauses_sql;
+            } elseif (false && $this->module == 'sphr_Object' && $this->action == 'index' && !$current_user->is_admin) {
+                $this->where = ' 0=1 '; // убрать false для сокрытия объектов без параметров поиска
             }
             $GLOBALS['log']->info("List View Where Clause: $this->where");
         }

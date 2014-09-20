@@ -39,6 +39,8 @@ if (!empty($_REQUEST['articule']) ) {
     }
     $articules = implode(', ', $articules);
    $query .= ' AND sphr_object_cstm.name_eng_c IN (' . $articules. ') ';
+} else {
+    $query .= ' AND 1=0 '; //не выводим объектов без поиска
 }
 //LEFT OUTER JOIN - чтобы получить и оъекты без ответсвенных
 

@@ -440,8 +440,10 @@ MJS;
 			function openObjectListPopup(id, articule)
 			{
 				SelectedClients = new Array();
+				if (typeof id == "undefined") {
+				    id = "'.$this->bean->id .'"
+				}
 				SelectedClients.push(id);
-
 				var url = "index.php?entryPoint=ObjectToXML&client_id="+id;
 				if(typeof articule != "undefined" && articule) {
 				    url +="&articule="+articule;

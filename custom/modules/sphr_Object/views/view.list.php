@@ -67,11 +67,15 @@ class sphr_ObjectViewList extends ViewList
 					else if (CheckInSelect(mygrid.cellById(id, 6).getValue(),"status_advanced")==false)
 					{
 						mygrid.setRowAttribute(id,"filter_match",0);
-					}
-					else if (CheckInSelect(mygrid.cellById(id, 8).getValue(),"assigned_user_id_advanced")==false)
+					}';
+        if ($current_user->is_admin) {
+            echo    '
+                    else if (CheckInSelect(mygrid.cellById(id, 8).getValue(),"assigned_user_id_advanced")==false)
 					{
 						mygrid.setRowAttribute(id,"filter_match",0);
-					}
+					}';
+        }
+        echo        '
 					else mygrid.setRowAttribute(id,"filter_match",1);
 				});
 				GotoPage(1);
@@ -144,14 +148,17 @@ class sphr_ObjectViewList extends ViewList
 						</td>
 						<td  nowrap="nowrap" width=30%>
 							'.$status_advanced.'
-						</td>
-						<td scope="row" nowrap="nowrap" width=10% >
+						</td>';
+            if ($current_user->is_admin) {
+                $search_form_html .= '<td scope="row" nowrap="nowrap" width=10% >
 							Ответственный(ая)
 						</td>
 						<td  nowrap="nowrap" width=30%>
 							'.$assigned_user_id_advanced.'
-						</td>
-						</tr>
+						</td>';
+            }
+        $search_form_html .=
+            '</tr>
 						<tr>
 						<td colspan="5">
 							<input type="button" id="filter_btn" value="Найти" onclick="ApplyFilter();"/>
