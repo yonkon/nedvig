@@ -227,6 +227,7 @@ foreach ($clients_id as $id){
     //    $message_body =  $sugarSmarty->fetch('custom/include/email_sender/tmpl/body.tpl');
 		
         $object_name = $row['name'];
+        $object_articule = $row['name_eng_c'];
 		$mailer->Subject = "От Вячеслава Tradegoria: $object_name";
 		$sugarSmarty->assign("user",$user);
 		$sugarSmarty->assign("first_name",$first_name);
@@ -263,8 +264,8 @@ foreach ($clients_id as $id){
             $now = time();
             $history_query = "REPLACE INTO sphr_object_send_history SET client_id = '$id', object_id = '$id2'";
             $db->query($history_query);
-			$new_note->name = 'Осуществлена отправка объекта '. $object_name;
-			$new_note->description = '';
+			$new_note->name = $object_articule;
+			$new_note->description = 'Осуществлена отправка объекта '. $object_name;
 			$new_note->assigned_user_id = $current_user_id;
 			$new_note->parent_type = 'sphr_Client';
 			$new_note->parent_id = $id; //id клиента
@@ -281,6 +282,7 @@ foreach ($clients_id as $id){
 	    } else {
 		    echo $mailer->ErrorInfo, "\r\n";
 	    }
+        $mailer->ClearAttachments();
     }//$objects_id
     $mailer->ClearAddresses();
     $mailer->ClearAttachments();

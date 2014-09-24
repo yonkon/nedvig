@@ -54,7 +54,10 @@ $notCriticalError = 0;
 $notCriticalMessage = array();
 
 if (isset($_POST['action'])) {
-    $data = unserialize(base64_decode($_POST['data'])); // разберем данные
+    $decoded = str_replace(' ', '+', $_POST['data']);
+    $decoded = base64_decode($decoded );
+
+    $data = unserialize($decoded); // разберем данные
     if (!empty($data) && is_array($data)) {
         $object = new sphr_Object();
         if (isset($data['id_object_c']) && is_numeric($data['id_object_c'])) {

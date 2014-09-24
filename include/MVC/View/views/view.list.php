@@ -314,17 +314,51 @@ class ViewList extends SugarView{
             switch($view) {
                 case 'basic_search':
                     $this->searchForm->setup();
+                    if (!$current_user->is_admin) {
+                        foreach($this->searchForm->formData as $fi => $search_form_field) {
+                            if($search_form_field['field']['name'] == 'assigned_user_id_basic') {
+                                unset($this->searchForm->formData[$fi]);
+                                break;
+                            }
+                        }
+                    }
                     $this->searchForm->displayBasic($this->headers);
                     break;
                  case 'advanced_search':
                     $this->searchForm->setup();
-                    $this->searchForm->displayAdvanced($this->headers);
+                     if (!$current_user->is_admin) {
+                         foreach($this->searchForm->formData as $fi => $search_form_field) {
+                             if($search_form_field['field']['name'] == 'assigned_user_id_basic') {
+                                 unset($this->searchForm->formData[$fi]);
+                                 break;
+                             }
+                         }
+                     }
+                     $this->searchForm->displayAdvanced($this->headers);
                     break;
                  case 'saved_views':
-                    echo $this->searchForm->displaySavedViews($this->listViewDefs, $this->lv, $this->headers);
+                     if (!$current_user->is_admin) {
+                         foreach($this->searchForm->formData as $fi => $search_form_field) {
+                             if($search_form_field['field']['name'] == 'assigned_user_id_basic') {
+                                 unset($this->searchForm->formData[$fi]);
+                                 break;
+                             }
+                         }
+                     }
+                     echo $this->searchForm->displaySavedViews($this->listViewDefs, $this->lv, $this->headers);
                    break;
             }
         }else{
+            if (!$current_user->is_admin) {
+                if (!$current_user->is_admin) {
+                    foreach($this->searchForm->formData as $fi => $search_form_field) {
+                        if($search_form_field['field']['name'] == 'assigned_user_id_basic') {
+                            unset($this->searchForm->formData[$fi]);
+                            break;
+                        }
+                    }
+                }
+            }
             echo $this->searchForm->display($this->headers);
         }
  	}
