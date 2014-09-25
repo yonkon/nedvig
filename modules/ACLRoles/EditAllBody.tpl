@@ -78,35 +78,38 @@ Just get the accessOptions for the Accounts module and use for the header select
 Not ideal but it'll work since it's the only way to get that info without editing DetailView.php to pass this with ACTION_NAMES
 {foreach from=$ACTION_NAMES item="ACTION_NAME" }
 *}
-{foreach from=$CATEGORIES item="TYPES" key="CATEGORY_NAME"}
-{if $APP_LIST.moduleList[$CATEGORY_NAME]=='Accounts'}
+{*{foreach from=$CATEGORIES item="TYPES" key="CATEGORY_NAME"}*}
+{*{if $APP_LIST.moduleList[$CATEGORY_NAME]=='Accounts'}*}
 	
 	{foreach from=$ACTION_NAMES item="ACTION_LABEL" key="ACTION_NAME"}
-		{foreach from=$TYPES item="ACTIONS"}
-			{foreach from=$ACTIONS item="ACTION" key="ACTION_NAME_ACTIVE"}
-			{if $ACTION_NAME==$ACTION_NAME_ACTIVE}
+		{*{foreach from=$TYPES item="ACTIONS"}*}
+			{*{foreach from=$ACTIONS item="ACTION" key="ACTION_NAME_ACTIVE"}*}
+			{*{if $ACTION_NAME==$ACTION_NAME_ACTIVE}*}
 			
 			<td align='center'>
-				<div align='center' id="{$ACTION_NAME}link" onclick="aclviewer.toggleDisplay('{$ACTION_NAME}')"><b>{$ACTION_LABEL}</b></div>
+                <div align='center' id="{$ACTION_NAME}link">
+                    <b>{$ACTION_LABEL}</b>
+                </div>
+				{*<div align='center' id="{$ACTION_NAME}link" onclick="aclviewer.toggleDisplay('{$ACTION_NAME}')"><b>{$ACTION_LABEL}</b></div>
 				<div  style="display: none; text-align: center;" id="{$ACTION_NAME}">
 					<select name='act_guid{$ACTION_NAME}' id='act_guid{$ACTION_NAME}' onblur="cascadeAccessOption('{$ACTION_NAME}',this); aclviewer.toggleDisplay('{$ACTION_NAME}');" >
 					{html_options options=$ACTION.accessOptions selected=$ACTION.aclaccess }
 					</select>
-				</div>
+				</div>*}
 			</td>
 			{*
 			<td align='center'><div align='center'><b>{$ACTION_NAME}</b></div></td>
 			*}
-			{/if}
-			{/foreach}
-		{/foreach}
+			{*{/if}*}
+			{*{/foreach}*}
+		{*{/foreach}*}
 	{foreachelse}
 
           <td colspan="2">&nbsp;</td>
 
 	{/foreach}
-{/if}
-{/foreach}
+{*{/if}*}
+{*{/foreach}*}
 {* END - SECURITY GROUPS *}
 </TR>
 {literal}
