@@ -432,7 +432,17 @@ MJS;
 				GotoPage(GetCurrentPage());
 			}
 			addHandler(document.getElementById("mygrid_container"), "click", ClickGridHeaderHandler);
-
+            $("table.hdr tr:nth-child(2) td:nth-child(1)").click(function(){
+                $("table.obj td:nth-child(1) img").click();
+            });
+            var markSentObjects = function() {
+                $("table.obj td:nth-child(8)").each(function(i, el) {
+                    var $el = $(el);
+                    if ($el.text().trim() != "" ) {
+                        $el.parent().addClass("no-interest");
+                    }
+                } );
+            }
 		</script>
 		<script>
 			var SelectedObjects;
@@ -462,6 +472,7 @@ MJS;
 					document.getElementById("Log").value = "";
 					document.getElementById("PopupWindowLog").style.display="none";
 					document.getElementById("PopupWindowBody").style.display="block";
+					markSentObjects();
 				}
 			};
 		</script>
