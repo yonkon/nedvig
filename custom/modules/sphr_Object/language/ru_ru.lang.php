@@ -3,7 +3,8 @@
 $mod_strings = array (
   'LBL_ASSIGNED_TO_NAME' => 'Ответственный',
   'LBL_COUNTRY' => 'Страна',
-  'LBL_ADDRESS' => 'Точный адрес объекта',
+  'LBL_ADDRESS' => 'Город',
+//  'LBL_ADDRESS' => 'Точный адрес объекта',
   'LBL_REGION' => 'Регион',
   'LBL_TYPE' => 'Тип',
   'LBL_SQUARE' => 'Площадь',
@@ -114,5 +115,8 @@ $mod_strings = array (
   '' => '',
   'LBL_T_START' => 'Дата создания от',
   'LBL_T_END' => 'Дата создания до',
+
+  'PRICE_SALE_INT_C_MIN' => 'Цена продажи (от)',
+  'PRICE_SALE_INT_C_MAX' => 'Цена продажи (до)',
 );
 ?>

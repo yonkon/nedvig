@@ -395,7 +395,6 @@ class SugarController{
 	protected function no_action(){
 		sugar_die($GLOBALS['app_strings']['LBL_NO_ACTION']);
 	}
-
 	/**
 	 * The default action handler for instances where we do not have access to process.
 	 */
