@@ -1,0 +1,39 @@
+i.icon_tooltip:before {
+  content: '[?]';
+}
+
+.icon_tooltip:hover span{
+  display: none;
+}
+
+.icon_tooltip:hover span{
+  display: inline-block;
+  margin-left: -19pt;
+  background: none repeat scroll 0% 0% #EDEDED;
+  text-decoration: underline;
+  font-style: normal;
+}
+
+.hover-swap>*:nth-child(1) {
+  display: inline;
+}
+.hover-swap>*:nth-child(2) {
+  display: none;
+}
+.hover-swap:hover >*:nth-child(1){
+  display: none;
+}
+.hover-swap:hover >*:nth-child(2){
+  display: inline;
+}
+
+.search td {
+  font-size: 11px;
+  max-width: 150px;
+}
+.search td input {
+  max-width: 135px;
+}
+.search td input[name="saved_search_submit"] {
+  display: block;
+}
