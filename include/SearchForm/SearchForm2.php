@@ -537,21 +537,74 @@ require_once('include/EditView/EditView2.php');
         				 isset($this->seed->field_name_map[$field]['ext2']))))){
                 $customField = true;
               }
-
-            if ($type == 'int') {
-                if (!empty($parms['value'])) {
-                    $tempVal = explode(',', $parms['value']);
-                    $newVal = '';
-                    foreach($tempVal as $key => $val) {
-                        if (!empty($newVal))
-                            $newVal .= ',';
-                        if(!empty($val) && !(is_numeric($val)))
-                            $newVal .= -1;
-                        else
-                            $newVal .= $val;
-                    }
-                    $parms['value'] = $newVal;
+//TODO minimax type, add minimax types to custom/modules/sphr_Object/metadata/SearchFields.php
+          if(!empty($parms) && $parms['type'] == 'minimax')  {
+            $minimax = preg_split('/[^\d]+/', $parms['value']);
+            if ($customField) {
+              $t_table_name = strpos($table_name, "_cstm") === false? $table_name."_cstm" : $table_name;
+            } else {
+              $t_table_name = $table_name;
+            }
+            $t_table_name = strtolower($t_table_name);
+            $where = '';
+            if(count($minimax) == 1) {
+              if(!empty($minimax[0])) {
+                $where .= " $t_table_name.$field = {$minimax[0]} ";
+              }
+            } elseif(count($minimax) > 1) {
+              if(!empty($minimax[0])) {
+                $where .= " $t_table_name.$field >= {$minimax[0]} ";
+              }
+              if(!empty($minimax[1])) {
+                if (!empty($where)) {
+                  $where .= ' AND ';
                 }
+                $where .= " $t_table_name.$field <= {$minimax[1]} ";
+              }
+              if(isset($minimax[0]) && ($minimax[0] == 0 || $minimax[0] == '')) {
+                if (!empty($where)) {
+                  $where .= ' OR ';
+                }
+                $where .= " $t_table_name.$field IS NULL ";
+              }
+            }
+            if(!empty($where)) {
+              array_push($where_clauses, $where );
+            }
+          } elseif (!empty($parms) && $parms['type'] == 'string' && !empty($parms['value'])) {
+            if ($customField) {
+              $t_table_name = strpos($table_name, "_cstm") === false? $table_name."_cstm" : $table_name;
+            } else {
+              $t_table_name = $table_name;
+            }
+            $t_table_name = strtolower($t_table_name);
+            $field = empty($parms['db_field'][0]) ? $field : $parms['db_field'][0] ;
+            $val =  $parms['value'];
+            if(strpos($field, 'date') !== false ) {
+              $val = date('Y-m-d H:i:s', strtotime($val) );
+            }
+            $val = "'" . $val. "'";
+            $operator = '=';
+            if(!empty($parms['operator'])) {
+              $operator = $parms['operator'];
+            }
+            $where = " $t_table_name.$field $operator $val ";
+            array_push($where_clauses, $where );
+          } else {
+            if ($type == 'int') {
+              if (!empty($parms['value'])) {
+                $tempVal = explode(',', $parms['value']);
+                $newVal = '';
+                foreach($tempVal as $key => $val) {
+                  if (!empty($newVal))
+                    $newVal .= ',';
+                  if(!empty($val) && !(is_numeric($val)))
+                    $newVal .= -1;
+                  else
+                    $newVal .= $val;
+                }
+                $parms['value'] = $newVal;
+              }
             }
 
             //Navjeet- 6/24/08 checkboxes have been changed to dropdowns, so we can query unchecked checkboxes! Bug: 21648.
@@ -561,335 +614,339 @@ require_once('include/EditView/EditView2.php');
             // }
             //
             elseif($type == 'html' && $customField) {
-                continue;
+              continue;
             }
-            
+
             if(isset($parms['value']) && $parms['value'] != "") {
 
-                $operator = 'like';
-                if(!empty($parms['operator'])) {
-                    $operator = $parms['operator'];
+              $operator = 'like';
+              if(!empty($parms['operator'])) {
+                $operator = $parms['operator'];
+              }
+
+              if(is_array($parms['value'])) {
+                $field_value = '';
+
+                // always construct the where clause for multiselects using the 'like' form to handle combinations of multiple $vals and multiple $parms
+                if(/*$GLOBALS['db']->dbType != 'mysql' &&*/ !empty($this->seed->field_name_map[$field]['isMultiSelect']) && $this->seed->field_name_map[$field]['isMultiSelect']) {
+                  // construct the query for multenums
+                  // use the 'like' query for all mssql and oracle examples as both custom and OOB multienums are implemented with types that cannot be used with an 'in'
+                  $operator = 'custom_enum';
+                  $table_name = $this->seed->table_name ;
+                  if ($customField)
+                    $table_name .= "_cstm" ;
+                  $db_field = $table_name . "." . $field;
+
+                  foreach($parms['value'] as $key => $val) {
+                    if($val != ' ' and $val != '') {
+                      $qVal = $GLOBALS['db']->quote($val);
+                      if (!empty($field_value)) {
+                        $field_value .= ' or ';
+                      }
+                      $field_value .= "$db_field like '%^$qVal^%'";
+                    }
+                  }
+
+                } else {
+                  $operator = $operator != 'subquery' ? 'in' : $operator;
+                  foreach($parms['value'] as $key => $val) {
+                    if($val != ' ' and $val != '') {
+                      if (!empty($field_value)) {
+                        $field_value .= ',';
+                      }
+                      $field_value .= "'" . $GLOBALS['db']->quote($val) . "'";
+                    }
+                    // Bug 41209: adding a new operator "isnull" here
+                    // to handle the case when blank is selected from dropdown.
+                    // In that case, $val is empty.
+                    // When $val is empty, we need to use "IS NULL",
+                    // as "in (null)" won't work
+                    else if ($operator=='in') {
+                      $operator = 'isnull';
+                    }
+                  }
                 }
 
-                if(is_array($parms['value'])) {
-                    $field_value = '';
+              }
+              else {
+                $field_value = $GLOBALS['db']->quote($parms['value']);
+              }
 
-                    // always construct the where clause for multiselects using the 'like' form to handle combinations of multiple $vals and multiple $parms
-                     if(/*$GLOBALS['db']->dbType != 'mysql' &&*/ !empty($this->seed->field_name_map[$field]['isMultiSelect']) && $this->seed->field_name_map[$field]['isMultiSelect']) {
-                        // construct the query for multenums
-                        // use the 'like' query for all mssql and oracle examples as both custom and OOB multienums are implemented with types that cannot be used with an 'in'
-                        $operator = 'custom_enum';
-                        $table_name = $this->seed->table_name ;
-                        if ($customField)
-                            $table_name .= "_cstm" ;
-                        $db_field = $table_name . "." . $field;
+              //set db_fields array.
+              if(!isset($parms['db_field'])) {
+                $parms['db_field'] = array($field);
+              }
 
-	                    foreach($parms['value'] as $key => $val) {
-                            if($val != ' ' and $val != '') {
-	                               $qVal = $GLOBALS['db']->quote($val);
-	                               if (!empty($field_value)) {
-	                                   $field_value .= ' or ';
-	                               }
-	                               $field_value .= "$db_field like '%^$qVal^%'";
-	                        }
-	                    }
+              if(isset($parms['my_items']) and $parms['my_items'] == true) {
+                if( $parms['value'] == false ) { //do not include where clause for custom fields with checkboxes that are unchecked
 
-                    } else {
-                        $operator = $operator != 'subquery' ? 'in' : $operator;
-	                    foreach($parms['value'] as $key => $val) {
-	                        if($val != ' ' and $val != '') {
-	                            if (!empty($field_value)) {
-	                                $field_value .= ',';
-	                            }
-	                            $field_value .= "'" . $GLOBALS['db']->quote($val) . "'";
-	                        }
-                                // Bug 41209: adding a new operator "isnull" here
-                                // to handle the case when blank is selected from dropdown.
-                                // In that case, $val is empty.
-                                // When $val is empty, we need to use "IS NULL",
-                                // as "in (null)" won't work
-                                else if ($operator=='in') {
-                                    $operator = 'isnull';
-                                }
-	                    }
+                  continue;
+                }
+                else{ //my items is checked.
+                  global $current_user;
+                  $field_value = $GLOBALS['db']->quote($current_user->id);
+                  $operator = '=' ;
+                }
+//                    $operator = ($parms['value'] == '1') ? '=' : '!=';
+              }
+
+              $where = '';
+              $itr = 0;
+//---------------------------16.07.14
+              if($field == 't_start_c' || $field == 't_end_c'){
+                $t[$field]=$parms['value'];
+                $db_field_t=$module.".date_entered";
+                if(count($t) == 2){
+                  $start=$t['t_start_c'];
+                  $start=explode('.', $start);
+                  $start=$start[2].'-'.$start[1].'-'.$start[0];
+                  $end=$t['t_end_c'];
+                  $end=explode('.', $end);
+                  $end=$end[2].'-'.$end[1].'-'.$end[0];
+                  $where2 = "$db_field_t > '$start' AND $db_field_t  < '$end'";
+                }
+                if(count($t) == 1 && $t['t_start_c'] != ''){
+                  $start=$t['t_start_c'];
+                  $start=explode('.', $start);
+                  $start=$start[2].'-'.$start[1].'-'.$start[0];
+                  $end=$start.' 23:59:59';
+                  $where2 = "$db_field_t > '$start' AND $db_field_t  < '$end'";
+                }
+
+                continue;
+              }
+//---------------------------16.07.14
+
+              if($field_value != '' || $operator=='isnull') {
+
+                $this->searchColumns [ strtoupper($field) ] = $field ;
+
+                foreach ($parms['db_field'] as $db_field) {
+                  if (strstr($db_field, '.') === false) {
+                    //Try to get the table for relate fields from link defs
+                    if ($type == 'relate' && !empty($this->seed->field_name_map[$field]['link'])
+                      && !empty($this->seed->field_name_map[$field]['rname'])) {
+                      $link = $this->seed->field_name_map[$field]['link'];
+                      $relname = $link['relationship'];
+                      if (($this->seed->load_relationship($link))){
+                        //Martin fix #27494
+                        $db_field = $this->seed->field_name_map[$field]['name'];
+                      } else {
+                        //Best Guess for table name
+                        $db_field = strtolower($link['module']) . '.' . $db_field;
+                      }
+                    }
+                    else if ($type == 'parent') {
+                      if (!empty($this->searchFields['parent_type'])) {
+                        $parentType = $this->searchFields['parent_type'];
+                        $rel_module = $parentType['value'];
+                        global $beanFiles, $beanList;
+                        if(!empty($beanFiles[$beanList[$rel_module]])) {
+                          require_once($beanFiles[$beanList[$rel_module]]);
+                          $rel_seed = new $beanList[$rel_module]();
+                          $db_field = 'parent_' . $rel_module . '_' . $rel_seed->table_name . '.name';
+                        }
+                      }
+                    }
+                    // Relate fields in custom modules and custom relate fields
+                    else if ($type == 'relate' && $customField && !empty($this->seed->field_name_map[$field]['module'])) {
+                      $db_field = !empty($this->seed->field_name_map[$field]['name'])?$this->seed->field_name_map[$field]['name']:'name';
+                    }
+                    else if(!$customField){
+                      if ( !empty($this->seed->field_name_map[$field]['db_concat_fields']) )
+                        $db_field = db_concat($this->seed->table_name, $this->seed->field_name_map[$db_field]['db_concat_fields']);
+                      else
+                        $db_field = $this->seed->table_name .  "." . $db_field;
+                    }else{
+                      if ( !empty($this->seed->field_name_map[$field]['db_concat_fields']) )
+                        $db_field = db_concat($this->seed->table_name .  "_cstm.", $this->seed->field_name_map[$db_field]['db_concat_fields']);
+                      else
+                        $db_field = $this->seed->table_name .  "_cstm." . $db_field;
                     }
 
+                  }
+
+                  if($type == 'date') {
+                    // Collin - Have mysql as first because it's usually the case
+                    // The regular expression check is to circumvent special case YYYY-MM
+                    if($GLOBALS['db']->dbType == 'mysql') {
+                      if(preg_match('/^\d{4}.\d{1,2}$/', $field_value) == 0) {
+                        $field_value = $timedate->to_db_date($field_value, false);
+                        $operator = '=';
+                      } else {
+                        $operator = 'db_date';
+                      }
+                    } else if($GLOBALS['db']->dbType == 'mssql') {
+                      if(preg_match('/^\d{4}.\d{1,2}$/', $field_value) == 0) {
+                        $field_value = "Convert(DateTime, '".$timedate->to_db_date($field_value, false)."')";
+                      }
+                      $operator = 'db_date';
+                    } else {
+                      $field_value = $timedate->to_db_date($field_value, false);
+                      $operator = '=';
+                    }
+                  }
+
+                  if($type == 'datetime' || $type == 'datetimecombo') {
+                    $dates = $timedate->getDayStartEndGMT($field_value);
+                    $field_value = $dates["start"] . "<>" . $dates["end"];
+                    $operator = 'between';
+                  }
+                  if($type == 'decimal' || $type == 'float' || $type == 'currency') {
+                    require_once('modules/Currencies/Currency.php');
+
+                    $field_value = unformat_number($field_value);
+                    if ( $type == 'currency' && stripos($field,'_usdollar')!==FALSE ) {
+                      // It's a US Dollar field, we need to do some conversions from the user's local currency
+                      $currency_id = $GLOBALS['current_user']->getPreference('currency');
+                      if ( empty($currency_id) ) {
+                        $currency_id = -99;
+                      }
+                      if ( $currency_id != -99 ) {
+                        $currency = new Currency();
+                        $currency->retrieve($currency_id);
+                        $field_value = $currency->convertToDollar($field_value);
+                      }
+                    }
+
+                    // Databases can't really search for floating point numbers, because they can't be accurately described in binary,
+                    // So we have to fuzz out the match a little bit
+                    $top = $field_value + 0.01;
+                    $bottom = $field_value - 0.01;
+                    $field_value = $bottom . "<>" . $top;
+                    $operator = 'between';
+                  }
+
+
+
+                  $itr++;
+                  if(!empty($where)) {
+                    $where .= " OR ";
+                  }
+
+                  switch(strtolower($operator)) {
+                    case 'subquery':
+                      $in = 'IN';
+                      if ( isset($parms['subquery_in_clause']) ) {
+                        if ( !is_array($parms['subquery_in_clause']) ) {
+                          $in = $parms['subquery_in_clause'];
+                        }
+                        elseif ( isset($parms['subquery_in_clause'][$field_value]) ) {
+                          $in = $parms['subquery_in_clause'][$field_value];
+                        }
+                      }
+                      $sq = $parms['subquery'];
+                      if(is_array($sq)){
+                        $and_or = ' AND ';
+                        if (isset($sq['OR'])){
+                          $and_or = ' OR ';
+                        }
+                        $first = true;
+                        foreach($sq as $q){
+                          if(empty($q) || strlen($q)<2) continue;
+                          if(!$first){
+                            $where .= $and_or;
+                          }
+                          $where .= " {$db_field} $in ({$q} '{$field_value}%') ";
+                          $first = false;
+                        }
+                      }elseif(!empty($parms['query_type']) && $parms['query_type'] == 'format'){
+                        $stringFormatParams = array(0 => $field_value, 1 => $GLOBALS['current_user']->id);
+                        $where .= "{$db_field} $in (".string_format($parms['subquery'], $stringFormatParams).")";
+                      }else{
+                        $where .= "{$db_field} $in ({$parms['subquery']} '{$field_value}%')";
+                      }
+
+                      break;
+
+                    case 'like':
+                      if($type == 'bool' && $field_value == 0) {
+                        $where .=  $db_field . " = '0' OR " . $db_field . " IS NULL";
+                      }
+                      else {
+                        //check to see if this is coming from unified search or not
+                        $UnifiedSearch = !empty($parms['force_unifiedsearch']);
+                        if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'UnifiedSearch'){
+                          $UnifiedSearch = true;
+                        }
+                        //check to see if this is a universal search, AND the field name is "last_name"
+                        if($UnifiedSearch && strpos($db_field, 'last_name') !== false){
+                          //split the string value, and the db field name
+                          $string = explode(' ', $field_value);
+                          $column_name =  explode('.', $db_field);
+
+                          //when a search is done with a space, we concatenate and search against the full name.
+                          if(count($string)>1){
+                            //add where clause agains concatenated fields
+                            $where .= $GLOBALS['db']->concat($column_name[0],array('first_name','last_name')) . " LIKE '{$field_value}%'";
+                            $where .= ' OR ' . $GLOBALS['db']->concat($column_name[0],array('last_name','first_name')) . " LIKE '{$field_value}%'";
+                          }else{
+                            //no space was found, add normal where clause
+                            $where .=  $db_field . " like '".$field_value.$like_char."'";
+                          }
+
+                        }else{
+                          //field is not last name or this is not from global unified search, so do normal where clause
+                          $where .=  $db_field . " like '".$field_value.$like_char."'";
+                        }
+                      }
+                      break;
+                    case 'in':
+                      $where .=  $db_field . " in (".$field_value.')';
+                      break;
+                    case '=':
+                      if($type == 'bool' && $field_value == 0) {
+                        $where .=  $db_field . " = '0' OR " . $db_field . " IS NULL";
+                      }
+                      else {
+                        $where .=  $db_field . " = '".$field_value ."'";
+                      }
+                      break;
+                    case 'db_date':
+                      if(preg_match('/^\d{4}.\d{1,2}$/', $field_value) == 0) {
+                        $where .=  $db_field . " = ". $field_value;
+                      } else {
+                        // Create correct date_format conversion String
+                        if($GLOBALS['db']->dbType == 'oci8') {
+                          $where .= db_convert($db_field,'date_format',array("'YYYY-MM'")) . " = '" . $field_value . "'";
+                        } else {
+                          $where .= db_convert($db_field,'date_format',array("'%Y-%m'")) . " = '" . $field_value . "'";
+                        }
+                      }
+                      break;
+                    // tyoung bug 15971 - need to add these special cases into the $where query
+                    case 'custom_enum':
+                      $where .= $field_value;
+                      break;
+                    case 'between':
+                      $field_value = explode('<>', $field_value);
+                      $where .= $db_field . " >= '".$field_value[0] . "' AND " .$db_field . " <= '".$field_value[1]."'";
+                      break;
+                    case 'innerjoin':
+                      $this->seed->listview_inner_join[] = $parms['innerjoin'] . " '" . $parms['value'] . "%')";
+                      break;
+                    case 'isnull':
+                      $where .= $db_field . ' IS NULL';
+                      if ($field_value != '')
+                        $where .=  ' OR ' . $db_field . " in (".$field_value.')';
+                      break;
+                    default:
+                      $where .= $db_field . $operator . $field_value;
+                  }
+                }
+              }
+
+              if(!empty($where)) {
+                if($itr > 1) {
+                  array_push($where_clauses, '( '.$where.' )');
                 }
                 else {
-                    $field_value = $GLOBALS['db']->quote($parms['value']);
+                  array_push($where_clauses, $where);
                 }
-
-                //set db_fields array.
-                if(!isset($parms['db_field'])) {
-                    $parms['db_field'] = array($field);
-                }
-
-                if(isset($parms['my_items']) and $parms['my_items'] == true) {
-                   if( $parms['value'] == false ) { //do not include where clause for custom fields with checkboxes that are unchecked
-
-						continue;
-					}
-					else{ //my items is checked.
-						global $current_user;
-	                    $field_value = $GLOBALS['db']->quote($current_user->id);
-						$operator = '=' ;
-					}
-//                    $operator = ($parms['value'] == '1') ? '=' : '!=';
-                }
-
-                $where = '';
-                $itr = 0;
-//---------------------------16.07.14
-               if($field == 't_start_c' || $field == 't_end_c'){
-	               $t[$field]=$parms['value'];
-	               $db_field_t=$module.".date_entered";
-	               if(count($t) == 2){
-		               $start=$t['t_start_c'];
-		               $start=explode('.', $start);
-		               $start=$start[2].'-'.$start[1].'-'.$start[0];
-		               $end=$t['t_end_c'];
-		               $end=explode('.', $end);
-		               $end=$end[2].'-'.$end[1].'-'.$end[0];
-		               $where2 = "$db_field_t > '$start' AND $db_field_t  < '$end'";
-	                }
-					if(count($t) == 1 && $t['t_start_c'] != ''){
-		               $start=$t['t_start_c'];
-		               $start=explode('.', $start);
-		               $start=$start[2].'-'.$start[1].'-'.$start[0];
-					   $end=$start.' 23:59:59';
-		               $where2 = "$db_field_t > '$start' AND $db_field_t  < '$end'";
-	                }
-					
-	                continue;
-                }
-//---------------------------16.07.14  
-              
-                if($field_value != '' || $operator=='isnull') {
-
-                    $this->searchColumns [ strtoupper($field) ] = $field ;
-
-                    foreach ($parms['db_field'] as $db_field) {
-						if (strstr($db_field, '.') === false) {
-                        	//Try to get the table for relate fields from link defs
-                        	if ($type == 'relate' && !empty($this->seed->field_name_map[$field]['link'])
-                        		&& !empty($this->seed->field_name_map[$field]['rname'])) {
-                        			$link = $this->seed->field_name_map[$field]['link'];
-                        			$relname = $link['relationship'];
-                        			if (($this->seed->load_relationship($link))){
-										//Martin fix #27494
-										$db_field = $this->seed->field_name_map[$field]['name'];
-                        			} else {
-                        				//Best Guess for table name
-                        				$db_field = strtolower($link['module']) . '.' . $db_field;
-                        			}
-                        	}
-                        	else if ($type == 'parent') {
-                        		if (!empty($this->searchFields['parent_type'])) {
-                        			$parentType = $this->searchFields['parent_type'];
-                        			$rel_module = $parentType['value'];
-									global $beanFiles, $beanList;
-	                        		if(!empty($beanFiles[$beanList[$rel_module]])) {
-	    								require_once($beanFiles[$beanList[$rel_module]]);
-									    $rel_seed = new $beanList[$rel_module]();
-									    $db_field = 'parent_' . $rel_module . '_' . $rel_seed->table_name . '.name';
-	                        		}
-                        		}
-                        	}
-                        	// Relate fields in custom modules and custom relate fields
-                        	else if ($type == 'relate' && $customField && !empty($this->seed->field_name_map[$field]['module'])) {
-                        		$db_field = !empty($this->seed->field_name_map[$field]['name'])?$this->seed->field_name_map[$field]['name']:'name';
-                        	}
-                           else if(!$customField){
-                               if ( !empty($this->seed->field_name_map[$field]['db_concat_fields']) )
-                                   $db_field = db_concat($this->seed->table_name, $this->seed->field_name_map[$db_field]['db_concat_fields']);
-                               else
-                            	   $db_field = $this->seed->table_name .  "." . $db_field;
-                        	}else{
-                        		if ( !empty($this->seed->field_name_map[$field]['db_concat_fields']) )
-                                   $db_field = db_concat($this->seed->table_name .  "_cstm.", $this->seed->field_name_map[$db_field]['db_concat_fields']);
-                               else
-                            	   $db_field = $this->seed->table_name .  "_cstm." . $db_field;
-                        	}
-
-                        }
-
-                        if($type == 'date') {
-                           // Collin - Have mysql as first because it's usually the case
-                           // The regular expression check is to circumvent special case YYYY-MM
-                           if($GLOBALS['db']->dbType == 'mysql') {
-                                 if(preg_match('/^\d{4}.\d{1,2}$/', $field_value) == 0) {
-                                    $field_value = $timedate->to_db_date($field_value, false);
-                                    $operator = '=';
-                                 } else {
-                                    $operator = 'db_date';
-                                 }
-                           } else if($GLOBALS['db']->dbType == 'mssql') {
-                                 if(preg_match('/^\d{4}.\d{1,2}$/', $field_value) == 0) {
-                                    $field_value = "Convert(DateTime, '".$timedate->to_db_date($field_value, false)."')";
-                                 }
-                                 $operator = 'db_date';
-                           } else {
-                           	     $field_value = $timedate->to_db_date($field_value, false);
-                           	     $operator = '=';
-                           }
-                        }
-
-                        if($type == 'datetime' || $type == 'datetimecombo') {
-                            $dates = $timedate->getDayStartEndGMT($field_value);
-                            $field_value = $dates["start"] . "<>" . $dates["end"];
-                            $operator = 'between';
-                        }
-                        if($type == 'decimal' || $type == 'float' || $type == 'currency') {
-                            require_once('modules/Currencies/Currency.php');
-
-                            $field_value = unformat_number($field_value);
-                            if ( $type == 'currency' && stripos($field,'_usdollar')!==FALSE ) {
-                                // It's a US Dollar field, we need to do some conversions from the user's local currency
-                                $currency_id = $GLOBALS['current_user']->getPreference('currency');
-                                if ( empty($currency_id) ) {
-                                    $currency_id = -99;
-                                }
-                                if ( $currency_id != -99 ) {
-                                    $currency = new Currency();
-                                    $currency->retrieve($currency_id);
-                                    $field_value = $currency->convertToDollar($field_value);
-                                }
-                            }
-
-                            // Databases can't really search for floating point numbers, because they can't be accurately described in binary,
-                            // So we have to fuzz out the match a little bit
-                            $top = $field_value + 0.01;
-                            $bottom = $field_value - 0.01;
-                            $field_value = $bottom . "<>" . $top;
-                            $operator = 'between';
-                        }
-
-                        
-
-                        $itr++;
-                        if(!empty($where)) {
-                            $where .= " OR ";
-                        }
-
-                        switch(strtolower($operator)) {
-                        	case 'subquery':
-                        	    $in = 'IN';
-                        	    if ( isset($parms['subquery_in_clause']) ) {
-                        	        if ( !is_array($parms['subquery_in_clause']) ) {
-                        	            $in = $parms['subquery_in_clause'];
-                        	        }
-                        	        elseif ( isset($parms['subquery_in_clause'][$field_value]) ) {
-                        	            $in = $parms['subquery_in_clause'][$field_value];
-                        	        }
-                        	    }
-                                $sq = $parms['subquery'];
-                        		if(is_array($sq)){
-                                    $and_or = ' AND ';
-                                    if (isset($sq['OR'])){
-                                        $and_or = ' OR ';
-                                    }
-                                    $first = true;
-                                    foreach($sq as $q){
-                                        if(empty($q) || strlen($q)<2) continue;
-                                        if(!$first){
-                                            $where .= $and_or;
-                                        }
-                                        $where .= " {$db_field} $in ({$q} '{$field_value}%') ";
-                                        $first = false;
-                                    }
-                                }elseif(!empty($parms['query_type']) && $parms['query_type'] == 'format'){
-                                    $stringFormatParams = array(0 => $field_value, 1 => $GLOBALS['current_user']->id);
-                                    $where .= "{$db_field} $in (".string_format($parms['subquery'], $stringFormatParams).")";
-                                }else{
-                                    $where .= "{$db_field} $in ({$parms['subquery']} '{$field_value}%')";
-                                }
-
-    	                    	break;
-
-                            case 'like':
-                                if($type == 'bool' && $field_value == 0) {
-                                    $where .=  $db_field . " = '0' OR " . $db_field . " IS NULL";
-                                }
-                                else {
-                                	//check to see if this is coming from unified search or not
-                                	$UnifiedSearch = !empty($parms['force_unifiedsearch']);
-                                	if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'UnifiedSearch'){
-                                		$UnifiedSearch = true;
-                                	}
-                                	//check to see if this is a universal search, AND the field name is "last_name"
-									if($UnifiedSearch && strpos($db_field, 'last_name') !== false){
-										//split the string value, and the db field name
-										$string = explode(' ', $field_value);
-										$column_name =  explode('.', $db_field);
-
-										//when a search is done with a space, we concatenate and search against the full name.
-										if(count($string)>1){
-										    //add where clause agains concatenated fields
-											$where .= $GLOBALS['db']->concat($column_name[0],array('first_name','last_name')) . " LIKE '{$field_value}%'";
-										    $where .= ' OR ' . $GLOBALS['db']->concat($column_name[0],array('last_name','first_name')) . " LIKE '{$field_value}%'";
-										}else{
-											//no space was found, add normal where clause
-											$where .=  $db_field . " like '".$field_value.$like_char."'";
-										}
-
-									}else{
-										//field is not last name or this is not from global unified search, so do normal where clause
-										$where .=  $db_field . " like '".$field_value.$like_char."'";
-									}
-                                }
-                                break;
-                            case 'in':
-                                $where .=  $db_field . " in (".$field_value.')';
-                                break;
-                            case '=':
-                                if($type == 'bool' && $field_value == 0) {
-                                    $where .=  $db_field . " = '0' OR " . $db_field . " IS NULL";
-                                }
-                                else {
-                                    $where .=  $db_field . " = '".$field_value ."'";
-                                }
-                                break;
-                            case 'db_date':
-                                if(preg_match('/^\d{4}.\d{1,2}$/', $field_value) == 0) {
-                                  $where .=  $db_field . " = ". $field_value;
-                                } else {
-                                  // Create correct date_format conversion String
-                                  if($GLOBALS['db']->dbType == 'oci8') {
-                                  	$where .= db_convert($db_field,'date_format',array("'YYYY-MM'")) . " = '" . $field_value . "'";
-                                  } else {
-                                  	$where .= db_convert($db_field,'date_format',array("'%Y-%m'")) . " = '" . $field_value . "'";
-                                  }
-                                }
-                                break;
-                            // tyoung bug 15971 - need to add these special cases into the $where query
-                            case 'custom_enum':
-                            	$where .= $field_value;
-                            	break;
-                            case 'between':
-                                $field_value = explode('<>', $field_value);
-                                $where .= $db_field . " >= '".$field_value[0] . "' AND " .$db_field . " <= '".$field_value[1]."'";
-                                break;
-                            case 'innerjoin':
-                                $this->seed->listview_inner_join[] = $parms['innerjoin'] . " '" . $parms['value'] . "%')";
-                                break;
-                            case 'isnull':
-                                $where .= $db_field . ' IS NULL'; 
-                                if ($field_value != '')
-                                    $where .=  ' OR ' . $db_field . " in (".$field_value.')';
-                                break;
-                        }
-                    }
-                }
-
-                if(!empty($where)) {
-                    if($itr > 1) {
-                        array_push($where_clauses, '( '.$where.' )');
-                    }
-                    else {
-                        array_push($where_clauses, $where);
-                    }
-                }
+              }
             }
+          }
+
         }
 //------------------------16.07.14	
 		if(!empty($where2)) {

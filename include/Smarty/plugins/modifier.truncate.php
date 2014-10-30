@@ -54,18 +54,59 @@ r8230 - 2005-10-03 17:47:19 -0700 (Mon, 03 Oct 2005) - majed - Added Sugar_Smart
 function smarty_modifier_truncate($string, $length = 80, $etc = '...',
                                   $break_words = false, $middle = false)
 {
-    if ($length == 0)
+  mb_internal_encoding("UTF-8");
+//  if ($length == 0)return '';
+//
+//  if ( strlen( $string ) <= $length ) return $string;
+//
+//  preg_match_all("/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|\xe0[\xa0-\xbf][\x80-\xbf]|[\xe1-\xef][\x80-\xbf][\x80-\xbf]|\xf0[\x90-\xbf][\x80-\xbf][\x80-\xbf]|[\xf1-\xf7][\x80-\xbf][\x80-\xbf][\x80-\xbf]/", $string, $info);
+//
+//  if( $count_words ){
+//
+//    $wordscut = '';
+//
+//    $j = 0;
+//
+//    for($i=0; $i<count($info[0]); $i++) {
+//
+//      $wordscut .= $info[0][$i];
+//
+//      if( ord( $info[0][$i] ) >=128 ){
+//
+//        $j = $j+2;
+//
+//      }else{
+//
+//        $j = $j + 1;
+//
+//      }
+//
+//      if ($j >= $length ) {
+//
+//        return $wordscut.$etc;
+//
+//      }
+//
+//    }
+//
+//    return join('', $info[0]);
+//
+//  }
+//
+//  return join("",array_slice( $info[0],0,$length ) ).$etc;
+
+  if ($length == 0)
         return '';
 
-    if (strlen($string) > $length) {
-        $length -= strlen($etc);
+    if (mb_strlen($string) > $length) {
+        $length -= mb_strlen($etc);
         if (!$break_words && !$middle) {
-            $string = preg_replace('/\s+?(\S+)?$/', '', substr($string, 0, $length+1));
+            $string = preg_replace('/\s+?(\S+)?$/u', '', mb_substr($string, 0, $length+1));
         }
         if(!$middle) {
-            return substr($string, 0, $length).$etc;
+            return mb_substr($string, 0, $length).$etc;
         } else {
-            return substr($string, 0, $length/2) . $etc . substr($string, -$length/2);
+            return mb_substr($string, 0, $length/2) . $etc . mb_substr($string, -$length/2);
         }
     } else {
         return $string;

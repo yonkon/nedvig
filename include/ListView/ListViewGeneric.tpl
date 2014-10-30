@@ -77,7 +77,16 @@
                             <a href='javascript:sListView.order_checks("ASC", "{$params.orderBy|default:$colHeader|lower}" , "{$pageData.bean.moduleDir}{"2_"}{$pageData.bean.objectName|upper}{"_ORDER_BY"}")' class='listViewThLinkS1'>
                         {/if}
                     {/if}
-                    {sugar_translate label=$params.label module=$pageData.bean.moduleDir}
+                              {capture name=currentLabel assign=currentLabel}{sugar_translate label=$params.label module=$pageData.bean.moduleDir}{/capture}
+                              <span class="hover-swap">
+                                <span>{$currentLabel|truncate:5:"":true}</span>
+                                <span>{$currentLabel}</span>
+                                {*{$currentLabelTooltip}*}
+                              </span>
+                              {*{assign var=currentLabelTooltip value='<i class="icon_tooltip"><span class="icon_tooltip">'|cat:$currentLabel:'</span>&nbsp;</i>'}*}
+                              {*{$currentLabel|truncate:5:" ":true}*}
+                              {*{$currentLabelTooltip}*}
+                              {*{$currentLabel|truncate:5:$currentLabelTooltip:true}*}
 					</a>&nbsp;&nbsp;
 					{if $params.orderBy|default:$colHeader|lower == $pageData.ordering.orderBy}
 						{if $pageData.ordering.sortOrder == 'ASC'}
@@ -92,7 +101,16 @@
 						<img border='0' src='{sugar_getimagepath file=$imageName}' width='{$arrowWidth}' height='{$arrowHeight}' align='absmiddle' alt='{$arrowAlt}'>
 					{/if}
 				{else}
-					{sugar_translate label=$params.label module=$pageData.bean.moduleDir}
+                              {capture name=currentLabel assign=currentLabel}{sugar_translate label=$params.label module=$pageData.bean.moduleDir}{/capture}
+                              {*{assign var=currentLabelTooltip value='<i class="icon_tooltip"><span class="icon_tooltip">'|cat:$currentLabel:'</span>&nbsp;</i>'}*}
+                              {*{assign var=currentLabelTooltip value='<span>'|cat:$currentLabel:'</span>'}*}
+                              <span class="hover-swap">
+                                <span>{$currentLabel|truncate:4:" ":true}</span>
+                                <span>{$currentLabel}</span>
+                              {*{$currentLabelTooltip}*}
+                              </span>
+                              {*{$currentLabel|truncate:5:$currentLabelTooltip:true:true}*}
+                              {*{sugar_translate label=$params.label module=$pageData.bean.moduleDir}*}
 				{/if}
 				</div>
 			</th>
@@ -124,6 +142,7 @@
 			<td width='2%' nowrap>{if $pageData.access.edit}<a title='{$editLinkString}' href="#" onMouseOver="javascript:lvg_nav('{if $params.dynamic_module}{$rowData[$params.dynamic_module]}{else}{$pageData.bean.moduleDir}{/if}', '{$rowData.ID}', {if $act}'{$act}'{else}'e'{/if}, {$offset}, this)" onFocus="javascript:lvg_nav('{if $params.dynamic_module}{$rowData[$params.dynamic_module]}{else}{$pageData.bean.moduleDir}{/if}', '{$rowData.ID}', {if $act}'{$act}'{else}'e'{/if}, {$offset}, this)"><img border=0 src='{sugar_getimagepath file='edit_inline.gif'}'></a>{/if}</td>
 			{/if}
 			{counter start=0 name="colCounter" print=false assign="colCounter"}
+      {*todo make columns shorter*}
 			{foreach from=$displayColumns key=col item=params}
 			    {strip}
 				<td scope='row' align='{$params.align|default:'left'}' valign="top" {if ($params.type == 'teamset')}class="nowrap"{/if}>
