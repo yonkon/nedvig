@@ -7,6 +7,7 @@ class SearchModificator extends sphr_Object
 	function create_new_list_query ($order_by, $where,$filter=array(),$params=array(), $show_deleted = 0,$join_type='', $return_array = false,$parentbean, $singleSelect = false)
     {
 		global $db;
+
 		$ret_array = parent::create_new_list_query($order_by, $where, $filter, $params, $show_deleted, $join_type, $return_array, $parentbean, $singleSelect);
 
 		$where_name = "(sphr_object.name like '";
@@ -16,7 +17,7 @@ class SearchModificator extends sphr_Object
 			$name_end = strpos($ret_array['where'], "%'", $name_begin);
 			$name = substr($ret_array['where'], intval($name_begin), $name_end - $name_begin);
 
-			$ret_array['where'] = str_replace("(sphr_object.name like '".$name."%'", "((sphr_object_cstm.name_rus_c like '".$name."%') OR (sphr_object_cstm.name_eng_c like '".$name."%') OR (sphr_object_cstm.name_sp_c like '".$name."%')", $ret_array['where']);
+			$ret_array['where'] = str_replace("(sphr_object.name like '".$name."%'", "((sphr_object.name like '%".$name."%') OR (sphr_object_cstm.name_rus_c like '".$name."%') OR (sphr_object_cstm.name_eng_c like '".$name."%') OR (sphr_object_cstm.name_sp_c like '".$name."%')", $ret_array['where']);
 		}
 		$where_name = "(sphr_object_cstm.id_object_c like '";
 		$pos = strpos($ret_array['where'], $where_name);

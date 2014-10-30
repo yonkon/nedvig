@@ -4,9 +4,9 @@ $searchdefs [$module_name] =
 array (
   'layout' => 
   array (
-    'basic_search' => 
+    'basic_search' =>
     array (
-      'name_eng_c' => 
+      'name_eng_c' =>
       array (
         'type' => 'varchar',
         'default' => true,
@@ -15,48 +15,32 @@ array (
         'name' => 'name_eng_c',
       ),
     ),
-    'advanced_search' => 
+    'advanced_search' =>
     array (
-      'name' => 
-      array (
-        'type' => 'name',
-        'label' => 'LBL_NAME',
-        'width' => '10%',
-        'default' => true,
-        'name' => 'name',
-      ),
-      'price_sale_int_c_min' =>
-          array (
-              'type' => 'int',
-              'label' => 'PRICE_SALE_INT_C_MIN',
-              'width' => '10%',
-              'default' => true,
-              'name' => 'price_sale_int_c_min',
-          ),
-      'price_sale_int_c_max' =>
-          array (
-              'type' => 'int',
-              'label' => 'PRICE_SALE_INT_C_MAX',
-              'width' => '10%',
-              'default' => true,
-              'name' => 'price_sale_int_c_max',
-          ),
-      'price_sale_meter_c_min' =>
-          array (
-              'type' => 'int',
-              'label' => 'PRICE_SALE_METER_C_MIN',
-              'width' => '10%',
-              'default' => true,
-              'name' => 'price_sale_meter_c_min',
-          ),
-      'price_sale_meter_c_max' =>
-          array (
-              'type' => 'int',
-              'label' => 'PRICE_SALE_METER_C_MAX',
-              'width' => '10%',
-              'default' => true,
-              'name' => 'price_sale_meter_c_max',
-          ),
+      'name_с' =>
+        array (
+          'type' => 'name',
+          'label' => 'LBL_NAME',
+          'width' => '10%',
+          'default' => true,
+          'name' => 'name',
+        ),
+      'price_sale_int_c' =>
+        array (
+          'type' => 'minimax',
+          'label' => 'PRICE_SALE_INT_C',
+          'width' => '10%',
+          'default' => true,
+          'name' => 'price_sale_int_c',
+        ),
+      'price_sale_meter_c' =>
+        array (
+          'type' => 'minimax',
+          'label' => 'PRICE_SALE_METER_C',
+          'width' => '10%',
+          'default' => true,
+          'name' => 'price_sale_meter_c',
+        ),
       'name_eng_c' =>
         array (
           'type' => 'varchar',
@@ -65,73 +49,39 @@ array (
           'width' => '10%',
           'name' => 'name_eng_c',
         ),
-      'total_area_c_min' =>
+      'total_area_c' =>
         array (
-          'type' => 'int',
-          'label' => 'TOTAL_AREA_C_MIN',
+          'type' => 'minimax',
+          'label' => 'TOTAL_AREA_C',
           'width' => '10%',
           'default' => true,
-          'name' => 'total_area_c_min',
+          'name' => 'total_area_c',
         ),
-      'total_area_c_max' =>
+      'area_area_c' =>
         array (
-          'type' => 'int',
-          'label' => 'TOTAL_AREA_C_MAX',
+          'type' => 'minimax',
+          'label' => 'AREA_AREA_C',
           'width' => '10%',
           'default' => true,
-          'name' => 'total_area_c_max',
+          'name' => 'area_area_c',
         ),
-      'area_area_c_min' =>
+      'number_bedroom_c' =>
         array (
-          'type' => 'int',
-          'label' => 'AREA_AREA_C_MIN',
-          'width' => '10%',
-          'default' => true,
-          'name' => 'area_area_c_min',
-        ),
-      'area_area_c_max' =>
-        array (
-          'type' => 'int',
-          'label' => 'AREA_AREA_C_MAX',
-          'width' => '10%',
-          'default' => true,
-          'name' => 'area_area_c_max',
-        ),
-      'number_bedroom_c_min' =>
-        array (
-          'type' => 'int',
+          'type' => 'minimax',
           'default' => true,
           'studio' => 'visible',
-          'label' => 'LBL_NUMBER_BEDROOM_C_MIN',
+          'label' => 'LBL_NUMBER_BEDROOM_C',
           'sortable' => false,
           'width' => '10%',
-          'name' => 'number_bedroom_c_min',
+          'name' => 'number_bedroom_c',
         ),
-      'number_bedroom_c_max' =>
+      'sea_distance_c' =>
         array (
-          'type' => 'int',
+          'type' => 'minimax',
           'default' => true,
-          'studio' => 'visible',
-          'label' => 'LBL_NUMBER_BEDROOM_C_MAX',
-          'sortable' => false,
+          'label' => 'LBL_SEA_DISTANCE_C',
           'width' => '10%',
-          'name' => 'number_bedroom_c_max',
-        ),
-      'sea_distance_c_min' =>
-        array (
-          'type' => 'int',
-          'default' => true,
-          'label' => 'LBL_SEA_DISTANCE_C_MIN',
-          'width' => '10%',
-          'name' => 'sea_distance_c_min',
-        ),
-      'sea_distance_c_max' =>
-        array (
-          'type' => 'int',
-          'default' => true,
-          'label' => 'LBL_SEA_DISTANCE_C_MAX',
-          'width' => '10%',
-          'name' => 'sea_distance_c_max',
+          'name' => 'sea_distance_c',
         ),
       'view_sea_c' =>
         array (
@@ -149,26 +99,26 @@ array (
           'width' => '10%',
           'name' => 'mebel_c',
         ),
-      'city_area_c' =>
+      'first_line_c' =>
         array (
           'type' => 'bool',
           'default' => true,
           'label' => 'Первая линия',
           'width' => '10%',
-          'name' => 'city_area_c',
+          'name' => 'first_line_c',
         ),
-        'green_area_c' =>
+      'exclusive_c' =>
         array (
           'type' => 'bool',
           'default' => true,
           'label' => 'Эксклюзив',
           'width' => '10%',
-          'name' => 'green_area_c',
+          'name' => 'exclusive_c',
         ),
-/*      Эконом да нет
-Горячее предложение да нет
-Эксклюзив да нет
-Продано да нет*/
+  /*      Эконом да нет
+  Горячее предложение да нет
+  Эксклюзив да нет
+  Продано да нет*/
       'type' =>
       array (
         'type' => 'enum',
@@ -179,7 +129,7 @@ array (
         'width' => '10%',
         'name' => 'type',
       ),
-      'category_c' => 
+      'category_c' =>
       array (
         'type' => 'enum',
         'default' => true,
@@ -260,57 +210,16 @@ array (
           'width' => '10%',
           'name' => 'date_modified_max',
         ),
-//
-//      'coast_select_c' =>
-//      array (
-//        'type' => 'enum',
-//        'default' => true,
-//        'studio' => 'visible',
-//        'label' => 'LBL_COAST_SELECT',
-//        'sortable' => false,
-//        'width' => '10%',
-//        'name' => 'coast_select_c',
-//      ),
-//      'community_select_c' =>
-//      array (
-//        'type' => 'enum',
-//        'default' => true,
-//        'studio' => 'visible',
-//        'label' => 'LBL_COMMUNITY_SELECT',
-//        'sortable' => false,
-//        'width' => '10%',
-//        'name' => 'community_select_c',
-//      ),
-//      'budjet_c' =>
-//      array (
-//        'type' => 'enum',
-//        'default' => true,
-//        'studio' => 'visible',
-//        'label' => 'LBL_BUDJET',
-//        'sortable' => false,
-//        'width' => '10%',
-//        'name' => 'budjet_c',
-//      ),
-//      'number_bedroom_c' =>
-//      array (
-//        'type' => 'enum',
-//        'default' => true,
-//        'studio' => 'visible',
-//        'label' => 'LBL_NUMBER_BEDROOM',
-//        'sortable' => false,
-//        'width' => '10%',
-//        'name' => 'number_bedroom_c',
-//      ),
     ),
   ),
   'templateMeta' => 
   array (
-    'maxColumns' => '3',
-    'widths' => 
-    array (
-      'label' => '10',
-      'field' => '23',
-    ),
+    'maxColumns' => '4',
+//    'widths' =>
+//    array (
+//      'label' => '10',
+//      'field' => '23',
+//    ),
   ),
 );
 ?>

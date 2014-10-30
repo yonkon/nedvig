@@ -107,7 +107,7 @@ class sphr_ObjectViewDetail extends ViewDetail {
 					$("#sp_price_rent_int_c").hide();
 					$("#sp_seller_price_sale_int_c").hide();
 					$("#sp_seller_price_rent_int_c").hide();
-                                        $("#sp_old_price_sale_int_c").hide();
+          $("#sp_old_price_sale_int_c").hide();
 					$("#sp_old_price_rent_int_c").hide();
 					$("#sp_amount_commission_c").hide();
 					$("#sp_rent_amount_commission_c").hide();
@@ -116,7 +116,7 @@ class sphr_ObjectViewDetail extends ViewDetail {
 					$("#sp_lbl_price_rent_int_c").hide();
 					$("#sp_lbl_seller_price_sale_int_c").hide();
 					$("#sp_lbl_seller_price_rent_int_c").hide();
-                                        $("#sp_lbl_old_price_sale_int_c").hide();
+          $("#sp_lbl_old_price_sale_int_c").hide();
 					$("#sp_lbl_old_price_rent_int_c").hide();
 					$("#sp_lbl_amount_commission_c").hide();
 					$("#sp_lbl_rent_amount_commission_c").hide();
@@ -220,18 +220,18 @@ DJS;
 		echo '<script>',file_get_contents('custom/modules/sphr_Object/javascript/create_PDF.js'),'</script>';
 		global $current_user;
 		global $app_list_strings;
-		$type_c_advanced = '<select id="type_c_advanced"  style="width: 150px" multiple="true" size="4">';
+		$type_c_advanced = '<select id="type_c_advanced"  name="type_c_advanced" style="width: 150px" multiple="true" size="4">';
 		foreach ($app_list_strings['client_type_list'] as $client_type_value =>  $client_type_label)
 			$type_c_advanced .= '<option label="'.$client_type_label.'" value="'.$client_type_value.'">'.$client_type_label.'</option>';
 		$type_c_advanced .= '</select>';
 
-		$status_advanced = '<select id="status_advanced" style="width: 150px" multiple="true" size="4">';
+		$status_advanced = '<select id="status_advanced" name="status_advanced" style="width: 150px" multiple="true" size="4">';
 		foreach ($app_list_strings['client_status_list'] as $client_status_value =>  $client_status_label)
 			$status_advanced .= '<option label="'.$client_status_label.'" value="'.$client_status_value.'">'.$client_status_label.'</option>';
 		$status_advanced .= '</select>';
 
 
-		$assigned_user_id_advanced = '<select id="assigned_user_id_advanced" style="width: 150px" multiple="true" size="4">';
+		$assigned_user_id_advanced = '<select id="assigned_user_id_advanced" name="assigned_user_id_advanced" style="width: 150px" multiple="true" size="4">';
 		global $db;
 		$query = "SELECT id, CONCAT_WS(' ',first_name,last_name) as full_name
 		FROM users
@@ -298,6 +298,58 @@ DJS;
 		</script>';
 		$hint_html = 'Клиенты, выделенные красным, не имеют email и для выбора не доступны';
 		$caption_html = 'Выберите клиента';
+    //Имя, телефон, почта, бюджет, тип, статус.
+    $pre_search_form_html = '
+          <form name="pre_search_form" id="pre_search_form" action="index.php?entryPoint=ClientToXML">
+          <table width="100%" cellspacing="5" cellpadding="0" border="0">
+              <tr>
+            <td scope="row" nowrap="nowrap" width=10% >
+              Имя
+            </td>
+            <td  nowrap="nowrap" width=30%>
+              <input type="text" name="first_name_advanced" id="first_name_advanced">
+            </td>
+            <td scope="row" nowrap="nowrap" width=10% >
+              Телефон
+            </td>
+            <td  nowrap="nowrap" width=30%>
+              <input type="text" name="phone_advanced" id="phone_advanced">
+            </td>
+            <td scope="row" nowrap="nowrap" width=10% >
+              Почта
+            </td>
+            <td  nowrap="nowrap" width=30%>
+              <input type="text" name="email_advanced" id="email_advanced">
+            </tr>
+            <tr>
+            <td scope="row" nowrap="nowrap" width=10% >
+              Бюджет
+            </td>
+            <td  nowrap="nowrap" width=30%>
+              <input type="text" name="budget_advanced" id="budget_advanced">
+            </td>
+            <td scope="row" nowrap="nowrap" width=10% >
+              Тип
+            </td>
+            <td  nowrap="nowrap" width=30%>
+              '.$type_c_advanced.'
+            </td>
+            <td scope="row" nowrap="nowrap" width=10% >
+              Статус
+            </td>
+            <td  nowrap="nowrap" width=30%>
+              '.$status_advanced.'
+            </td>
+            </tr>
+            <tr>
+            <td colspan="3">
+              <button type="button" onclick=\'openClientListPopup(document.DetailView.record.value, "sphr_Object" ,"", true);\'>Найти</button>
+              <input type="reset" id="reset_btn" value="Очистить"/>
+            </td>
+            </tr>
+          </table>
+          </form>';
+//    return openClientListPopup(document.DetailView.record.value,"sphr_Object","", true);
 		$search_form_html = '
 					<form name="search_form" id="search_form">
 					<table width="100%" cellspacing="5" cellpadding="0" border="0">
@@ -361,6 +413,7 @@ DJS;
 						</tr>
 					</table>
 					</form>';
+    $search_form_html = '';
 		include('custom/include/email_sender/email_sender_form.php');
 		echo'
 		<link rel="STYLESHEET" type="text/css" href="custom/include/email_sender/dhtmlxGrid/codebase/dhtmlxgrid.css">
@@ -405,20 +458,41 @@ DJS;
 		<script>
 			var SelectedObjects;
 			var SelectedClients;
-			function openClientListPopup(val,ptype,pid)
+			function openClientListPopup(val,ptype,pid, pre_search)
 			{
 				SelectedObjects = new Array();
 				SelectedObjects.push(val);
 
 				var url = "index.php?entryPoint=ClientToXML";
-				//mygrid.clearAll();
-				//mygrid.load(url);
-				document.getElementById("PopupScreenLocker").style.display="block";
+				if(typeof pre_search  != "undefined" && pre_search) {
+				  $("input, select", $("#pre_search_form") ).each(function(i, el) {
+				  var $el = $(el);
+				  if($el.attr("name") && $el.val()) {
+				    url += "&search["+$el.attr("name") + "]="+$el.val();
+				  }
+				  });
+//          document.getElementById("search_form").style.display="block";
+//          document.getElementById("pre_search_form").style.display="none";
+          document.getElementById("PopupScreenLocker").style.display="block";
 				document.getElementById("PopupWindowBody").style.display="none";
 				document.getElementById("PopupWindowLog").style.display="block";
 				document.getElementById("PopupWindow").style.display="block";
 				document.getElementById("Log").value = "Идет загрузка...";
 				mygrid.updateFromXML(url,true,true,LoadSuccess); //insert_new & del_missed
+
+				} else {
+				document.getElementById("PopupScreenLocker").style.display="block";
+				document.getElementById("PopupWindowBody").style.display="block";
+				document.getElementById("PopupWindowLog").style.display="none";
+				document.getElementById("PopupWindow").style.display="block";
+//				document.getElementById("Log").value = "Идет загрузка...";
+//				mygrid.updateFromXML(url,true,true,LoadSuccess); //insert_new & del_missed
+          document.getElementById("search_form").style.display="none";
+          document.getElementById("pre_search_form").style.display="block";
+				}
+				//mygrid.clearAll();
+				//mygrid.load(url);
+
 				function LoadSuccess()
 				{
 					ApplyFilter();
@@ -434,6 +508,7 @@ DJS;
 					document.getElementById("Log").value = "";
 					document.getElementById("PopupWindowLog").style.display="none";
 					document.getElementById("PopupWindowBody").style.display="block";
+//          document.getElementById("search_form").style.display="block";
 				}
 			};
 		</script>

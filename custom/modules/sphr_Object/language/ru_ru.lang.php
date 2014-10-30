@@ -116,7 +116,15 @@ $mod_strings = array (
   'LBL_T_START' => 'Дата создания от',
   'LBL_T_END' => 'Дата создания до',
 
-  'PRICE_SALE_INT_C_MIN' => 'Цена продажи (от)',
-  'PRICE_SALE_INT_C_MAX' => 'Цена продажи (до)',
+  'PRICE_SALE_INT_C' => 'Цена продажи',
+  'PRICE_SALE_METER_C' => 'Цена за кв.м',
+  'TOTAL_AREA_C' => 'Общая площадь',
+  'AREA_AREA_C' => 'Площадь участка',
+  'LBL_NUMBER_BEDROOM_C' => 'Кол-во спален',
+  'LBL_SEA_DISTANCE_C' => 'Расстояние до моря, м',
+  'LBL_DATE_ENTERED_MIN' => 'Дата создания (от)',
+  'LBL_DATE_ENTERED_MAX' => 'Дата создания (до)',
+  'LBL_DATE_MODIFIED_MIN' => 'Изменен (от)',
+  'LBL_DATE_MODIFIED_MAX' => 'Изменен (до)',
 );
 ?>
