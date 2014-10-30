@@ -53,22 +53,28 @@ array (
     ),
     'panels' => 
     array (
-      'lbl_detailview_panel6' => 
+      'lbl_detailview_panel6' =>
       array (
+        -1 =>
+        array (
+          'name' => 'date_entered',
+          'comment' => 'Registration date',
+          'label' => 'LBL_DATE_ENTERED',
+        ),
         0 => 
         array (
-          0 => 
+          0 =>
           array (
             'name' => 'last_name',
             'comment' => 'Last name of the contact',
             'label' => 'LBL_LAST_NAME',
           ),
-          1 => 
+          1 =>
           array (
             'name' => 'country_c',
             'label' => 'LBL_COUNTRY',
           ),
-          2 => 
+          2 =>
           array (
             'name' => 'photo',
             'studio' => false,
