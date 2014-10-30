@@ -19,6 +19,47 @@ LEFT JOIN  email_addr_bean_rel AS eb ON eb.bean_id=sphr_client.id
 				AND eb.bean_module ='sphr_Client' AND eb.deleted=0 AND primary_address=1
 			JOIN  email_addresses AS e ON e.id=eb.email_address_id AND e.deleted=0
 WHERE (sphr_client.deleted = 0)";
+if(!empty($_REQUEST['search'])) {
+  $srch = $_REQUEST['search'];
+  if(!empty($srch['first_name_advanced'])) {
+    $nm = $srch['first_name_advanced'];
+    $query .= " AND (sphr_client.full_name LIKE '%{$nm}%' OR sphr_client.first_name LIKE '%{$nm}%' OR sphr_client.last_name LIKE '%{$nm}%'  )";
+  }
+  if(!empty($srch['phone_advanced'])) {
+    $nm = $srch['phone_advanced'];
+    $query .= " AND sphr_client.phone_mobile LIKE '%{$nm}%' ";
+  }
+  if(!empty($srch['email_advanced'])) {
+    $nm = $srch['email_advanced'];
+    $query .= " AND e.email_address LIKE '%{$nm}%' ";
+  }
+  if(!empty($srch['budget_advanced'])) {
+    $nm = $srch['budget_advanced'];
+    $nm = preg_replace('/^[^\d]*/', '', $nm);
+    $minimax = preg_split('/[\s,. -]+/', $nm);
+    if(!empty($minimax)) {
+      if(!empty($minimax[0]) ) {
+        $nm = intval($minimax[0]);
+        if(!empty($nm))
+          $query .= " AND sphr_client_cstm.budget_c >= $nm ";
+      }
+      if(!empty($minimax[1]) ) {
+        $nm = intval($minimax[1]);
+        if(!empty($nm))
+          $query .= " AND sphr_client_cstm.budget_c <= $nm ";
+      }
+    }
+  }
+  if(!empty($srch['type_c_advanced'])) {
+    $nm = $srch['type_c_advanced'];
+    $query .= " AND sphr_client_cstm.type_c = '$nm' ";
+  }
+  if(!empty($srch['status_advanced'])) {
+    $nm = $srch['status_advanced'];
+    $query .= " AND sphr_client.status = '$nm' ";
+  }
+
+}
 global $current_user;
 if(!$current_user->id) {
     $current_user = new User();

@@ -238,20 +238,29 @@ foreach ($clients_id as $id){
 		
 		$mailer->AddAddress($email, $first_name);
 		$ar_note = array();
+    $attachmentsFSize = 0;
 		while ($row = $db->fetchByAssoc($result2)) {
-		    $photo=$row["id"];
-			$main=$row["main"];
-            $image_size = getimagesize($photo_dir.$photo);
-            if($image_size && $image_size[0] > 1024 || $image_size[1] > 1024 ) {
-                if($image_size[0] > $image_size[1] ) {
-                    $percents = 1024 / $image_size[0] * 100;
-                } else {
-                    $percents = 1024 / $image_size[1] * 100;
-                }
-                imageresizejpg($photo_dir.$photo, $photo_dir.$photo, $percents, 100);
-            }
+      if($attachmentsFSize >= 9*1024*1024) {
+        break;
+      }
+      $photo=$row["id"];
+      $main=$row["main"];
+      $image_size = getimagesize($photo_dir.$photo);
+      if($image_size && $image_size[0] > 1024 || $image_size[1] > 1024 ) {
+          if($image_size[0] > $image_size[1] ) {
+              $percents = 1024 / $image_size[0] * 100;
+          } else {
+              $percents = 1024 / $image_size[1] * 100;
+          }
+          imageresizejpg($photo_dir.$photo, $photo_dir.$photo, $percents, 100);
+      }
+      $fsize = filesize($photo_dir.$photo);
+      if ($fsize)
+      $attachmentsFSize += $fsize;
+      if($attachmentsFSize < 9*1024*1024) {
+        $mailer->AddAttachment($photo_dir.$photo);
+      }
 //            imagesx($photo_dir.$photo)
-		    $mailer->AddAttachment($photo_dir.$photo);
 			if($main == 0)
 			    $f_note = $photo_dir.$photo;
         }	
