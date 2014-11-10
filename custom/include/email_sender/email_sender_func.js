@@ -74,7 +74,7 @@ function GotoPage(PageNumber)
 function CheckInSelect(Value, SelectId)
 {
 	var Listbox=document.getElementById(SelectId);
-	if (Listbox.selectedIndex == -1) return true; //если нет выбранных элементов
+	if (!Listbox || Listbox.selectedIndex == -1) return true; //если нет выбранных элементов
 	for (var i=0; i < Listbox.options.length; i++)
 	{
 		if (Listbox.options[i].selected) 

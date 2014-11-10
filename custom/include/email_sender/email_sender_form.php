@@ -16,10 +16,11 @@ background-color:#FFF; display:none;  border:1px solid #000;">
 		</textarea>
 	</div>
 	<div id="PopupWindowBody" style="padding:5px; top=20px; height=520px;">
+    <?php if(!empty($pre_search_form_html) ) {?>
     <div id="pre_search_form" style="height:125px;border:1px solid #000;" >
       <?php echo $pre_search_form_html; ?>
     </div>
-
+    <?php }?>
     <div id="search_form" style="height:125px;border:1px solid #000;" >
 			<?php echo $search_form_html; ?>
 		</div>
