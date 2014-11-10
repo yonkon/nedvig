@@ -695,7 +695,7 @@ require_once('include/EditView/EditView2.php');
 //---------------------------16.07.14
               if($field == 't_start_c' || $field == 't_end_c'){
                 $t[$field]=$parms['value'];
-                $db_field_t=$module.".date_entered";
+                $db_field_t=strtolower($module.".date_entered");
                 if(count($t) == 2){
                   $start=$t['t_start_c'];
                   $start=explode('.', $start);

@@ -37,3 +37,12 @@ i.icon_tooltip:before {
 .search td input[name="saved_search_submit"] {
   display: block;
 }
+
+.image-miniature {
+  width: 24px;
+  max-height: 24px;
+}
+.image-miniature:hover {
+  width: 100%;
+  height: 100%;
+}

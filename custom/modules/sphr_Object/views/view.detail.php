@@ -249,15 +249,16 @@ DJS;
 			function ApplyFilter()
 			{
 				mygrid.forEachRow(function(id){
-					if ((mygrid.cellById(id, 2).getValue()).toUpperCase().indexOf(document.getElementById("title_advanced").value.toUpperCase())!=0)
+					if (document.getElementById("title_advanced") && (mygrid.cellById(id, 2).getValue()).toUpperCase().indexOf(document.getElementById("title_advanced").value.toUpperCase())!=0)
 					{
 						mygrid.setRowAttribute(id,"filter_match",0);
 					}
-					else if ((mygrid.cellById(id, 3).getValue().toUpperCase()).indexOf(document.getElementById("first_name_advanced").value.toUpperCase())!=0)
+					else
+					if (document.getElementById("first_name_advanced") && (mygrid.cellById(id, 3).getValue().toUpperCase()).indexOf(document.getElementById("first_name_advanced").value.toUpperCase())!=0)
 					{
 						mygrid.setRowAttribute(id,"filter_match",0);
 					}
-					else if ((mygrid.cellById(id, 9).getValue().toUpperCase()).indexOf(document.getElementById("date_entered_advanced").value.toUpperCase())!=0)
+					else if (document.getElementById("date_entered_advanced") && (mygrid.cellById(id, 9).getValue().toUpperCase()).indexOf(document.getElementById("date_entered_advanced").value.toUpperCase())!=0)
 					{
 						mygrid.setRowAttribute(id,"filter_match",0);
 					}

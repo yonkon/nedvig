@@ -77,6 +77,29 @@ array (
         'default' => true,
         'name' => 'accounts_sphr_client_name',
       ),
+      't_start_c' =>
+        array (
+          'type' => 'date',
+          'default' => true,
+          'label' => 'LBL_T_START',
+          'width' => '10%',
+          'name' => 't_start_c',
+        ),
+      't_end_c' =>
+        array (
+          'type' => 'date',
+          'default' => true,
+          'label' => 'LBL_T_END',
+          'width' => '10%',
+          'name' => 't_end_c',
+        ),
+      'budget_c' =>
+        array (
+          'type' => 'minimax',
+          'name' => 'budget_c',
+          'label' => 'LBL_BUDGET',
+        ),
+
     ),
     'advanced_search' => 
     array (
@@ -170,6 +193,7 @@ array (
       ),
       'budget_c' => 
       array (
+        'type' => 'minimax',
         'name' => 'budget_c',
         'label' => 'LBL_BUDGET',
       ),
