@@ -542,7 +542,9 @@ class SugarTheme
     {
         // include style.css file
         $html = '<link rel="stylesheet" type="text/css" href="'.$this->getCSSURL('yui.css').'" />';
-        $html = '<link rel="stylesheet" type="text/css" href="'.$this->getCSSURL('custom.css').'" />';
+    if($_REQUEST['module'] != 'ModuleBuilder') {
+      $html = '<link rel="stylesheet" type="text/css" href="'.$this->getCSSURL('custom.css').'" />';
+    }
         $html .= '<link rel="stylesheet" type="text/css" href="'.$this->getCSSURL('deprecated.css').'" />';
         $html .= '<link rel="stylesheet" type="text/css" href="'.$this->getCSSURL('style.css').'" />';
 		

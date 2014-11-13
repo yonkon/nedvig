@@ -72,21 +72,16 @@
                         <a href='{$pageData.urls.orderBy}{$params.orderBy|default:$colHeader|lower}' class='listViewThLinkS1'>
                     {else}
                         {if $params.orderBy|default:$colHeader|lower == $pageData.ordering.orderBy}
-                            <a href='javascript:sListView.order_checks("{$pageData.ordering.sortOrder|default:ASCerror}", "{$params.orderBy|default:$colHeader|lower}" , "{$pageData.bean.moduleDir}{"2_"}{$pageData.bean.objectName|upper}{"_ORDER_BY"}")' class='listViewThLinkS1'>
+                            <a href='javascript:sListView.order_checks("{$pageData.ordering.sortOrder|default:ASCerror}", "{$params.orderBy|default:$colHeader|lower}" , "{$pageData.bean.moduleDir}2_{$pageData.bean.objectName|upper}_ORDER_BY")' class='listViewThLinkS1'>
                         {else}
-                            <a href='javascript:sListView.order_checks("ASC", "{$params.orderBy|default:$colHeader|lower}" , "{$pageData.bean.moduleDir}{"2_"}{$pageData.bean.objectName|upper}{"_ORDER_BY"}")' class='listViewThLinkS1'>
+                            <a href='javascript:sListView.order_checks("ASC", "{$params.orderBy|default:$colHeader|lower}" , "{$pageData.bean.moduleDir}2_{$pageData.bean.objectName|upper}_ORDER_BY")' class='listViewThLinkS1'>
                         {/if}
                     {/if}
                               {capture name=currentLabel assign=currentLabel}{sugar_translate label=$params.label module=$pageData.bean.moduleDir}{/capture}
                               <span class="hover-swap">
                                 <span>{$currentLabel|truncate:5:"":true}</span>
                                 <span>{$currentLabel}</span>
-                                {*{$currentLabelTooltip}*}
                               </span>
-                              {*{assign var=currentLabelTooltip value='<i class="icon_tooltip"><span class="icon_tooltip">'|cat:$currentLabel:'</span>&nbsp;</i>'}*}
-                              {*{$currentLabel|truncate:5:" ":true}*}
-                              {*{$currentLabelTooltip}*}
-                              {*{$currentLabel|truncate:5:$currentLabelTooltip:true}*}
 					</a>&nbsp;&nbsp;
 					{if $params.orderBy|default:$colHeader|lower == $pageData.ordering.orderBy}
 						{if $pageData.ordering.sortOrder == 'ASC'}
@@ -102,15 +97,10 @@
 					{/if}
 				{else}
                               {capture name=currentLabel assign=currentLabel}{sugar_translate label=$params.label module=$pageData.bean.moduleDir}{/capture}
-                              {*{assign var=currentLabelTooltip value='<i class="icon_tooltip"><span class="icon_tooltip">'|cat:$currentLabel:'</span>&nbsp;</i>'}*}
-                              {*{assign var=currentLabelTooltip value='<span>'|cat:$currentLabel:'</span>'}*}
                               <span class="hover-swap">
                                 <span>{$currentLabel|truncate:4:" ":true}</span>
                                 <span>{$currentLabel}</span>
-                              {*{$currentLabelTooltip}*}
                               </span>
-                              {*{$currentLabel|truncate:5:$currentLabelTooltip:true:true}*}
-                              {*{sugar_translate label=$params.label module=$pageData.bean.moduleDir}*}
 				{/if}
 				</div>
 			</th>
