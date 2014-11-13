@@ -119,6 +119,30 @@ array (
   Горячее предложение да нет
   Эксклюзив да нет
   Продано да нет*/
+      'economy_c' =>
+        array (
+          'type' => 'bool',
+          'default' => true,
+          'label' => 'Эконом',
+          'width' => '10%',
+          'name' => 'economy_c',
+        ),
+      'hot_c' =>
+        array (
+          'type' => 'bool',
+          'default' => true,
+          'label' => 'Горячее предложение',
+          'width' => '10%',
+          'name' => 'hot_c',
+        ),
+      'sold_c' =>
+        array (
+          'type' => 'bool',
+          'default' => true,
+          'label' => 'Продано',
+          'width' => '10%',
+          'name' => 'sold_c',
+        ),
       'type' =>
       array (
         'type' => 'enum',

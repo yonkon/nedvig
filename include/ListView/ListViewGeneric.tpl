@@ -169,23 +169,18 @@
     {*//2014-11-09 добавление превью фоток в список обектов*}
     {if $pageData.bean.objectName == 'sphr_Object'}
       <tr>
+        <td colspan="{$colCounter}">
+
         {get_object_photos id=$rowData.ID assign='object_photos' html='true'}
         {foreach from=$object_photos item='photo'}
-          <td>
+            <div class="image-miniature">
             {$photo}
+            </div>
             {*<img style="width: 24px; max-height: 24px;" src="{$photo}">*}
-          </td>
         {/foreach}
+        </td>
       </tr>
     {/if}
-       {*{foreach from=$pageData.idIndex item='p' key="k"}
-         <p><pre>{$k} => {$p}</pre></p>
-         {foreach from=$p item='i' key="j"}
-           <p><pre>{$j} => {$i}</pre></p>
-         {/foreach}
-       {/foreach}*}
-
-
 	{foreachelse}
 	<tr height='20' class='{$rowColor[0]}S1'>
 	    <td colspan="{$colCount}">

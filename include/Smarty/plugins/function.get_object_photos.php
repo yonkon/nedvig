@@ -89,9 +89,11 @@ function smarty_function_get_object_photos($params, &$smarty)
 
   if(!empty($assign)) {
     $smarty->assign($assign, $images);
+  } else {
+    return $images;
   }
 
-  return $images;
+  return '';
 
 }
 

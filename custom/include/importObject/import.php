@@ -58,6 +58,24 @@ if (isset($_POST['action'])) {
     $decoded = base64_decode($decoded );
 
     $data = unserialize($decoded); // разберем данные
+  //привоим поля в соответствие с БД
+  $db_map = array(
+    'rewdata_sea_distance' => 'sea_distance_c',
+    'rawdata_sea_view' => 'view_sea_c',
+    'rawdata_furniture' => 'mebel_c',
+    'rawdata_first_line' => 'first_line_c',
+    'rawdata_economy' => 'economy_c',
+    'rawdata_hot' => 'hot_c',
+    'rawdata_exclusive' => 'exclusive_c',
+    'rawdata_sold' => 'sold_c',
+    'raw_createdon' => 'date_entered',
+    'raw_editedon' => 'date_modified',
+  );
+  foreach($db_map as $kin => $kout) {
+    if (isset($data[$kin])) {
+      $data[$kout] = $data[$kin];
+    }
+  }
     if (!empty($data) && is_array($data)) {
         $object = new sphr_Object();
         if (isset($data['id_object_c']) && is_numeric($data['id_object_c'])) {
@@ -109,15 +127,25 @@ if (isset($_POST['action'])) {
 
         foreach ($data as $crm_field => $value) {
             if (property_exists($object, "$crm_field") === true && $crm_field != 'id' && $crm_field !=
-                'id_object_c')
-                if (validateField($object, $crm_field, $value) === true)
-                    $object->$crm_field = $value;
-                else {
-                    $notCriticalError = 1;
-                    $notCriticalMessage[] = 'Неправильное имя поля (' . $crm_field .
-                        ') или данные не прошли валидацию';
-                }
+                'id_object_c') {
+              if (validateField($object, $crm_field, $value) === true) {
+                $object->$crm_field = $value;
+              }
+              else {
+                $notCriticalError = 1;
+                $notCriticalMessage[] = 'Неправильное имя поля (' . $crm_field .
+                  ') или данные не прошли валидацию';
+              }
+            }
         }
+      if (!empty ($data['price_sale_int_c'])) {
+        if (!empty ($data['area_area_c'])) {
+          $data['price_sale_meter_c'] = (int) $data['price_sale_int_c']/$data['area_area_c'];
+        } elseif (!empty ($data['total_area_c']) ) {
+          $data['price_sale_meter_c'] = (int) $data['price_sale_int_c']/$data['total_area_c'];
+        }
+      }
+//todo make map [article => assigned_user_id]
 
         switch ($_POST['action']) {
             case "update": // обновляем данные
@@ -136,7 +164,7 @@ if (isset($_POST['action'])) {
                 }
                 break;
             case "create": // добавляем данные
-                if ($not_save === false) {
+                 if ($not_save === false) {
                     $newId = $object->save();
                     if ($newId !== null) {
                         if ($data['pictures'] != '') {
