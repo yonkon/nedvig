@@ -132,7 +132,6 @@
 			<td width='2%' nowrap>{if $pageData.access.edit}<a title='{$editLinkString}' href="#" onMouseOver="javascript:lvg_nav('{if $params.dynamic_module}{$rowData[$params.dynamic_module]}{else}{$pageData.bean.moduleDir}{/if}', '{$rowData.ID}', {if $act}'{$act}'{else}'e'{/if}, {$offset}, this)" onFocus="javascript:lvg_nav('{if $params.dynamic_module}{$rowData[$params.dynamic_module]}{else}{$pageData.bean.moduleDir}{/if}', '{$rowData.ID}', {if $act}'{$act}'{else}'e'{/if}, {$offset}, this)"><img border=0 src='{sugar_getimagepath file='edit_inline.gif'}'></a>{/if}</td>
 			{/if}
 			{counter start=0 name="colCounter" print=false assign="colCounter"}
-      {*todo make columns shorter*}
 			{foreach from=$displayColumns key=col item=params}
 			    {strip}
 				<td scope='row' align='{$params.align|default:'left'}' valign="top" {if ($params.type == 'teamset')}class="nowrap"{/if}>
@@ -160,13 +159,11 @@
     {if $pageData.bean.objectName == 'sphr_Object'}
       <tr>
         <td colspan="{$colCounter}">
-
         {get_object_photos id=$rowData.ID assign='object_photos' html='true'}
         {foreach from=$object_photos item='photo'}
             <div class="image-miniature">
             {$photo}
             </div>
-            {*<img style="width: 24px; max-height: 24px;" src="{$photo}">*}
         {/foreach}
         </td>
       </tr>

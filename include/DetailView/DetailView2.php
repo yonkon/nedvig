@@ -69,8 +69,8 @@ class DetailView2 extends EditView
         if(isset($GLOBALS['sugar_config']['disable_vcr'])) {
            $this->showVCRControl = !$GLOBALS['sugar_config']['disable_vcr'];	
         }
-        if(!empty($this->metadataFile) && file_exists($this->metadataFile)){
-        	require_once($this->metadataFile);
+        if(!empty($this->metadataFile) && file_exists($_SERVER['DOCUMENT_ROOT'].'/'.$this->metadataFile)){
+        	require_once($_SERVER['DOCUMENT_ROOT'].'/'.$this->metadataFile);
         }else {
         	//If file doesn't exist we create a best guess
         	if(!file_exists("modules/$this->module/metadata/detailviewdefs.php") &&

@@ -34,7 +34,7 @@
  * "Powered by SugarCRM".
  ********************************************************************************/
 
-$vardefs = array(  
+$vardefs = array(
 'fields' => array (
 	  'id' =>
 	  array (

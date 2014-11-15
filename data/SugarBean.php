@@ -1397,7 +1397,7 @@ class SugarBean
 		{
 			if($isUpdate)
 			{
-				// build out the SQL UPDATE statement.
+// build out the SQL UPDATE statement.
 				$query = "UPDATE " . $this->table_name." SET ";
 				$firstPass = 0;
 				foreach($this->field_defs as $field=>$value)
