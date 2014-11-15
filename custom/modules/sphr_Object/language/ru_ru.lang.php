@@ -126,5 +126,16 @@ $mod_strings = array (
   'LBL_DATE_ENTERED_MAX' => 'Дата создания (до)',
   'LBL_DATE_MODIFIED_MIN' => 'Изменен (от)',
   'LBL_DATE_MODIFIED_MAX' => 'Изменен (до)',
+  'LBL_SOLD_C' => 'Продан',
+  'LBL_FIRST_LINE_C' => 'Первая линия',
+  'LBL_ECONOMY_C' => 'Эконом',
+  'LBL_PHOTO_COUNT_C' => 'Количество фото',
+  'LBL_HOT_C' => 'Горячее предложение',
+  'LBL_OWNER_FIO_C' => 'ФИО хозяина',
+  'LBL_EXCLUSIVE_C' => 'Эксклюзив',
+  'LBL_OWNER_CONTACTS_C' => 'Контакты хозяина',
+  'LBL_COMMENT_SP_C' => 'Служебный комментарий',
+  'LBL_PARTNER_C' => 'Партнёр',
+  'LBL_PARTNER_COMMENT_C' => 'Партнёрский комментарий',
 );
 ?>

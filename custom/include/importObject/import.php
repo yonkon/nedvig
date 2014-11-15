@@ -70,6 +70,8 @@ if (isset($_POST['action'])) {
     'rawdata_sold' => 'sold_c',
     'raw_createdon' => 'date_entered',
     'raw_editedon' => 'date_modified',
+    'rawdata_owner_fio' => 'owner_fio_c',
+    'rawdata_owner_contacts' => 'owner_contacts_c',
   );
   foreach($db_map as $kin => $kout) {
     if (isset($data[$kin])) {

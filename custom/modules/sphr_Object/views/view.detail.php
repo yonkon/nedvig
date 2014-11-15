@@ -201,7 +201,7 @@ DJS;
             //получаем массив имён фото и их число
 			var photos = jQuery.parseJSON('$photosJson');
 			var numberPhotos = parseInt('$numberPhotos');
-
+			$('#photo_count_c').text(numberPhotos);
 			//выводим фото
 			$('<ul class="gallery">').appendTo('#photosBlock');
 			for(var i = 0; i < numberPhotos; i++) {
@@ -513,7 +513,8 @@ DJS;
 				}
 			};
 		</script>
-';      $this->manager->display();
+';
+    $this->manager->display();
  		parent::display();
  	}
 
