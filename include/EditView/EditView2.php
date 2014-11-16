@@ -218,6 +218,20 @@ class EditView
 
     function render()
     {
+      global $current_user;
+      if (!$current_user->is_admin) {
+        $only_admin_fields = array('owner_fio_c', 'owner_contacts_c', 'comment_sp_c', 'partner_c', 'partner_comment_c');
+        foreach($only_admin_fields as $oaf) {
+          unset($this->fieldDefs[$oaf]);
+        }
+        foreach($this->defs['panels']['default'] as $fri => $field_row) {
+          foreach($field_row as $fi=> $field_def) {
+            if(!empty($field_def) && !empty($field_def['name']) && in_array($field_def['name'], $only_admin_fields)) {
+              $this->defs['panels']['default'][$fri][$fi] = array();
+            }
+          }
+        }
+      }
         $totalWidth = 0;
         foreach($this->defs['templateMeta']['widths'] as $col => $def) {
             foreach($def as $k => $value) $totalWidth += $value;
@@ -482,7 +496,6 @@ class EditView
             $this->fieldDefs['email2']['value'] = '';
             $this->fieldDefs['email']['value'] = '';
             $this->fieldDefs['last_name']['value'] = '';
-
         }
         if(isset($this->defs['templateMeta']['javascript'])) {
            if(is_array($this->defs['templateMeta']['javascript'])) {

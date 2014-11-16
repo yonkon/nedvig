@@ -16,6 +16,7 @@
  *           - max    (optional) - max photos per object
  *           - html   (optional) - bool default not set
  *           - id     (required) - string object id
+ *           - mini   (bool) - get miniatures
  * Purpose:  Prints the list of <option> tags generated from
  *           the passed parameters
  * @link http://smarty.php.net/manual/en/language.function.html.options.php {html_image}
@@ -37,6 +38,7 @@ function smarty_function_get_object_photos($params, &$smarty)
   $html = false;
   $max = '';
   $assign = null;
+  $mini = false;
   if (empty ($params['id'])) {
     $smarty->_trigger_fatal_error('No object id given');
   } else {
@@ -56,8 +58,11 @@ function smarty_function_get_object_photos($params, &$smarty)
         $assign = (string)$_val;
         break;
       case 'html':
-        $html = !empty($_val) && ($_val != 'false');
-
+        $html = !empty($_val) && ($_val != 'false' || $_val !== false);
+        break;
+      case 'mini':
+        $mini = !empty($_val) && ($_val != 'false' || $_val !== false);
+        break;
       default:
         if(!is_array($_val)) {
           $extra .= ' '.$_key.'="'.smarty_function_escape_special_chars($_val).'"';
@@ -80,7 +85,7 @@ function smarty_function_get_object_photos($params, &$smarty)
   }
   if(!empty($images) ) {
     foreach($images as $i=>$image) {
-      $images[$i] = $image = $GLOBALS['sugar_config']['cache_dir'] .'upload/object/' . $image;
+      $images[$i] = $image = $GLOBALS['sugar_config']['cache_dir'] .'upload/object/' . ($mini? 'cut_' : '') . $image;
       if ($html) {
         $images[$i] = $image  = "<img class=\"{$IMAGE_CLASS}\" src=\"{$image}\">";
       }

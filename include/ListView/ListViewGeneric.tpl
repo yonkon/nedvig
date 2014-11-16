@@ -118,7 +118,11 @@
 		{else}
 			{assign var='_rowColor' value=$rowColor[1]}
 		{/if}
-		<tr height='20' class='{$_rowColor}S1'>
+    {*//2014-11-16 добавление превью фоток в список обектов*}
+    {if $pageData.bean.objectName == 'sphr_Object'}
+      {get_object_photos id=$rowData.ID assign='object_photos' html='true' mini=true}
+    {/if}
+    <tr height='20' class='{$_rowColor}S1 {if !empty($object_photos)}has_photos{/if}' >
 			{if $prerow}
 			<td width='1%' class='nowrap'>
 			 {if !$is_admin && is_admin_for_user && $rowData.IS_ADMIN==1}
@@ -157,16 +161,17 @@
 	    	</tr>
     {*//2014-11-09 добавление превью фоток в список обектов*}
     {if $pageData.bean.objectName == 'sphr_Object'}
-      <tr>
-        <td colspan="{$colCounter}">
-        {get_object_photos id=$rowData.ID assign='object_photos' html='true'}
-        {foreach from=$object_photos item='photo'}
-            <div class="image-miniature">
-            {$photo}
-            </div>
-        {/foreach}
-        </td>
-      </tr>
+      {if !empty($object_photos)}
+        <tr class='{$_rowColor}S1 row_photos'>
+          <td colspan="{$colCounter+2}">
+          {foreach from=$object_photos item='photo'}
+              <div class="image-miniature">
+              {$photo}
+              </div>
+          {/foreach}
+          </td>
+        </tr>
+      {/if}
     {/if}
 	{foreachelse}
 	<tr height='20' class='{$rowColor[0]}S1'>
@@ -182,5 +187,30 @@
 {$contextMenuScript}
 {literal}function lvg_nav(m,id,act,offset,t){if(t.href.search(/#/) < 0){return;}else{if(act=='pte'){act='ProjectTemplatesEditView';}else if(act=='d'){ act='DetailView';}else if( act =='ReportsWizard'){act = 'ReportsWizard';}else{ act='EditView';}{/literal}url = 'index.php?module='+m+'&offset=' + offset + '&stamp={$pageData.stamp}&return_module='+m+'&action='+act+'&record='+id;t.href=url;{literal}}}{/literal}
 {literal}function lvg_dtails(id){{/literal}return SUGAR.util.getAdditionalDetails( '{$pageData.bean.moduleDir|default:$params.module}',id, 'adspan_'+id);{literal}}{/literal}
+{if $pageData.bean.objectName == 'sphr_Object'}
+{literal}
+$('div.image-miniature').click(function(){
+  var $this = $(this);
+  var $img = $('img', $this);
+  var img_src = $img.attr('src');
+  var $row = $this.parent().parent();
+  var expanded = $this.hasClass('expanded');
+  $('div.image-miniature').each(function(i, el) {
+    var $el = $(el);
+    if($el.hasClass('expanded')) {
+      $el.removeClass('expanded');
+      var $el_img = $('img', el);
+      var el_img_src = $el_img.attr('src');
+      $el_img.attr('src', el_img_src.replace('object/', 'object/cut_'));
+    }
+  });
+  if(!expanded) {
+    $this.addClass('expanded');
+    $img.attr('src', img_src.replace('object/cut_', 'object/'))
+  }
+
+});
+{/literal}
+{/if}
 </script>
 {/if}

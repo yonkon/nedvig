@@ -1,10 +1,9 @@
 <?php
-// created: 2014-07-21 13:54:16
+// created: 2014-11-16 02:02:16
 $mod_strings = array (
   'LBL_ASSIGNED_TO_NAME' => 'Ответственный',
   'LBL_COUNTRY' => 'Страна',
   'LBL_ADDRESS' => 'Город',
-//  'LBL_ADDRESS' => 'Точный адрес объекта',
   'LBL_REGION' => 'Регион',
   'LBL_TYPE' => 'Тип',
   'LBL_SQUARE' => 'Площадь',

@@ -46,6 +46,11 @@
 						{$actionsLink}&nbsp;
 						&nbsp;{$selectedObjectsSpan}		
 					</td>
+          {if $pageData.bean.objectName == 'sphr_Object'}
+          <td class="togge_miniatures_cell">
+            <label for="toggle_miniatures_input">Показывать фотографии объектов</label><input type="checkbox" id="toggle_miniatures_input" onchange="{literal}$('tr.row_photos').toggle();{/literal}">
+          </td>
+          {/if}
 					<td  nowrap='nowrap' width='1%' align="right" class='paginationChangeButtons'>
 						{if $pageData.urls.startPage}
 							<button type='button' id='listViewStartButton' name='listViewStartButton' title='{$navStrings.start}' class='button' {if $prerow}onclick='return sListView.save_checks(0, "{$moduleString}");'{else} onClick='location.href="{$pageData.urls.startPage}"' {/if}>

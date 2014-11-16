@@ -43,19 +43,20 @@ div.image-miniature {
   margin: 2px;
 }
 
-div.image-miniature:hover {
+div.image-miniature.expanded {
   position: fixed;
   top: 0;
   height: 100%;
   min-height: 100%;
   width: 75%;
+  left: 25%;
 }
 
 img.image-miniature {
   max-width: 48px;
   max-height: 48px;
 }
-div.image-miniature:hover img{
+div.image-miniature.expanded img{
   max-height: 100%;
   min-height: 100%;
   position: static;
@@ -63,3 +64,13 @@ div.image-miniature:hover img{
   max-width: 100%;
 }
 
+.evenListRowS1.has_photos td, .oddListRowS1.has_photos td {
+  border-bottom: none;
+}
+.evenListRowS1.row_photos td, .oddListRowS1.row_photos td {
+  border-bottom: 1px solid #CBDAE6;
+}
+
+tr.row_photos {
+  display: none;
+}

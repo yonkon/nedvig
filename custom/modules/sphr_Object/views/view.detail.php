@@ -521,6 +521,6 @@ DJS;
  	function process() {
 		$this->manager->process();
 		parent::process();
-	}
+  }
 }
 ?>
