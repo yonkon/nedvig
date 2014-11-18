@@ -121,7 +121,6 @@ $viewdefs [$module_name] =
                     0 => array(
                       'name' => 'province_select_c',
                       'label' => 'LBL_PROVINCE',
-
                       ),
                     1 => array(
                       'name' => 'name_eng_c',
@@ -139,8 +138,11 @@ $viewdefs [$module_name] =
                   ),
                 3 => array(
                     0 => array(
-                      'name' => 'community_select_c',
-                      'label' => 'LBL_COMMUNITY',
+
+                      'name' => 'address',
+//                      'name' => 'community_select_c',
+//                      'label' => 'LBL_COMMUNITY',
+                      'label' => 'LBL_ADDRESS',
                       'studio' => 'visible',
 
 //                        'name' => 'name_sp_c',

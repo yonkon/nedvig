@@ -128,27 +128,27 @@ foreach ($clients_id as $id){
         $v = $GLOBALS['app_list_strings'][$f_opt][$v];
       }
 
-      if($k=='complex_c' || $k=='garage_c' || $k=='parking_area_c' || $k=='private_swimpool_c'
+      if($k=='mebel_c' || $k=='view_sea_c' || $k=='first_line_c' /*$k=='complex_c' || $k=='garage_c' || $k=='parking_area_c' || $k=='private_swimpool_c'
         || $k=='general_swimpool_c' || $k=='children_area_c' || $k=='sport_area_c' || $k=='area_c'
         || $k=='terrace_c' || $k=='balcony_c' || $k=='solarium_c' || $k=='basement_c'
-        || $k=='storeroom_c')
+        || $k=='storeroom_c'*/)
       {
         if($v != 0){
           $k = $mod_strings[$f_vname];
           $str1 .= $k.', ';
         }
       }
-      if($k=='mebel_c' || $k=='kitchen_mebel_c' || $k=='life_equipment_c' || $k=='safe_c'
+      if($false /*|| $k=='kitchen_mebel_c' || $k=='life_equipment_c' || $k=='safe_c'
         || $k=='jacuzzi_c' || $k=='conditioner_c' || $k=='install_conditioner_c' || $k=='view_golf_pole_c'
-        || $k=='alarm_c' || $k=='heating_c')
+        || $k=='alarm_c' || $k=='heating_c'*/)
       {
         if($v != 0){
           $k = $mod_strings[$f_vname];
           $str2 .= $k.', ';
         }
       }
-      if($k=='city_area_c' || $k=='green_area_c' || $k=='view_sea_c' || $k=='view_mount_c'
-        || $k=='view_forest_c' || $k=='view_park_c' || $k=='view_salt_lake_c')
+      if( $k=='economy_c'  ||  $k=='hot_c' ||  $k=='exclusive_c'/*$k=='city_area_c' || $k=='green_area_c' || $k=='view_sea_c' || $k=='view_mount_c'
+        || $k=='view_forest_c' || $k=='view_park_c' || $k=='view_salt_lake_c'*/)
       {
         if($v != 0){
           $k = $mod_strings[$f_vname];
@@ -163,7 +163,7 @@ foreach ($clients_id as $id){
         $sugarSmarty->assign("public",$v);
       }
       //-----------------------
-      if($k=='price_rent_int_c' || $k=='price_sale_int_c')
+      if($k=='price_rent_int_c' || $k=='price_sale_int_c' || $k=='price_sale_meter_c')
       {
         if($v != ''){
           $k = $mod_strings[$f_vname];
@@ -191,16 +191,21 @@ foreach ($clients_id as $id){
         $k = $mod_strings[$f_vname];
         $ar_area[$k] = $v;
       }
-      if($k=='province_select_c' || $k=='coast_select_c' || $k=='community_select_c' || $k=='address')
+      if($k=='province_select_c' || $k=='coast_select_c' || $k=='country' /*|| $k=='community_select_c'*/ || $k=='address')
       {
         if($v != ''){
           $k = $mod_strings[$f_vname];
           $ar_adr[$k] = $v;
         }
       }
-      if($k=='nearest_airport_c' || $k=='sea_distance_c' || $k=='comm_center_distance_c')
+      if(/*$k=='nearest_airport_c' ||*/ $k=='sea_distance_c' /*|| $k=='comm_center_distance_c'*/)
       {
-        if($v != ''){
+        if($v != '') {
+          if($k = 'sea_distance_c') {
+            $km = intval($v/1000);
+            $m = intval($v%1000);
+            $v=($km?"$km км " : "") . ($m?"$m м":"");
+          }
           $k = $mod_strings[$f_vname];
           $ar_dist[$k] = $v;
         }
@@ -257,6 +262,8 @@ foreach ($clients_id as $id){
     $sugarSmarty->assign("objects",$objects);
     $sugarSmarty->assign("site_url", $sugar_config["site_url"]);
     $message_body =  $sugarSmarty->fetch('custom/include/email_sender/tmpl/body.tpl');
+//    echo $message_body;
+//    die();
 
     $mailer->AddAddress($email, $first_name);
     $ar_note = array();

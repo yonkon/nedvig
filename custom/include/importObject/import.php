@@ -80,9 +80,9 @@ if (isset($_POST['action'])) {
   }
   if (!empty ($data['price_sale_int_c'])) {
     if (!empty ($data['area_area_c'])) {
-      $data['price_sale_meter_c'] = (int) $data['price_sale_int_c']/$data['area_area_c'];
+      $data['price_sale_meter_c'] = intval( $data['price_sale_int_c']/$data['area_area_c']);
     } elseif (!empty ($data['total_area_c']) ) {
-      $data['price_sale_meter_c'] = (int) $data['price_sale_int_c']/$data['total_area_c'];
+      $data['price_sale_meter_c'] = intval($data['price_sale_int_c']/$data['total_area_c']);
     }
   }
   $articule_dot = strpos($data['name_eng_c'], '.');

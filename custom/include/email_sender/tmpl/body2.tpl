@@ -6,21 +6,10 @@
 
 <table width="100%" align="left">
     {foreach from=$ar_adr key=k item=v}
-        {if in_array($k, array('Страна'))}
+        {if in_array($k, array('Точный адрес объекта'))}
             <tr><td style="min-width: 200px"  width="27%"  align="left">{$k}</td><td  align="left">{$v}</td></tr>
         {/if}
     {/foreach}
-    {foreach from=$ar_adr key=k item=v}
-        {if in_array($k, array('Провинция'))}
-            <tr><td style="min-width: 200px"  width="27%"  align="left">Регион</td><td  align="left">{$v}</td></tr>
-        {/if}
-    {/foreach}
-    {foreach from=$ar_adr key=k item=v}
-        {if in_array($k, array('Город'))}
-            <tr><td style="min-width: 200px"  width="27%"  align="left">{$k}</td><td  align="left">{$v}</td></tr>
-        {/if}
-    {/foreach}
-
     {foreach from=$ar_obj key=k item=v}
         {if in_array($k, array('Тип'))}
         <tr><td style="min-width: 200px"  width="25%"  align="left">{$k}</td><td  align="left">{$v}</td></tr>
@@ -30,7 +19,7 @@
     <tr><td style="min-width: 200px" width="25%"  align="left">{$k}</td><td  align="left">{$v}</td></tr> 
 {/foreach}*}
     {foreach from=$ar_area key=k item=v}
-        {if in_array($k, array('Общая площадь (кв. м)', 'Кол-во спален', 'Площадь участка (кв. м.)'))}
+        {if in_array($k, array('Общая площадь (кв. м.)'))}
             <tr><td style="min-width: 200px"  width="27%"  align="left">{$k}</td><td  align="left">{$v}</td></tr>
         {/if}
     {/foreach}
@@ -72,7 +61,7 @@
     <p>&nbsp;</p>
 {/if}
 {foreach from=$ar_price key=k item=v}
-    <p style="font-weight: bold">{$k}: <span style="font-size: 21px; color: rgb(20, 180, 20);"><b>{$v|intval} Евро</b></span></p>
+    <p style="font-weight: bold">{$k}: <span style="font-size: 21px; color: rgb(20, 180, 20);"><b>{$v} Евро</b></span></p>
 {/foreach}
 <p>ID {$id_ob}</p>
 <p> Буду рад ответить на все Ваши вопросы.<br>
