@@ -15,6 +15,10 @@ class sphr_ObjectViewList extends ViewList
 
 	function listViewProcess()
 	{
+//    if($_REQUEST['searchFormTab'] == 'advanced_search' && !isset($_REQUEST['assigned_user_id_advanced'])) {
+//      $_REQUEST['assigned_user_id_advanced'] = $_REQUEST['assigned_user_name_advanced'];
+//      unset($_REQUEST['assigned_user_name_advanced']);
+//    }
 		parent::listViewProcess();
 		global $current_user;
 		global $app_list_strings;

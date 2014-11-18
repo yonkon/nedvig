@@ -124,7 +124,7 @@ class ListViewDisplay {
         // create filter fields based off of display columns
         if(empty($filter_fields) || $this->mergeDisplayColumns) {
             foreach($this->displayColumns as $columnName => $def) {
-			
+
                $filter_fields[strtolower($columnName)] = true;
             
             if(isset($this->seed->field_defs[strtolower($columnName)]['type']) &&

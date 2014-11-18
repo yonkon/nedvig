@@ -33,15 +33,15 @@ array (
         'default' => true,
         'name' => 'price_sale_int_c',
       ),
-      'price_sale_meter_c' =>
-        array (
-          'type' => 'minimax',
-          'label' => 'PRICE_SALE_METER_C',
-          'width' => '10%',
-          'default' => true,
-          'name' => 'price_sale_meter_c',
-        ),
-      'name_eng_c' =>
+      'price_sale_meter_c' => 
+      array (
+        'type' => 'minimax',
+        'label' => 'PRICE_SALE_METER_C',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'price_sale_meter_c',
+      ),
+      'name_eng_c' => 
       array (
         'type' => 'varchar',
         'default' => true,
@@ -184,7 +184,7 @@ array (
         'default' => true,
         'name' => 'address',
       ),
-      'assigned_user_name' => 
+      'assigned_user_id' => 
       array (
         'link' => 'assigned_user_link',
         'type' => 'enum',
@@ -199,7 +199,7 @@ array (
         'label' => 'LBL_ASSIGNED_TO_NAME',
         'width' => '10%',
         'default' => true,
-        'name' => 'assigned_user_name',
+        'name' => 'assigned_user_id',
       ),
       'date_entered_min' => 
       array (
