@@ -35,6 +35,7 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  * "Powered by SugarCRM".
  ********************************************************************************/
 $startTime = microtime(true);
+mb_internal_encoding("UTF-8");
 require_once('include/entryPoint.php');
 ob_start();
 require_once('include/MVC/SugarApplication.php');

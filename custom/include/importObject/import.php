@@ -79,35 +79,13 @@ if (isset($_POST['action'])) {
     }
   }
   if (!empty ($data['price_sale_int_c'])) {
-    if (!empty ($data['area_area_c'])) {
-      $data['price_sale_meter_c'] = intval( $data['price_sale_int_c']/$data['area_area_c']);
-    } elseif (!empty ($data['total_area_c']) ) {
+    if (!empty ($data['total_area_c']) ) {
       $data['price_sale_meter_c'] = intval($data['price_sale_int_c']/$data['total_area_c']);
+    } elseif (!empty ($data['area_area_c'])) {
+      $data['price_sale_meter_c'] = intval( $data['price_sale_int_c']/$data['area_area_c']);
     }
   }
-  $articule_dot = strpos($data['name_eng_c'], '.');
-  if(!empty($articule_dot)) {
-    $before_dot = substr($data['name_eng_c'], 0, $articule_dot);
-    if(is_numeric($before_dot)) {
-      switch ($before_dot) {
-        case 1:
-          $data['assigned_user_id'] = "1";
-          break;
-        case 2:
-          $data['assigned_user_id'] = "e9280dfe-6f42-0939-0149-5358b592682d";
-          break;
-        case 4:
-          $data['assigned_user_id'] = "8ccebcbe-3dba-719f-6159-54666e69c3da";
-           break;
-        case 5:
-          $data['assigned_user_id'] = "df057fc8-f30c-7807-becf-54666e89d44c";
-          break;
-        default:
-          $data['assigned_user_id'] = "c5a18104-8357-625b-877e-54666c18045b";
-      }
-    }
-
-  }
+  $data['assigned_user_id'] = sphr_Object::articule2assigned_user_id($data['name_eng_c']);
     if (!empty($data) && is_array($data)) {
         $object = new sphr_Object();
         if (isset($data['id_object_c']) && is_numeric($data['id_object_c'])) {

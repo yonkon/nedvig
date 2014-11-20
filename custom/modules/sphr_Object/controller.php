@@ -383,7 +383,7 @@ class sphr_ObjectController extends SugarController {
       while($colind < 11) {
         $o_key = $col2sphrObj_map[$colind];
         $o_val = $cc->getCalculatedValue();
-        if(!empty($o_val)) {
+        if(isset($o_val)) {
           $row_data[$o_key] = $o_val;
         }
         $ci->next();
@@ -393,9 +393,21 @@ class sphr_ObjectController extends SugarController {
       if(empty($row_data) ) {
         $empty_rows++;
       } else {
+        if (empty($row_data['name_eng_c'])) {
+          continue;
+          //TODO ДОБАВИТЬ ЗАПИСЬ НЕУДАЧНЫХ СТРОК В ОТДЕЛЬНЫЙ ФАЙЛ?
+        }
+        $object->retrieve_by_string_fields(array('name_eng_c' => $row_data['name_eng_c']));
+        if (isset($row_data['type'])) {
+          $row_data['type'] = sphr_Object::type_string2id($row_data['type']);
+        }
+        if (isset($row_data['province_select_c'])) {
+          $row_data['province_select_c'] = sphr_Object::province_string2id($row_data['province_select_c']);
+        }
         foreach($row_data as $field => $value) {
           $object->$field = $value;
         }
+        $object->assigned_user_id = sphr_Object::articule2assigned_user_id($row_data['name_eng_c']);
         $oid = $object->save();
         $empty_rows = 0;
       }
