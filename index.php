@@ -40,6 +40,7 @@ ob_start();
 require_once('include/MVC/SugarApplication.php');
 $app = new SugarApplication();
 $app->startSession();
+define("PATH_EXCEL_IMPORT_FILES", $_SERVER['DOCUMENT_ROOT'].'/'.$sugar_config['upload_dir'].'/excel_import_files/');
 $app->execute();
 
 ?>
