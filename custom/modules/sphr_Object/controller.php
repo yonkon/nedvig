@@ -329,6 +329,86 @@ class sphr_ObjectController extends SugarController {
             }
             }elseif($status==1||$status==2) { $db->query("INSERT INTO sphr_object_publications(id,status) VALUES('".$this->bean->id."',1)"); echo "INSERT INTO sphr_object_publications(id,satus) VALUES('".$this->bean->id."',".$status.")";};
         }
-    }   
+    }
+
+  function action_import_from_excel() {
+    require_once $_SERVER['DOCUMENT_ROOT']. '/include/phpexcel/Classes/PHPExcel/IOFactory.php';
+    $ok = true;
+    $path = $_REQUEST['path'];
+    if(empty($path) ) {
+      echo 'Не указан файл импорта';
+      die();
+    }
+    if(!is_dir(PATH_EXCEL_IMPORT_FILES)) {
+      mkdir(PATH_EXCEL_IMPORT_FILES);
+      chmod(PATH_EXCEL_IMPORT_FILES, 0777);
+    }
+    $path = PATH_EXCEL_IMPORT_FILES . $path;
+    if(!is_file($path)) {
+      echo 'Указанный файл импорта не существует';
+      die();
+    }
+    try {
+      $excel = PHPExcel_IOFactory::load($path);
+    } catch (PHPExcel_Exception $e) {
+      echo nl2br($e->getMessage());
+      die();
+    }
+    $col2sphrObj_map = array(
+      0 => 'name_eng_c',
+      1 => 'total_area_c',
+      2 => 'area_area_c',
+      3 => 'sea_distance_c',
+      4 => 'additional_description_c',
+      5 => 'price_sale_int_c',
+      6 => 'price_sale_meter_c',
+      7 => 'name',
+      8 => 'type',
+      9 => 'address',
+      10 => 'province_select_c',
+
+    );
+    $sheet = $excel->getActiveSheet();
+    $ri = $sheet->getRowIterator(2); //Пропускаем верхнюю строку с названием полей
+    $cr =  $ri->current();
+    $empty_rows = 0;
+
+    while(!empty($cr ) && $empty_rows < 2 ) {
+      $ci = $cr->getCellIterator();
+      $ci->setIterateOnlyExistingCells(false);
+      $cc = $ci->current();
+      $colind = $ci->key();
+      $row_data = array();
+      $object = new sphr_Object();
+      while($colind < 11) {
+        $o_key = $col2sphrObj_map[$colind];
+        $o_val = $cc->getCalculatedValue();
+        if(!empty($o_val)) {
+          $row_data[$o_key] = $o_val;
+        }
+        $ci->next();
+        $cc = $ci->current();
+        $colind = $ci->key();
+      }
+      if(empty($row_data) ) {
+        $empty_rows++;
+      } else {
+        foreach($row_data as $field => $value) {
+          $object->$field = $value;
+        }
+        $oid = $object->save();
+        $empty_rows = 0;
+      }
+      $ri->next();
+//      if (!$ri->current()) {
+//        break;
+//      }
+      $cr = $ri->current();
+    }
+//    echo $sheet->getCellByColumnAndRow($cell, $row)->getValue();
+    echo $ok?'OK' : '';
+    die();
+  }
+
 }
 ?>

@@ -704,6 +704,7 @@ $dictionary["sphr_Object"]["fields"]["sphr_clienc1ac_client_ida"] = array (
 
  // created: 2014-05-30 20:21:11
 $dictionary["sphr_Object"]["fields"]["number_bedroom_c"]['type'] = 'minimax';
+$dictionary["sphr_Object"]["fields"]["number_bedroom_c"]['default'] = '0';
 
  
 
@@ -752,6 +753,7 @@ $dictionary['sphr_Object']['fields']['SecurityGroups'] = array (
 
  // created: 2014-05-30 20:20:18
 $dictionary["sphr_Object"]["fields"]["number_bathroom_c"]['type'] = 'minimax';
+$dictionary["sphr_Object"]["fields"]["number_bathroom_c"]['default'] = '0';
 
  
 
