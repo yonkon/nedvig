@@ -54,6 +54,7 @@ $mod_strings = array (
 'LBL_MODULE_TITLE' => 'История: ГЛАВНАЯ' ,
 'LBL_SEARCH_FORM_TITLE' => 'История - поиск' ,
 'LBL_LIST_FORM_TITLE' => 'История' ,
+'LBL_LIST_ARTICULE' => 'Артикул' ,
 'LBL_LIST_SUBJECT' => 'Тема' ,
 'LBL_LIST_CONTACT' => 'Контакт' ,
 'LBL_LIST_RELATED_TO' => 'Относится к' ,

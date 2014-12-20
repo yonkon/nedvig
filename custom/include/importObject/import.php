@@ -78,14 +78,24 @@ if (isset($_POST['action'])) {
       $data[$kout] = $data[$kin];
     }
   }
+  if (empty($data['total_area_c']) || $data['total_area_c'] == 1) {
+    $data['total_area_c'] = 0;
+  }
+  if (empty($data['area_area_c']) || $data['area_area_c'] == 1) {
+    $data['area_area_c'] = 0;
+  }
   if (!empty ($data['price_sale_int_c'])) {
-    if (!empty ($data['total_area_c']) ) {
+    if (!empty ($data['total_area_c']  )  ) {
       $data['price_sale_meter_c'] = intval($data['price_sale_int_c']/$data['total_area_c']);
-    } elseif (!empty ($data['area_area_c'])) {
+    } elseif (!empty ($data['area_area_c']) && $data['price_sale_int_c'] != 1) {
       $data['price_sale_meter_c'] = intval( $data['price_sale_int_c']/$data['area_area_c']);
     }
   }
   $data['assigned_user_id'] = sphr_Object::articule2assigned_user_id($data['name_eng_c']);
+
+  if($data['type'] == sphr_Object::type_string2id('Земельные участки')) {
+    $data['number_bedroom_c'] = 0;
+  }
     if (!empty($data) && is_array($data)) {
         $object = new sphr_Object();
         if (isset($data['id_object_c']) && is_numeric($data['id_object_c'])) {

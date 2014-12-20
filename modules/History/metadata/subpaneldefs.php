@@ -172,6 +172,12 @@ $layout_defs['History'] = array(
 			 		 	'module' => 'Notes',
 		 		 		'width' => '2%',
 					),
+                    /*array(
+                        'name' => 'name_eng_c',
+                        'vname' => 'LBL_LIST_ARTICULE',
+                        'widget_class' => 'SubPanelDetailViewLink',
+                        'width' => '10%',
+                    ),*/
 					array(
 			 		 	'name' => 'name',
 			 		 	'vname' => 'LBL_LIST_SUBJECT',

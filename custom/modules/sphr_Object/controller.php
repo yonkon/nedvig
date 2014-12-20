@@ -332,12 +332,16 @@ class sphr_ObjectController extends SugarController {
     }
 
   function action_import_from_excel() {
+    ini_set('memory_limit', '1000M');
+    ini_set('display_errors', true);
+    set_time_limit(0);
     require_once $_SERVER['DOCUMENT_ROOT']. '/include/phpexcel/Classes/PHPExcel/IOFactory.php';
+    require_once $_SERVER['DOCUMENT_ROOT']. '/include/phpexcel/Classes/chunkReadFilter.php';
     $ok = true;
     $path = $_REQUEST['path'];
     if(empty($path) ) {
       echo 'Не указан файл импорта';
-      die();
+      return;
     }
     if(!is_dir(PATH_EXCEL_IMPORT_FILES)) {
       mkdir(PATH_EXCEL_IMPORT_FILES);
@@ -346,14 +350,34 @@ class sphr_ObjectController extends SugarController {
     $path = PATH_EXCEL_IMPORT_FILES . $path;
     if(!is_file($path)) {
       echo 'Указанный файл импорта не существует';
-      die();
+      return;
     }
+    echo "<p>Чтение файла...</p>";
+    if ($_SESSION['startRow']) {
+      $startRow = $_SESSION['startRow'];
+    } else {
+      $_SESSION['startRow'] = $startRow = 2;
+    }
+    $objects_readed = false;
+
     try {
-      $excel = PHPExcel_IOFactory::load($path);
+      $inputFileType = 'Excel5';
+      PHPExcel_Settings::setCacheStorageMethod( PHPExcel_CachedObjectStorageFactory::cache_to_phpTemp );
+      $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+      $chunkSize = 2;
+      $chunkFilter = new chunkReadFilter();
+      $objReader->setReadDataOnly(true);
+      $chunkFilter->setRows($startRow,$chunkSize);
+      $objReader->setReadFilter($chunkFilter);
+      $excel = $objReader->load($path);
+      unset($objReader);
+      //Что-то с этими строками делаем
     } catch (PHPExcel_Exception $e) {
       echo nl2br($e->getMessage());
-      die();
+      return;
     }
+    echo "<p>Чтение файла OK</p>";
+
     $col2sphrObj_map = array(
       0 => 'name_eng_c',
       1 => 'total_area_c',
@@ -366,33 +390,40 @@ class sphr_ObjectController extends SugarController {
       8 => 'type',
       9 => 'address',
       10 => 'province_select_c',
-
     );
     $sheet = $excel->getActiveSheet();
-    $ri = $sheet->getRowIterator(2); //Пропускаем верхнюю строку с названием полей
+    unset($excel);
+    $ri = $sheet->getRowIterator(1); //Пропускаем верхнюю строку с названием полей
     $cr =  $ri->current();
     $empty_rows = 0;
 
-    while(!empty($cr ) && $empty_rows < 2 ) {
+    while(!empty($cr ) && $empty_rows < 1 ) {
+//      $crind = $cr->getRowIndex();
+      echo "<p>Чтение строки $startRow...</p>";
+      unset($ci);
       $ci = $cr->getCellIterator();
       $ci->setIterateOnlyExistingCells(false);
       $cc = $ci->current();
       $colind = $ci->key();
       $row_data = array();
       $object = new sphr_Object();
-      while($colind < 11) {
+      while($colind < 11 && $cc) {
         $o_key = $col2sphrObj_map[$colind];
         $o_val = $cc->getCalculatedValue();
         if(isset($o_val)) {
           $row_data[$o_key] = $o_val;
         }
         $ci->next();
+        unset($cc);
         $cc = $ci->current();
         $colind = $ci->key();
       }
+      echo "<p>OK. Обрабртка строки $startRow</p>";
       if(empty($row_data) ) {
         $empty_rows++;
+        break;
       } else {
+        $objects_readed = true;
         if (empty($row_data['name_eng_c'])) {
           continue;
           //TODO ДОБАВИТЬ ЗАПИСЬ НЕУДАЧНЫХ СТРОК В ОТДЕЛЬНЫЙ ФАЙЛ?
@@ -408,18 +439,31 @@ class sphr_ObjectController extends SugarController {
           $object->$field = $value;
         }
         $object->assigned_user_id = sphr_Object::articule2assigned_user_id($row_data['name_eng_c']);
+        echo "<p>Обрабртка OK. Сохранение в БД</p>";
         $oid = $object->save();
+        echo $oid?"<p>OK</p>":"<p>ERROR</p>";
+
         $empty_rows = 0;
       }
       $ri->next();
 //      if (!$ri->current()) {
 //        break;
 //      }
+      unset($cr);
       $cr = $ri->current();
+      unset ($object);
+      unset ($cc);
+      unset ($ci);
+      $startRow++;
+      $_SESSION['startRow'] = $startRow;
+    }
+    if (!$objects_readed) { //Если ничего не прочли - значит конец файла, пустых строк в файле не допускаем
+      unset($_SESSION['startRow']);
     }
 //    echo $sheet->getCellByColumnAndRow($cell, $row)->getValue();
+
     echo $ok?'OK' : '';
-    die();
+    return;
   }
 
 }

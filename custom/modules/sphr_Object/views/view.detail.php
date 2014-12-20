@@ -92,6 +92,7 @@ class sphr_ObjectViewDetail extends ViewDetail {
 		$numberPhotos = count($photos);
 		$photosJson = json_encode($photos);
 		//==================================================================
+    //TODO убрить сокрытие цены, показывать всегда
                 $object_status_c_cl = str_replace('^','',$this->bean->object_status_c);
         echo
 <<<DJS
@@ -104,22 +105,22 @@ class sphr_ObjectViewDetail extends ViewDetail {
                 var statusValue = "{$object_status_c_cl}";
 				if(statusValue == null ||statusValue == "") {
 					$("#sp_price_sale_int_c").hide();
-					$("#sp_price_rent_int_c").hide();
-					$("#sp_seller_price_sale_int_c").hide();
-					$("#sp_seller_price_rent_int_c").hide();
-          $("#sp_old_price_sale_int_c").hide();
-					$("#sp_old_price_rent_int_c").hide();
-					$("#sp_amount_commission_c").hide();
-					$("#sp_rent_amount_commission_c").hide();
+//					$("#sp_price_rent_int_c").hide();
+//					$("#sp_seller_price_sale_int_c").hide();
+//					$("#sp_seller_price_rent_int_c").hide();
+//          $("#sp_old_price_sale_int_c").hide();
+//					$("#sp_old_price_rent_int_c").hide();
+//					$("#sp_amount_commission_c").hide();
+//					$("#sp_rent_amount_commission_c").hide();
 
 					$("#sp_lbl_price_sale_int_c").hide();
-					$("#sp_lbl_price_rent_int_c").hide();
-					$("#sp_lbl_seller_price_sale_int_c").hide();
-					$("#sp_lbl_seller_price_rent_int_c").hide();
-          $("#sp_lbl_old_price_sale_int_c").hide();
-					$("#sp_lbl_old_price_rent_int_c").hide();
-					$("#sp_lbl_amount_commission_c").hide();
-					$("#sp_lbl_rent_amount_commission_c").hide();
+//					$("#sp_lbl_price_rent_int_c").hide();
+//					$("#sp_lbl_seller_price_sale_int_c").hide();
+//					$("#sp_lbl_seller_price_rent_int_c").hide();
+//          $("#sp_lbl_old_price_sale_int_c").hide();
+//					$("#sp_lbl_old_price_rent_int_c").hide();
+//					$("#sp_lbl_amount_commission_c").hide();
+//					$("#sp_lbl_rent_amount_commission_c").hide();
 
 				}
 				else {

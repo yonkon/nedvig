@@ -6,11 +6,10 @@
  * Time: 17:07
  */
 //session_start();
-define('sugarEntry', 'exel_import');
+define('sugarEntry', 'excel_import');
 if($argc<2) {
   echo 'No file specified', PHP_EOL;
 }
-//$path = $_REQUEST['path'];
 $path = $argv[1];
 if(empty($path) ) {
   echo "Не указан файл импорта\n";
@@ -25,55 +24,82 @@ require_once('include/entryPoint.php');
 require_once('include/MVC/SugarApplication.php');
 $app = new SugarApplication();
 //$app->startSession();
-session_start();
-session_id('crm.tardegoria.com/excel_import');
+//session_start();
+//session_id('crm.tardegoria.com/excel_import');
 
-define("PATH_EXCEL_IMPORT_FILES", $_SERVER['DOCUMENT_ROOT'].'/'.$sugar_config['upload_dir'].'/excel_import_files/');
+define("PATH_EXCEL_IMPORT_FILES", dirname(__FILE__).'/'.$sugar_config['upload_dir'].'excel_import_files/');
 require_once './include/phpexcel/Classes/PHPExcel/IOFactory.php';
 require_once './include/phpexcel/Classes/chunkReadFilter.php';
-/*require_once './data/SugarBean.php';
-require_once './include/SugarObjects/templates/basic/Basic.php';
-require_once './modules/sphr_Object/sphr_Object.php';
-require_once './include/database/DBManagerFactory.php';
-require_once './include/SugarLogger/LoggerManager.php';
-//require_once './include/SugarObjects/SugarConfig.php';
-require_once './include/utils.php';
-require_once './include/utils/autoloader.php';
-require_once './include/utils/sugar_file_utils.php';
-require_once './include/utils/file_utils.php';
-require_once './include/utils/LogicHook.php';
-require_once './include/utils/LogicHook.php';
-require_once './include/database/DBManagerFactory.php';
-require_once './include/database/DBHelper.php';
-require_once './include/SugarTheme/SugarTheme.php';*/
+//require_once './custom/include/importObject/import.php';
 
-//require_once './';
-
-//$sugar_config = new SugarConfig();
-//$log =  LoggerManager::getLogger();
-//$app_strings = return_application_language('ru_ru');
-//$db = DBManagerFactory::getInstance();
-//$ok = true;
-
-//if(!is_dir(PATH_EXCEL_IMPORT_FILES)) {
-//  mkdir(PATH_EXCEL_IMPORT_FILES);
-//  chmod(PATH_EXCEL_IMPORT_FILES, 0777);
-//}
-//$path = PATH_EXCEL_IMPORT_FILES . $path;
 const EXCEL_IMPORT_SESSION_FILE = './excel_import_session_file';
+echo "<p>Проверка сессии...</p>\n";
 if(is_file(EXCEL_IMPORT_SESSION_FILE)) {
   $dat = file_get_contents(EXCEL_IMPORT_SESSION_FILE);
   $_SESSION = unserialize($dat);
+  echo "<p>Сессия обнаружена</p>\n";
+} else {
+  echo "<p>Сессия не обнаружена</p>\n";
 }
+
 if(!is_file($path)) {
   echo "Указанный файл импорта не существует\n";
   return;
 }
-echo "<p>Чтение файла...</p>\n";
+echo "<p>Подготовка директорий с фотографиями...</p>\n","<p>scandir...</p>\n";
+//$curdir = dirname($path);
+$dir = scandir(PATH_EXCEL_IMPORT_FILES);
+$dir_L1 = array();
+$orig_dir_count = 0;
+$moved_dir_count = 0;
+$error_dir_count = 0;
+
+foreach($dir as $d){
+  if($d == "." || $d == ".." || strpos($d, 'error') === 0) {
+    continue;
+  }
+  $abs_d = PATH_EXCEL_IMPORT_FILES . $d;
+  if(is_dir($abs_d)){
+    $d_formated = preg_replace('/\s/', '', $d);
+    $dash_pos = strpos($d_formated, '-');
+    if($dash_pos != 4) {
+      $d_formated = 'error_'.$d;
+      $error_dir_count++;
+    } else {
+      $d_formated = substr($d_formated, 0, 9);
+    }
+    $d_formated = PATH_EXCEL_IMPORT_FILES . $d_formated;
+    $orig_dir_count++;
+    $dir_L1[] = array('from' => $abs_d, 'to' => $d_formated);
+      echo "\t-", $d, PHP_EOL;
+  }
+}
+echo "<p>Форматирование папок...</p>\n";
+foreach ($dir_L1 as $mvdir) {
+  if (rename($mvdir['from'], $mvdir['to']) ) {
+    $moved_dir_count++;
+  };
+}
+echo "\t-Всего найдено: $orig_dir_count\n";
+echo "\t-Папок с неправильными именами: $error_dir_count\n";
+echo "\t-Всего переименовано: $orig_dir_count\n";
+unset ($d);
+unset ($dash_pos);
+unset ($dir);
+unset ($dir_L1);
+unset ($orig_dir_count);
+unset ($moved_dir_count);
+unset ($error_dir_count);
+unset ($d_formated);
+unset ($orig_dir_count);
+unset ($abs_d);
+unset ($mvdir);
+
+echo "<p>Чтение файла импорта...</p>\n";
 if (!empty($_SESSION['startRow'])) {
   $startRow = $_SESSION['startRow'];
 } else {
-  $_SESSION['startRow'] = $startRow = 2;
+  $_SESSION['startRow'] = $startRow = 1;
 }
 $objects_readed = false;
 
@@ -90,7 +116,7 @@ try {
   unset($objReader);
   //Что-то с этими строками делаем
 } catch (PHPExcel_Exception $e) {
-  echo nl2br($e->getMessage()), EOL;
+  echo nl2br($e->getMessage()), PHP_EOL;
   return;
 }
 echo "<p>Чтение файла OK</p>\n";
@@ -142,14 +168,13 @@ while(!empty($cr ) && $empty_rows < 1 ) {
     $empty_rows++;
     break;
   } else {
-    $objects_readed = true;
     //ОБРАБАТЫВАЕМ ВОЗМОЖНЫЕ ОШИБКИ ФАЙЛА
     if (empty($row_data['name_eng_c']) ||
-      strlen($row_data['name_eng_c'])<9 ||
+      strlen($row_data['name_eng_c'])!==9 ||
 //      strlen($row_data['name_eng_c'])>10 ||
       !is_numeric($row_data['price_sale_int_c']) ||
       !is_numeric($row_data['price_sale_meter_c']) ||
-      !is_numeric($row_data['sea_distance_c']) ||
+//      !is_numeric($row_data['sea_distance_c']) ||
       (
         !is_numeric($row_data['area_area_c']) &&
         !is_numeric($row_data['total_area_c'])
@@ -157,8 +182,8 @@ while(!empty($cr ) && $empty_rows < 1 ) {
       empty($row_data['name']) ||
       empty($row_data['type']) ||
       empty($row_data['address']) ||
-      empty($row_data['province_select_c']) ||
-      empty($row_data['additional_description_c'])
+      empty($row_data['province_select_c'])
+//      empty($row_data['additional_description_c'])
     ) {
       echo "<p>Ошибка соержания файла, копирование строки в память для записи в файл</p>\n";
       $w_xls = empty($w_xls) ? new PHPExcel() : $w_xls;
@@ -182,6 +207,7 @@ while(!empty($cr ) && $empty_rows < 1 ) {
       continue;
       //TODO ДОБАВИТЬ ЗАПИСЬ НЕУДАЧНЫХ СТРОК В ОТДЕЛЬНЫЙ ФАЙЛ?
     }
+    $objects_readed = true;
     $object->retrieve_by_string_fields(array('name_eng_c' => $row_data['name_eng_c']));
     if (isset($row_data['type'])) {
       $row_data['type'] = sphr_Object::type_string2id($row_data['type']);
@@ -195,8 +221,15 @@ while(!empty($cr ) && $empty_rows < 1 ) {
     $object->assigned_user_id = sphr_Object::articule2assigned_user_id($row_data['name_eng_c']);
     echo "<p>Обрабртка OK. Сохранение в БД</p>\n";
     $oid = $object->save();
-    echo $oid?"<p>OK</p>":"<p>ERROR</p>\n";
-    echo "<p>Сохранение фотографий</p>\n";
+    echo $oid?"<p>OK</p>\n":"<p>ERROR</p>\n";
+    if (!empty ($oid)) {
+      echo "<p>Сохранение фотографий...</p>\n";
+      $object_img_array = array();
+      if (is_dir(PATH_EXCEL_IMPORT_FILES . $row_data['name_eng_c'])) {
+        Dir2ImagesArray(PATH_EXCEL_IMPORT_FILES . $row_data['name_eng_c'] .'/*', $object_img_array);
+        setImages(implode(', ', $object_img_array), $oid);
+       }
+     }
 
     $empty_rows = 0;
   }
@@ -219,6 +252,202 @@ if (!$objects_readed) { //Если ничего не прочли - значит
 echo "SCRIPT END OK\n";
 //session_write_close();
 $dat = serialize($_SESSION);
-file_put_contents($dat, EXCEL_IMPORT_SESSION_FILE);
+file_put_contents( EXCEL_IMPORT_SESSION_FILE, $dat);
 
 return;
+
+function Dir2ImagesArray($dir, &$img_array) {
+  $items = glob($dir);
+  foreach($items as $item) {
+    if(is_dir($item)) {
+      Dir2ImagesArray($item . '/*', $img_array);
+    } else {
+      $img_array[] = $item;
+    }
+  }
+}
+
+function setImages($images_data, $object_id)
+{
+  global $db;
+
+  $notCriticalMessage = array();
+
+  $path_images = 'cache/upload/object/';
+  if (!is_dir($path_images)) {
+    mkdir($path_images);
+  }
+  $uniqId = md5(uniqid('', true));
+
+  // Предполагаем что картинки приходят в виде строки разделенной запятой (,)
+  $images_array = explode(',', $images_data);
+
+  if (!empty($images_array) && is_array($images_array)) {
+    // удалим старые файлы с сервера, и подчистим базу
+    $sql = "SELECT id FROM `sphr_object_photo_c` WHERE `sphr_object_id`='" . $object_id .
+      "'";
+    $resPhoto = $db->query($sql);
+    if ($resPhoto) {
+      while (($row = $db->fetchByAssoc($resPhoto))) {
+        unlink($path_images . $row['id']);
+        unlink($path_images . 'cut_' . $row['id']);
+      }
+      $sql = "DELETE FROM `sphr_object_photo_c` WHERE `sphr_object_id`='" . $object_id .
+        "'";
+      $db->query($sql);
+    }
+    foreach ($images_array as $i => $file_name) {
+      $file_name = trim($file_name);
+      if (@GetImageSize($file_name)) // проверим если картинка сушествует
+      {
+        $extFile = substr(strrchr($file_name, '.'), 1);
+        if ($extFile == 'jpg' || $extFile == 'jpeg' || $extFile == 'png')
+          // можно только jpg\png файлы
+        {
+          $fullNameFile = $uniqId . '_' . ($i + 1) . '.' . $extFile;
+          $realNameFile = basename($file_name);
+          if (file_put_contents($path_images . $fullNameFile, file_get_contents($file_name))
+            !== false) {
+            $sql = "INSERT INTO `sphr_object_photo_c` SET
+                                    `id`='" . $fullNameFile . "',
+                                    `sphr_object_id`='" . $object_id . "',
+                                    `main`='" . $i . "' ";
+            if ($db->query($sql)) {
+              $origx = GetImageSize($file_name)[0];
+              $origy = GetImageSize($file_name)[1];
+              $resize_percent = ($origx>$origy)?102400/$origx:102400/$origy;
+              if (
+                (
+                  $extFile == 'png' &&
+                  !imageresizepng($path_images.$fullNameFile, 1024, 1024, $path_images.$fullNameFile )
+                ) ||
+                (
+                  $extFile != 'png' &&
+                  imageresizejpg($path_images.$fullNameFile, $path_images.$fullNameFile,
+                    $resize_percent, 100) === false
+                )
+              ) {
+                $notCriticalMessage[] = 'Ошибка создания resized (' . $file_name . ')';
+              }
+              if (
+                (
+                  $extFile == 'png' &&
+                  !imageresizepng($path_images.$fullNameFile, 75, 75, $path_images . 'cut_' . $fullNameFile )
+                ) ||
+                (
+                  $extFile != 'png' &&
+                  imageresizejpg($path_images . 'cut_' . $fullNameFile, $path_images . $fullNameFile,
+                  30, 75) === false
+                )
+              ) {
+                $notCriticalMessage[] = 'Ошибка создания preview (' . $file_name . ')';
+              }
+            } else {
+              // Поле ID является уникальным. При обновлении картинок запрос не будет выполнен. В противном случае, добавиться новая запись
+            }
+          } else {
+            $notCriticalMessage[] = 'Ошибка копирования картинки (' . $file_name . ')';
+          }
+        } else {
+          $notCriticalMessage[] = 'Разрешены только картинки формата JPG\JPEG (' . $file_name .
+            ')';
+        }
+      } else {
+        $notCriticalMessage[] = 'Картинка не обнаружена ' . $file_name;
+      }
+    }
+  }
+
+  return $notCriticalMessage;
+}
+
+function imageresizejpg($outfile, $infile, $percents, $quality)
+{
+  $result = true;
+
+  if (!$im = imagecreatefromjpeg($infile)) {
+    $result = false;
+  }
+
+  if (!$w = imagesx($im) * $percents / 100) {
+    $result = false;
+  }
+
+  if (!$h = imagesy($im) * $percents / 100) {
+    $result = false;
+  }
+
+  if (!$im1 = imagecreatetruecolor($w, $h)) {
+    $result = false;
+  }
+
+  if (!imagecopyresampled($im1, $im, 0, 0, 0, 0, $w, $h, imagesx($im), imagesy($im))) {
+    $result = false;
+  }
+
+  if (!imagejpeg($im1, $outfile, $quality)) {
+    $result = false;
+  }
+  imagedestroy($im);
+  imagedestroy($im1);
+
+  return $result;
+}
+
+function setTransparency($new_image, $image_source)
+{
+
+  $transparencyIndex = imagecolortransparent($image_source);
+  $transparencyColor = array('red' => 255, 'green' => 255, 'blue' => 255);
+
+  if ($transparencyIndex >= 0)
+  {
+    $transparencyColor = imagecolorsforindex($image_source, $transparencyIndex);
+  }
+
+  $transparencyIndex = imagecolorallocate($new_image, $transparencyColor['red'], $transparencyColor['green'], $transparencyColor['blue']);
+  imagefill($new_image, 0, 0, $transparencyIndex);
+  imagecolortransparent($new_image, $transparencyIndex);
+}
+
+function imageresizepng($image_path, $new_width, $new_height, $new_path ){
+  $image_source = imagecreatefrompng($image_path);
+  $result = true;
+  if (!$image_source) {
+    $result = false;
+  }
+// Старые размеры
+  $old_width = imagesx($image_source);
+  $old_height = imagesy($image_source);
+  $resize_rate = $xrate = $old_width / $new_width;
+  $yrate = $old_height / $new_height;
+  if ($xrate < $yrate) {
+    $resize_rate = $yrate;
+  }
+  $new_width = $old_width/$resize_rate;
+  $new_height = $old_height/$resize_rate;
+
+// Размеры новой картинки
+  $new_image = imagecreatetruecolor($new_width, $new_height);
+  if (!$new_image) {
+    $result = false;
+  }
+
+// Устанавливаем прозрачность
+  setTransparency($new_image, $image_source);
+
+// Изменяем размер
+  if (!imagecopyresampled($new_image, $image_source, 0, 0, 0, 0, $new_width, $new_height, $old_width, $old_height)) {
+      $result = false;
+  }
+
+// Сохраняем уменьшенное изображение
+  if (!imagepng($new_image, $new_path) ) {
+    $result = false;
+  }
+
+// Закрываем дескрипторы
+  imagedestroy($image_source);
+  imagedestroy($new_image);
+  return $result;
+}

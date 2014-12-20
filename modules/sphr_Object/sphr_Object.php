@@ -207,7 +207,7 @@ class sphr_Object extends sphr_Object_sugar
       exit;
     }
 
-    if (($_GET['record'] != '' && $_GET['module'] == 'sphr_Object') ||
+    if (isset($_REQUEST['record'])&&($_GET['record'] != '' && $_GET['module'] == 'sphr_Object') ||
       ($_POST['record'] != '' && $_POST['module'] == 'sphr_Object')
     ) {
 
