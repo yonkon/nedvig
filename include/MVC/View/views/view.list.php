@@ -193,6 +193,11 @@ class ViewList extends SugarView{
 			$this->lv->ss->assign("SEARCH",true);
 			$this->lv->setup($this->seed, 'include/ListView/ListViewGeneric.tpl', $this->where, $this->params);
 			$savedSearchName = empty($_REQUEST['saved_search_select_name']) ? '' : (' - ' . $_REQUEST['saved_search_select_name']);
+     /* if (!empty($this->needOrd)) {
+        global $db;
+        $request = $db->query('SELECT * FRON sphr_client ORDER BY date_entered');
+        $fromDB = $db->fetchByAssoc($request);
+      }*/
 			echo $this->lv->display();
 		}
  	}

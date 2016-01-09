@@ -49,6 +49,7 @@ class sphr_Client_sugar extends Person {
 	var $importable = true;
 	var $disable_row_level_security = true ; // to ensure that modules created and deployed under CE will continue to function under team security if the instance is upgraded to PRO
 		var $id;
+		var $idn;
 		var $name;
 		var $date_entered;
 		var $date_modified;

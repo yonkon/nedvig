@@ -1,5 +1,5 @@
 <?php
-// created: 2014-08-06 18:49:13
+// created: 2016-01-10 01:08:03
 $mod_strings = array (
   'LBL_CONTACT_INFORMATION' => 'Клиент',
   'LBL_DETAILVIEW_PANEL2' => 'Клиент',
@@ -102,5 +102,9 @@ $mod_strings = array (
   'LBL_IMPORT' => 'Импорт',
   'LBL_OBJECT_TYPE' => 'Тип объекта',
   'LBL_BUDGET' => 'Бюджет',
+  'LBL_ARRIVAL_DATE_C' => 'Дата приезда',
+  'LBL_ARRIVAL_DATE_2' => 'Дата приезда',
+  'LBL_CLIENT_NUMBER' => '№',
+  'LBL_IDN' => '№',
 );
 ?>

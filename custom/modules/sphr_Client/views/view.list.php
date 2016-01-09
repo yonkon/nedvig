@@ -89,11 +89,21 @@ class sphr_ClientViewList extends ViewList
 
     function listViewProcess()
     {
+      echo '<script src="/js/client_view.js">';
         require_once 'custom/include/sphere_modules_utils.php';
         global $current_user;
-        if (!$current_user->is_admin) {
+         if (!$current_user->is_admin) {
             if (!empty($this->where)) $this->where .= ' AND ';
+          //9a63036b-531f-e1e0-2eab-53e110882bd9 tranio
+          $is_tranio = $current_user->id == '9a63036b-531f-e1e0-2eab-53e110882bd9';
+          //$is_tranio = true;
+          if ($is_tranio) {
+            $this->params['custom_from'] = ' JOIN accounts_sphr_client_c ON accounts_sphr_client_c.accounts_s160fccounts_ida = "9a63036b-531f-e1e0-2eab-53e110882bd9" AND accounts_sphr_client_c.accounts_sde91_client_idb = sphr_client.id ';
+            $this->params['custom_where'] = $this->params['custom_where'] . ' GROUP BY sphr_client.id ';
+            //$this->params['distinct'] = true;
+          } else {
             $this->where .= ' (assigned_user_id = "' . $current_user->id . '" OR sphr_client.status = 2 ) ';
+        }
         }
         if (isCurrentUserOnlyOperator())
         {

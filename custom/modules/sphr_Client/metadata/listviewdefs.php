@@ -2,6 +2,16 @@
 $module_name = 'sphr_Client';
 $listViewDefs [$module_name] = 
 array (
+  'IDN' => array(
+    'width' => '10%',
+    'type' => 'int',
+    'label' => '№ клиента',
+    'sortable' => true,
+    'link' => true,
+//    'customCode' => '{$EMAIL1_LINK}{$EMAIL1}</a>',
+    'default' => true,
+    'disable_num_format' => '1',
+  ),
   'FIRST_NAME' => 
   array (
     'type' => 'varchar',
@@ -26,16 +36,20 @@ array (
     'customCode' => '{$EMAIL1_LINK}{$EMAIL1}</a>',
     'default' => true,
   ),
-  'BUDGET_C' => array(
+  'BUDGET_C' => 
+  array (
     'type' => 'enum',
     'default' => true,
     'label' => 'LBL_BUDGET',
-    ),
-  'OBJECT_TYPE_C' => array(
+    'width' => '10%',
+  ),
+  'OBJECT_TYPE_C' => 
+  array (
     'type' => 'varchar',
     'default' => true,
     'label' => 'LBL_OBJECT_TYPE',
-    ),
+    'width' => '10%',
+  ),
   'ASSIGNED_USER_NAME' => 
   array (
     'link' => 'assigned_user_link',
@@ -57,6 +71,7 @@ array (
     'label' => 'LBL_ACTIVITIES',
     'sortable' => true,
     'default' => true,
+    'width' => '10%',
   ),
   'TYPES_OF_QUERIES_C' => 
   array (
@@ -64,6 +79,20 @@ array (
     'default' => true,
     'studio' => 'visible',
     'label' => 'LBL_BONUS',
+    'width' => '10%',
+  ),
+  'ARRIVAL_DATE_C' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'label' => 'LBL_ARRIVAL_DATE_C',
+    'width' => '10%',
+  ),
+  'ARRIVAL_DATE_2_C' => 
+  array (
+    'type' => 'datetimecombo',
+    'default' => true,
+    'label' => 'LBL_ARRIVAL_DATE_2',
     'width' => '10%',
   ),
 );

@@ -53,28 +53,41 @@ array (
     ),
     'panels' => 
     array (
-      'lbl_detailview_panel6' =>
+      'lbl_detailview_panel6' => 
       array (
-        -1 =>
-        array (
-          'name' => 'date_entered',
-          'comment' => 'Registration date',
-          'label' => 'LBL_DATE_ENTERED',
-        ),
         0 => 
         array (
-          0 =>
+          0 => 
+          array (
+            'name' => 'date_entered',
+            'comment' => 'Registration date',
+            'label' => 'LBL_DATE_ENTERED',
+          ),
+          1 => 
+          array (
+            'name' => 'Registration date',
+            'label' => 'Registration date',
+          ),
+          2 => 
+          array (
+            'name' => 'LBL_DATE_ENTERED',
+            'label' => 'LBL_DATE_ENTERED',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
           array (
             'name' => 'last_name',
             'comment' => 'Last name of the contact',
             'label' => 'LBL_LAST_NAME',
           ),
-          1 =>
+          1 => 
           array (
             'name' => 'country_c',
             'label' => 'LBL_COUNTRY',
           ),
-          2 =>
+          2 => 
           array (
             'name' => 'photo',
             'studio' => false,
@@ -82,7 +95,7 @@ array (
             'customCode' => '<img src="" id="photo_client" title="Фото клиента" style="display: block; position: relative;">',
           ),
         ),
-        1 => 
+        2 => 
         array (
           0 => 
           array (
@@ -95,9 +108,13 @@ array (
             'name' => 'region_c',
             'label' => 'LBL_REGION',
           ),
-          2 => '',
+          2 => 
+          array (
+            'name' => 'arrival_date_c',
+            'label' => 'LBL_ARRIVAL_DATE_C',
+          ),
         ),
-        2 => 
+        3 => 
         array (
           0 => 
           array (
@@ -115,7 +132,7 @@ array (
             'label' => 'LBL_CURRENT_ADDRESS',
           ),
         ),
-        3 => 
+        4 => 
         array (
           0 => 
           array (
@@ -125,7 +142,7 @@ array (
           1 => 'budget_c',
           2 => '',
         ),
-        4 => 
+        5 => 
         array (
           0 => 
           array (
@@ -135,40 +152,40 @@ array (
           1 => 'object_type_c',
           2 => '',
         ),
-        5 => 
+        6 => 
         array (
-          0 => 
+          0 => '',
+          1 => 
           array (
             'name' => 'phone_home',
             'comment' => 'Home phone number of the contact',
             'label' => 'LBL_PHONE_HOME',
           ),
-          1 => '',
           2 => '',
         ),
-        6 => 
+        7 => 
         array (
-          0 => 
+          0 => '',
+          1 => 
           array (
             'name' => 'phone_work',
             'comment' => 'Work phone number of the contact',
             'label' => 'LBL_PHONE_WORK',
           ),
-          1 => '',
           2 => '',
         ),
-        7 => 
+        8 => 
         array (
-          0 => 
+          0 => '',
+          1 => 
           array (
             'name' => 'email1',
             'studio' => 'false',
             'label' => 'LBL_EMAIL',
           ),
-          1 => '',
           2 => '',
         ),
-        8 => 
+        9 => 
         array (
           0 => 
           array (
@@ -182,7 +199,7 @@ array (
           ),
           2 => '',
         ),
-        9 => 
+        10 => 
         array (
           0 => 
           array (
@@ -201,7 +218,7 @@ array (
             'label' => 'LBL_STATUS_DESCRIPTION',
           ),
         ),
-        10 => 
+        11 => 
         array (
           0 => 'vip_c',
           1 => 
@@ -212,7 +229,7 @@ array (
           ),
           2 => '',
         ),
-        11 => 
+        12 => 
         array (
           0 => 
           array (
@@ -226,91 +243,87 @@ array (
           ),
           2 => '',
         ),
-        12 => 
+        13 => 
         array (
           0 => 
           array (
-              'name' => 'types_of_queries_c',
-              'studio' => 'visible',
-              'label' => 'LBL_TYPES_OF_QUERIES_C ',
+            'name' => 'types_of_queries_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TYPES_OF_QUERIES_C ',
           ),
-        
         ),
-        13 => 
-        array (
-          ),
       ),
       'lbl_detailview_panel7' => 
       array (
         0 => 
         array (
-          0 => 
+          0 => '',
+          1 => 
           array (
             'name' => 'zagran_name_c',
             'label' => 'LBL_ZAGRAN_NAME',
           ),
-          1 => '',
           2 => '',
         ),
         1 => 
         array (
-          0 => 
+          0 => '',
+          1 => 
           array (
             'name' => 'zagran_last_name_c',
             'label' => 'LBL_ZAGRAN_LAST_NAME',
           ),
-          1 => '',
           2 => '',
         ),
         2 => 
         array (
-          0 => 
+          0 => '',
+          1 => 
           array (
             'name' => 'zagran_date_birth_c',
             'label' => 'LBL_ZAGRAN_DATE_BIRTH',
           ),
-          1 => '',
           2 => '',
         ),
         3 => 
         array (
-          0 => 
+          0 => '',
+          1 => 
           array (
             'name' => 'zagran_number_c',
             'label' => 'LBL_ZAGRAN_NUMBER',
           ),
-          1 => '',
           2 => '',
         ),
         4 => 
         array (
-          0 => 
+          0 => '',
+          1 => 
           array (
             'name' => 'zagran_date_give_c',
             'label' => 'LBL_ZAGRAN_DATE_GIVE',
           ),
-          1 => '',
           2 => '',
         ),
         5 => 
         array (
-          0 => 
+          0 => '',
+          1 => 
           array (
             'name' => 'zagran_date_end_c',
             'label' => 'LBL_ZAGRAN_DATE_END',
           ),
-          1 => '',
           2 => '',
         ),
         6 => 
         array (
-          0 => 
+          0 => '',
+          1 => 
           array (
             'name' => 'zagran_organ_c',
             'studio' => 'visible',
             'label' => 'LBL_ZAGRAN_ORGAN',
           ),
-          1 => '',
           2 => '',
         ),
       ),
@@ -318,13 +331,13 @@ array (
       array (
         0 => 
         array (
-          0 => 
+          0 => '',
+          1 => 
           array (
             'name' => 'additionalBlock_kindred',
             'studio' => false,
             'customCode' => '<div id="additionalBlock_kindred" style="position: relative; margin-left: -43%;"></div>',
           ),
-          1 => '',
           2 => '',
         ),
       ),

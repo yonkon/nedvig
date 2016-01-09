@@ -102,7 +102,11 @@ array (
         array (
           0 => 'phone_mobile',
           1 => 'budget_c',
-          2 => '',
+          2 => 
+          array (
+            'name' => 'arrival_date_2_c',
+            'label' => 'LBL_ARRIVAL_DATE_2',
+          ),
         ),
         4 => 
         array (
@@ -118,34 +122,19 @@ array (
         array (
           0 => '',
           1 => '',
-          2 => 
-          array (
-            'name' => 'phone_home',
-            'comment' => 'Home phone number of the contact',
-            'label' => 'LBL_PHONE_HOME',
-          ),
+          2 => '',
         ),
         6 => 
         array (
           0 => '',
           1 => '',
-          2 => 
-          array (
-            'name' => 'phone_work',
-            'comment' => 'Work phone number of the contact',
-            'label' => 'LBL_PHONE_WORK',
-          ),
+          2 => '',
         ),
         7 => 
         array (
           0 => '',
           1 => '',
-          2 => 
-          array (
-            'name' => 'email1',
-            'studio' => 'false',
-            'label' => 'LBL_EMAIL',
-          ),
+          2 => '',
         ),
         8 => 
         array (

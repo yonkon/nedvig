@@ -50,6 +50,23 @@ class sphr_Client extends sphr_Client_sugar {
     }
 
     function save($check_notify=false) {
+/*      $is_update = empty($this->id) ? false : true;
+      if ($is_update) {
+        global $db;
+        $request = $db->query(
+'UPDATE sphr_client c JOIN
+  (SELECT @rn:=@rn+1 AS rank, `id`
+	  FROM (
+        	SELECT *
+  		    FROM sphr_client
+  		    ORDER BY `date_entered` ASC
+		      ) t1,
+          (SELECT @rn:=0) t2
+  ) t3
+   ON t3.id = c.id
+SET idn = rank');
+
+      }*/
         $this->emailAddress->handleLegacySave($this, $this->module_dir);
         $email1_ori = $this->email1;
         $email2_ori = $this->email2;
